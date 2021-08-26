@@ -1,6 +1,6 @@
 #include "Window.h"
-#include "GLFW/glfw3.h"
 #include "iostream"
+#include "GLFW/glfw3.h"
 
 namespace Window_name
 {

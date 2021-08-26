@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include "GLFW/glfw3.h"
 
-namespace Renderer_name 
+namespace Renderer_name
 {
 	Renderer::Renderer()
 	{
