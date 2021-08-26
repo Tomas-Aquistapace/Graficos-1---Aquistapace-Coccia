@@ -1,4 +1,5 @@
 #ifndef RENDERER_H
+#define RENDERER_H
 
 #include "..\Export\Export.h"
 
@@ -9,8 +10,8 @@ namespace Renderer_name
 	public:
 		Renderer();
 		~Renderer();
-
-	private:
+		
+		int InitGlfw();
 
 	};
 }

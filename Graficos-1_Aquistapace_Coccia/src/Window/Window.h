@@ -1,6 +1,6 @@
 #ifndef WINDOW_H
+#define WINDOW_H
 
-//#include "GLFW/glfw3.h"
 #include "..\Export\Export.h"
 
 struct GLFWmonitor;
@@ -10,18 +10,18 @@ namespace Window_name
 {
 	class EXPORT_API Windowuwu
 	{
+		GLFWwindow* _window;
 	public:
 		Windowuwu();
 		~Windowuwu();
 	
-		void CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor);
-		void DestroyWindow(GLFWwindow* window);
-		int WindowShouldClose(GLFWwindow* window);
-		void SwapBuffers(GLFWwindow* window);
+		int CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor);
+		void InitWindow();
+		void DestroyWindow();
+		int WindowShouldClose();
+		void SwapBuffers();
 		void ClearWindow(float r, float g, float b, float a);
-
-	private:
-	
+		GLFWwindow* ReturnWindow();
 	};
 }
 

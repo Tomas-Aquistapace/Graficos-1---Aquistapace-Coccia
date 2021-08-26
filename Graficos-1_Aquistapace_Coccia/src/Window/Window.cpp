@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "GLFW/glfw3.h"
+#include "iostream"
 
 namespace Window_name
 {
@@ -13,29 +14,46 @@ namespace Window_name
 
 	}
 
-	void Windowuwu::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor)
+	int Windowuwu::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor)
 	{
-		glfwCreateWindow(width, height, title, monitor, NULL);
+		_window = glfwCreateWindow(width, height, title, monitor, NULL);
+
+		if (!_window)
+		{
+			std::cout << "Error al iniciar la ventana" << std::endl;
+			return 0;
+		}
+		return 1;
 	}
 
-	void Windowuwu::DestroyWindow(GLFWwindow* window)
+	void Windowuwu::InitWindow()
 	{
-		glfwDestroyWindow(window);
+		glfwMakeContextCurrent(_window);
 	}
 
-	int Windowuwu::WindowShouldClose(GLFWwindow* window)
+	void Windowuwu::DestroyWindow()
 	{
-		glfwWindowShouldClose(window);
+		glfwDestroyWindow(_window);
 	}
 
-	void Windowuwu::SwapBuffers(GLFWwindow* window)
+	int Windowuwu::WindowShouldClose()
 	{
-		glfwSwapBuffers(window);
+		glfwWindowShouldClose(_window);
+	}
+
+	void Windowuwu::SwapBuffers()
+	{
+		glfwSwapBuffers(_window);
 	}
 
 	void Windowuwu::ClearWindow(float r, float g, float b, float a)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(r, g, b, a);
+	}
+
+	GLFWwindow* Windowuwu::ReturnWindow()
+	{
+		return _window;
 	}
 }
