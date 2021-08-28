@@ -38,7 +38,7 @@ namespace Window_name
 
 	int Windowuwu::WindowShouldClose()
 	{
-		glfwWindowShouldClose(_window);
+		return glfwWindowShouldClose(_window);
 	}
 
 	void Windowuwu::SwapBuffers()
