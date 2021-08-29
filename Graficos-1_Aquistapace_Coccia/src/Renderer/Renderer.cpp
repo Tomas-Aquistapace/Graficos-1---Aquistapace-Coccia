@@ -3,16 +3,15 @@
 #include "GLFW/glfw3.h"
 namespace Renderer_name
 {
-	float vertex[] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
+	float vertex[6] = {
+		-0.5f, -0.5f,
+		 0.5f, -0.5f,
+		 0.0f,  0.5f
 	};
-	unsigned int VBO;
+	unsigned int buffer;
 	Renderer::Renderer()
 	{
-		glGenBuffers(1, &VBO);
-
+		
 	}
 	
 	Renderer::~Renderer()
@@ -29,5 +28,31 @@ namespace Renderer_name
 		}
 
 		return 1;
+	}
+	int Renderer::InitGlew()
+	{
+		if (glewInit != GLEW_OK)
+		{
+			return 0;
+		}
+		return 1;
+	}
+	void Renderer::CreateBuffer()
+	{
+		//Vertex Buffers and Drawing a Triangle in OpenGL   video
+		glGenBuffers(1, &buffer);
+		glBindBuffer(GL_ARRAY_BUFFER, buffer);
+		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), vertex, GL_STATIC_DRAW);
+
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	void Renderer::DrawRenderer()
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 }

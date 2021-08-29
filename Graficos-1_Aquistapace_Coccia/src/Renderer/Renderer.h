@@ -12,7 +12,9 @@ namespace Renderer_name
 		~Renderer();
 		
 		int InitGlfw();
-
+		int InitGlew();
+		void CreateBuffer();
+		void DrawRenderer();
 	};
 }
 #endif
