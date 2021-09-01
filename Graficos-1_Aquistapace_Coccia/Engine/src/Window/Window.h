@@ -6,7 +6,7 @@
 struct GLFWmonitor;
 struct GLFWwindow;
 
-namespace Window_name 
+namespace Engine
 {
 	class EXPORT_API Windowuwu
 	{

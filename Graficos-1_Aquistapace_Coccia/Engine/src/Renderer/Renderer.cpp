@@ -2,22 +2,29 @@
 #include <iostream>
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
-namespace Renderer_name
+
+namespace Engine
 {
 	float vertex[6] = {
 		-0.5f, -0.5f,
 		 0.5f, -0.5f,
 		 0.0f,  0.5f
 	};
+
 	unsigned int buffer;
+
+	//=============================\\
+
 	Renderer::Renderer()
 	{
 
 	}
+
 	Renderer::~Renderer()
 	{
 
 	}
+
 	int Renderer::InitGlfw()
 	{
 		if (!glfwInit())
@@ -26,6 +33,7 @@ namespace Renderer_name
 		}
 		return 1;
 	}
+
 	int Renderer::InitGlew()
 	{
 		if (glewInit != GLEW_OK)
@@ -35,6 +43,7 @@ namespace Renderer_name
 		}
 		return 1;
 	}
+
 	void Renderer::CreateBuffer()
 	{
 		//Vertex Buffers and Drawing a Triangle in OpenGL video
@@ -47,6 +56,7 @@ namespace Renderer_name
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
+
 	void Renderer::DrawRenderer()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);

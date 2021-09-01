@@ -1,4 +1,15 @@
-int main()
+#include <iostream>
+#include "..\Game\Game.h"
+
+using namespace Engine;
+
+void main()
 {
-	return 0;
+	Game* game = new Game();
+
+	game->Start();
+	game->Play();
+	game->End();
+
+	delete game;
 }

@@ -2,7 +2,7 @@
 #include "iostream"
 #include "GLFW/glfw3.h"
 
-namespace Window_name
+namespace Engine
 {
 	Windowuwu::Windowuwu()
 	{

@@ -3,7 +3,7 @@
 
 #include "..\Export\Export.h"
 
-namespace Renderer_name
+namespace Engine
 {
 	class EXPORT_API Renderer
 	{
