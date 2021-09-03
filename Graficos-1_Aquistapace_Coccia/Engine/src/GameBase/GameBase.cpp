@@ -23,8 +23,17 @@ namespace Engine
 		if (!glfwInit())
 			return -1;
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 		_window->CreateWindow(width, height, windowName, NULL);
 		_window->InitWindow();
+
+		_renderer->InitGlew();
+
+		_renderer->CreateBuffer();
+		_renderer->CreateShader();
 	}
 
 	void GameBase::UpdateEngine()
@@ -32,8 +41,9 @@ namespace Engine
 		while (!_window->WindowShouldClose())
 		{
 			/* Render here */
-			glClear(GL_COLOR_BUFFER_BIT);
-
+			_window->ClearWindow(0.0f, 0.0f, 0.0f, 1);
+			_renderer->DrawRenderer();
+			
 			/* Swap front and back buffers */
 			_window->SwapBuffers();
 

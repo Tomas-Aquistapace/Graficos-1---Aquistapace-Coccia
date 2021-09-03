@@ -13,6 +13,9 @@
     <Filter Include="GameBase">
       <UniqueIdentifier>{6b9e0c10-be68-4f2a-a932-362a6640949c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{bcc350e7-0796-44c0-8600-705cc93fc2c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="src\GameBase\GameBase.cpp">
       <Filter>GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\Shader.cpp">
+      <Filter>Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="src\Export\Export.h">
       <Filter>Export</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\Shader.h">
+      <Filter>Shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,28 +1,25 @@
-#ifndef RENDERER_H
-#define RENDERER_H
+#ifndef SHADER_H
+#define SHADER_H
 
 #include <string>
 #include "..\Export\Export.h"
-//#include "..\Shader\Shader.h"
 
 namespace Engine
 {
-	class EXPORT_API Renderer
+	class EXPORT_API Shader
 	{
 	private:
-		//Shader* _shader;
+		const char* _vertexShader;
+		const char* _fragmentShader;
+
+	public:
+		Shader();
+		~Shader();
 
 		unsigned int CompileShader(unsigned int type, const std::string& source);
 		unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 
-	public:
-		Renderer();
-		~Renderer();
-		
-		int InitGlew();
-		void CreateBuffer();
-		void CreateShader();
-		void DrawRenderer();
 	};
 }
+
 #endif
