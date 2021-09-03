@@ -41,7 +41,7 @@ namespace Engine
 		while (!_window->WindowShouldClose())
 		{
 			/* Render here */
-			_window->ClearWindow(0.0f, 0.0f, 0.0f, 1);
+			_window->ClearWindow(0.1f, 0.0f, 0.0f, 1);
 			_renderer->DrawRenderer();
 			
 			/* Swap front and back buffers */

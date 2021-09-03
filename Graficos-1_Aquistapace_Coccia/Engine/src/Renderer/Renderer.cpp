@@ -5,14 +5,13 @@
 
 namespace Engine
 {
-	float vertex[6] = {
-		-0.5f, -0.5f,
-		 0.5f, -0.5f,
-		 0.0f,  0.5f
+	float vertex[18] = {
+		/*Pos*/ -0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
+		/*Pos*/  0.0f,  0.5f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
+		/*Pos*/  0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
 	};
-	//unsigned int vao; // Vertex Array Obj 
-	//unsigned int vbo; // Vertex Buffer Obj
-	unsigned int buffer; // Vertex Buffer Obj
+	unsigned int vao; // Vertex Array Obj 
+	unsigned int vbo; // Vertex Buffer Obj
 
 	//------ SHADER
 
@@ -20,17 +19,21 @@ namespace Engine
 
 	const char* _vertexShader = 
 		"#version 330 core\n"
-		"layout (location = 0) in vec4 position;\n"
+		"layout(location = 0) in vec3 inPosition;\n"
+		"layout(location = 1) in vec3 inColor;\n"
+		"out vec3 outColor;\n"
 		"void main()\n"
 		"{\n"
-		"   gl_Position = position;\n"
+		"   gl_Position = vec4(inPosition, 1.0);\n"
+		"   outColor = inColor;\n"
 		"}\0";
 	const char* _fragmentShader = 
 		"#version 330 core\n"
-		"layout(location = 0) out vec4 color;\n"
+		"out vec4 FragColor;\n"
+		"in vec3 outColor;\n"
 		"void main()\n"
 		"{\n"
-		"   color = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
+		"   FragColor = vec4(outColor, 1.0);\n"
 		"}\n\0";
 
 	//====================================\\
@@ -59,14 +62,21 @@ namespace Engine
 
 	void Renderer::CreateBuffer()
 	{
-		glGenBuffers(1, &buffer);
-		glBindBuffer(GL_ARRAY_BUFFER, buffer);
-		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), vertex, GL_STATIC_DRAW);
+		glGenVertexArrays(1, &vao);
+		glGenBuffers(1, &vbo);
 
+		glBindVertexArray(vao);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
+
+		// Para las posiciones
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
+		// Para los colores
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
 	}
 
 	void Renderer::CreateShader()
@@ -80,7 +90,7 @@ namespace Engine
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(_shader);
-		glBindVertexArray(buffer);
+		glBindVertexArray(vao);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
