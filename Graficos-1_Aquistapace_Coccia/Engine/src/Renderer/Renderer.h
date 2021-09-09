@@ -3,17 +3,17 @@
 
 #include <string>
 #include "..\Export\Export.h"
-//#include "..\Shader\Shader.h"
+#include "..\Shader\Shader.h"
 
 namespace Engine
 {
 	class EXPORT_API Renderer
 	{
 	private:
-		//Shader* _shader;
+		Shader* _shader;
 
-		unsigned int CompileShader(unsigned int type, const std::string& source);
-		unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+		//unsigned int CompileShader(unsigned int type, const std::string& source);
+		//unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 
 	public:
 		Renderer();

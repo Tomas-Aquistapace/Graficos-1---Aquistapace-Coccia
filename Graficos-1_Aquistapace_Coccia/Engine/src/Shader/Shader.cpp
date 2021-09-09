@@ -4,8 +4,7 @@
 #include "GLFW/glfw3.h"
 
 namespace Engine
-{
-	
+{	
 	Shader::Shader()
 	{
 		_vertexShader =
@@ -75,5 +74,15 @@ namespace Engine
 		glDeleteShader(fs);
 
 		return program;
+	}
+
+	void Shader::SetShader()
+	{
+		_shader = CreateShader(_vertexShader, _fragmentShader);
+	}
+
+	unsigned int Shader::GetShader()
+	{
+		return _shader;
 	}
 }

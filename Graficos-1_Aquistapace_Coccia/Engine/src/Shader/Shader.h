@@ -9,16 +9,20 @@ namespace Engine
 	class EXPORT_API Shader
 	{
 	private:
+		unsigned int _shader;
+
 		const char* _vertexShader;
 		const char* _fragmentShader;
 
+		unsigned int CompileShader(unsigned int type, const std::string& source);
+		unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+	
 	public:
 		Shader();
 		~Shader();
 
-		unsigned int CompileShader(unsigned int type, const std::string& source);
-		unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
-
+		void SetShader();
+		unsigned int GetShader();
 	};
 }
 
