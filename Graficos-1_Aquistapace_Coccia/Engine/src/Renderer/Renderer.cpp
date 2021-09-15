@@ -10,10 +10,10 @@ namespace Engine
 		/*Pos*/  0.0f,  0.5f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
 		/*Pos*/  0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
 	};
-	unsigned int vao; // Vertex Array Obj 
+	unsigned int vao; // Vertex Array Obj
 	unsigned int vbo; // Vertex Buffer Obj
 
-	// HAY QUE METER EL "EBO" BUFFER
+	// --------> HAY QUE METER EL "EBO" BUFFER
 
 	//====================================\\
 
@@ -71,6 +71,6 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 		glBindVertexArray(vao);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 3); // ------> USAR DRAW ELEMENTS
 	}
 }

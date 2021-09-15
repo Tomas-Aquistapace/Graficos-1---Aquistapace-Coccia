@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_WINDLL;GraficosEngine_Exports;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\GLFW\include;$(ProjectDir)lib\GLEW\include;$(ProjectDir)lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\GLFW\include;$(ProjectDir)lib\GLEW\include;$(ProjectDir)lib\glm;$(ProjectDir)lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,16 +150,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Entity2D\Entity2D.cpp" />
+    <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\GameBase\GameBase.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
+    <ClCompile Include="src\Shape2D\Shape2D.cpp" />
+    <ClCompile Include="src\Shape\Shape.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Entity2D\Entity2D.h" />
+    <ClInclude Include="src\Entity\Entity.h" />
     <ClInclude Include="src\Export\Export.h" />
     <ClInclude Include="src\GameBase\GameBase.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
+    <ClInclude Include="src\Shape2D\Shape2D.h" />
+    <ClInclude Include="src\Shape\Shape.h" />
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

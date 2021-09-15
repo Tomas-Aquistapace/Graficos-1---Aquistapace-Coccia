@@ -16,6 +16,18 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{bcc350e7-0796-44c0-8600-705cc93fc2c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shape">
+      <UniqueIdentifier>{74721481-43c8-4c66-be5f-ee3d9cf63837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{4639e722-e1e3-47c5-af93-3120611eaa08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity2D">
+      <UniqueIdentifier>{9c50b949-40e4-4865-af7d-f3b3eebb5c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shape2D">
+      <UniqueIdentifier>{54254b23-86a9-4aff-b6d6-34914214f45a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -29,6 +41,18 @@
     </ClCompile>
     <ClCompile Include="src\Shader\Shader.cpp">
       <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shape\Shape.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity2D\Entity2D.cpp">
+      <Filter>Entity2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shape2D\Shape2D.cpp">
+      <Filter>Shape2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +70,18 @@
     </ClInclude>
     <ClInclude Include="src\Shader\Shader.h">
       <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shape\Shape.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity2D\Entity2D.h">
+      <Filter>Entity2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shape2D\Shape2D.h">
+      <Filter>Shape2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
