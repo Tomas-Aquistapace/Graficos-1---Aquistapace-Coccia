@@ -5,15 +5,14 @@
 
 namespace Engine
 {
-	float vertex[18] = {
-		/*Pos*/ -0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/  0.0f,  0.5f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/  0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
-	};
-	unsigned int vao; // Vertex Array Obj
-	unsigned int vbo; // Vertex Buffer Obj
-
-	// --------> HAY QUE METER EL "EBO" BUFFER
+	//float vertex[18] = {
+	//	/*Pos*/ -0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
+	//	/*Pos*/  0.0f,  0.5f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
+	//	/*Pos*/  0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+	//};
+	//unsigned int vao; // Vertex Array Obj
+	//unsigned int vbo; // Vertex Buffer Obj
+	unsigned int ebo; // Vertex Elements Obj
 
 	//====================================\\
 
@@ -39,15 +38,20 @@ namespace Engine
 		}
 	}
 
-	void Renderer::CreateBuffer()
+	void Renderer::CreateBuffer(int vertexCant, float* testvb, unsigned int& vbo, unsigned int& vao)
 	{
 		glGenVertexArrays(1, &vao);
 		glGenBuffers(1, &vbo);
 
 		glBindVertexArray(vao);
-
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
+
+		glBufferData(GL_ARRAY_BUFFER, vertexCant, testvb, GL_STATIC_DRAW);
+
+
+		//glGenBuffers(1, &ebo);
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
 
 		// Para las posiciones
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
@@ -64,11 +68,11 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 	}
 
-	void Renderer::DrawRenderer()
+	void Renderer::DrawRenderer(unsigned int& vao)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(_shader->GetShader());
+		//glUseProgram(_shader->GetShader()); por que esto esta aca??? Que hace???
 		glBindVertexArray(vao);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3); // ------> USAR DRAW ELEMENTS

@@ -3,13 +3,14 @@
 
 #include <string>
 #include "..\Export\Export.h"
-#include <glm\vec3.hpp>
-#include <glm\mat4x4.hpp>
-#include <glm\gtc\quaternion.hpp>
+#include "..\Renderer\Renderer.h"
+#include "glm\glm\vec3.hpp"
+#include "glm\glm\mat4x4.hpp"
+//#include <glm\gtc\quaternion.hpp>
 
 namespace Engine
 {
-	class EXPORT_API Entity
+	class EXPORT_API Entity 
 	{
 	private:
 		struct  Transform
@@ -17,11 +18,11 @@ namespace Engine
 			glm::vec3 position;
 			glm::vec3 rotation;
 			glm::vec3 scale;
-			glm::quat quatRotation;
+			//glm::quat quatRotation;
 		};
 
-
 	public:
+		Renderer* renderer;
 		Entity();
 		~Entity();
 
@@ -29,7 +30,6 @@ namespace Engine
 		//void SetRotation(float x, float y, float z);
 		//void SetScale(float x, float y, float z);
 		//void SetQuat
-
 	};
 }
 

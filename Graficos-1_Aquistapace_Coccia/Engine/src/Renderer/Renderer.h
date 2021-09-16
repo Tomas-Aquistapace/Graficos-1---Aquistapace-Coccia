@@ -11,7 +11,7 @@ namespace Engine
 	{
 	private:
 		Shader* _shader;
-
+		
 		//unsigned int CompileShader(unsigned int type, const std::string& source);
 		//unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 
@@ -20,9 +20,9 @@ namespace Engine
 		~Renderer();
 		
 		int InitGlew();
-		void CreateBuffer();
+		void CreateBuffer(int vertexCant, float* testvb, unsigned int& vbo, unsigned int& vao);
 		void CreateShader();
-		void DrawRenderer();
+		void DrawRenderer(unsigned int& vao);
 	};
 }
 #endif

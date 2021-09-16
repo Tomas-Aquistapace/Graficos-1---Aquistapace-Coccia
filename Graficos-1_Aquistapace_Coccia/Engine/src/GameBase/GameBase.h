@@ -3,6 +3,7 @@
 
 #include "../Window/Window.h"
 #include "../Renderer/Renderer.h"
+#include "../Shape/Shape.h"
 
 namespace Engine
 {
@@ -10,6 +11,7 @@ namespace Engine
 	{
 		Renderer* _renderer;
 		Windowuwu* _window;
+		Shape* _shape;
 
 	public:
 		GameBase();
