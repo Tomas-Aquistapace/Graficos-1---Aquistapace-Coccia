@@ -7,6 +7,7 @@ namespace Engine
 {
 	class Game : GameBase
 	{
+	private:
 		Shape* _triangle1;
 
 	public:
@@ -15,7 +16,7 @@ namespace Engine
 
 		void Start();
 		void Play();
-		void Update();
+		void Update() override;
 		void End();
 	};
 }

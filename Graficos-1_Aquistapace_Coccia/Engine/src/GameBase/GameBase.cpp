@@ -8,7 +8,6 @@ namespace Engine
 	{
 		_window = new Windowuwu();
 		_renderer = new Renderer();
-		//_shape = new Shape();
 	}
 
 	GameBase::~GameBase() 
@@ -32,7 +31,6 @@ namespace Engine
 		_window->InitWindow();
 
 		_renderer->InitGlew();
-
 		_renderer->CreateShader();
 	}
 
@@ -43,11 +41,8 @@ namespace Engine
 			/* Render here */
 			_window->ClearWindow(0.1f, 0.0f, 0.0f, 1);
 			
-			//
-			//_shape->Draw();
-			// 
-			//_renderer->DrawRenderer();
-			
+			Update(); // --> Aca se utiliza un metodo virtual para poder dibujar los objetos del Game.cpp
+
 			/* Swap front and back buffers */
 			_window->SwapBuffers();
 

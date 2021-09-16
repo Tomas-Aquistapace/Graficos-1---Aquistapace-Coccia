@@ -20,6 +20,9 @@ namespace Engine
 		void UpdateEngine();
 		void EndEngine();
 
+		//virtual void Start() = 0;
+		virtual void Update() = 0;
+
 		Renderer* GetRenderer();
 	};
 }
