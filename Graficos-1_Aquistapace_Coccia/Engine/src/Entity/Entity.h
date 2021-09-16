@@ -20,16 +20,18 @@ namespace Engine
 			glm::vec3 scale;
 			//glm::quat quatRotation;
 		};
+
 	protected:
 		Renderer* _renderer;
+
 	public:	
-		Entity();
+		Entity(Renderer* renderer);
 		~Entity();
 
-		//void SetPosition(float x, float y, float z);
-		//void SetRotation(float x, float y, float z);
-		//void SetScale(float x, float y, float z);
-		//void SetQuat
+		void SetPosition(float x, float y, float z);
+		void SetRotation(float x, float y, float z);
+		void SetScale(float x, float y, float z);
+		//void SetQuat();
 	};
 }
 

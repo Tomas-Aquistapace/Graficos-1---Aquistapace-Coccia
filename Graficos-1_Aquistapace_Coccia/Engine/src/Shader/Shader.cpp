@@ -22,6 +22,8 @@ namespace Engine
 			"{\n"
 			"   color = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
 			"}\n\0";
+
+		_shader = 0;
 	}
 
 	Shader::~Shader()
@@ -81,8 +83,18 @@ namespace Engine
 		_shader = CreateShader(_vertexShader, _fragmentShader);
 	}
 
+	void Shader::ClearShader()
+	{
+		if (_shader != 0)
+		{
+			glDeleteProgram(_shader);
+			_shader = 0;
+		}
+	}
+	
 	unsigned int Shader::GetShader()
 	{
 		return _shader;
 	}
+
 }

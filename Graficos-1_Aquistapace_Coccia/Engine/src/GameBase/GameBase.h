@@ -11,7 +11,6 @@ namespace Engine
 	{
 		Renderer* _renderer;
 		Windowuwu* _window;
-		Shape* _shape;
 
 	public:
 		GameBase();
@@ -20,6 +19,8 @@ namespace Engine
 		int StartEngine(int width, int height, const char* windowName);
 		void UpdateEngine();
 		void EndEngine();
+
+		Renderer* GetRenderer();
 	};
 }
 

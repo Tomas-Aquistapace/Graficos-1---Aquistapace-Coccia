@@ -5,17 +5,6 @@
 
 namespace Engine
 {
-	//float vertex[18] = {
-	//	/*Pos*/ -0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-	//	/*Pos*/  0.0f,  0.5f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-	//	/*Pos*/  0.5f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
-	//};
-	//unsigned int vao; // Vertex Array Obj
-	//unsigned int vbo; // Vertex Buffer Obj
-	unsigned int ebo; // Vertex Elements Obj
-
-	//====================================\\
-
 	Renderer::Renderer()
 	{		
 		_shader = new Shader();
@@ -25,8 +14,6 @@ namespace Engine
 	{
 		if (_shader != NULL)
 			delete _shader;
-
-		glDeleteProgram(_shader->GetShader());
 	}
 
 	int Renderer::InitGlew()
@@ -47,7 +34,6 @@ namespace Engine
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 		glBufferData(GL_ARRAY_BUFFER, vertexCant, testvb, GL_STATIC_DRAW);
-
 
 		//glGenBuffers(1, &ebo);
 		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
@@ -76,5 +62,13 @@ namespace Engine
 		glBindVertexArray(vao);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3); // ------> USAR DRAW ELEMENTS
+	}
+
+	void Renderer::StopShader()
+	{
+		if (_shader != NULL)
+		{
+			_shader->ClearShader();
+		}
 	}
 }

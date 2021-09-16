@@ -8,7 +8,7 @@ namespace Engine
 	{
 		_window = new Windowuwu();
 		_renderer = new Renderer();
-		_shape = new Shape();
+		//_shape = new Shape();
 	}
 
 	GameBase::~GameBase() 
@@ -33,9 +33,6 @@ namespace Engine
 
 		_renderer->InitGlew();
 
-		_shape->BindBuffers();
-
-		//_renderer->CreateBuffer();
 		_renderer->CreateShader();
 	}
 
@@ -45,7 +42,10 @@ namespace Engine
 		{
 			/* Render here */
 			_window->ClearWindow(0.1f, 0.0f, 0.0f, 1);
-			_shape->Draw();
+			
+			//
+			//_shape->Draw();
+			// 
 			//_renderer->DrawRenderer();
 			
 			/* Swap front and back buffers */
@@ -58,6 +58,14 @@ namespace Engine
 	
 	void GameBase::EndEngine()
 	{
+		_renderer->StopShader();
 		glfwTerminate();
+	}
+
+	//===========================================
+
+	Renderer* GameBase::GetRenderer()
+	{
+		return _renderer;
 	}
 }

@@ -22,6 +22,8 @@ namespace Engine
 		~Shader();
 
 		void SetShader();
+		void ClearShader();
+
 		unsigned int GetShader();
 	};
 }

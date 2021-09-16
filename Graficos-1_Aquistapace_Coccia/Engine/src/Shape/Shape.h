@@ -15,18 +15,18 @@ namespace Engine
 	class EXPORT_API Shape : Entity
 	{
 	private:
-		int vertexSize;
-		float* vertex;
-		unsigned int vao; // Vertex Array Obj
-		unsigned int vbo; // Vertex Buffer Obj
+		int _vertexSize;
+		float* _vertex;
+		unsigned int _vao; // Vertex Array Obj
+		unsigned int _vbo; // Vertex Buffer Obj
 
 		// --------> HAY QUE METER EL "EBO" BUFFER
 
 	public:
-		Shape(/*TypeOfShape type*/);
+		Shape(Renderer* renderer);
 		~Shape();
 
-		void BindBuffers();
+		void InitShape(TypeOfShape type);
 		void Draw();
 	};
 }

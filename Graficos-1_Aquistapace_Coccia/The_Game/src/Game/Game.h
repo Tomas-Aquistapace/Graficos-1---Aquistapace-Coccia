@@ -5,9 +5,10 @@
 
 namespace Engine
 {
-
 	class Game : GameBase
 	{
+		Shape* _triangle1;
+
 	public:
 		Game();
 		~Game();
@@ -17,7 +18,6 @@ namespace Engine
 		void Update();
 		void End();
 	};
-
 }
 
 #endif;
