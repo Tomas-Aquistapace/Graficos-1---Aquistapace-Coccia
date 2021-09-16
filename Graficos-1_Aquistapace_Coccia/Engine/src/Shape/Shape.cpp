@@ -37,7 +37,7 @@ namespace Engine
 
 	void Shape::BindBuffers()
 	{
-		renderer->CreateBuffer(vertexSize,vertex,vbo,vao);
+		_renderer->CreateBuffer(vertexSize,vertex,vbo,vao);
 		//glGenVertexArrays(1, &vao);
 		//glGenBuffers(1, &vbo);
 		//
@@ -55,6 +55,6 @@ namespace Engine
 	}
 	void Shape::Draw()
 	{
-		renderer->DrawRenderer(vao);
+		_renderer->DrawRenderer(vao);
 	}
 }

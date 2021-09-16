@@ -20,9 +20,9 @@ namespace Engine
 			glm::vec3 scale;
 			//glm::quat quatRotation;
 		};
-
-	public:
-		Renderer* renderer;
+	protected:
+		Renderer* _renderer;
+	public:	
 		Entity();
 		~Entity();
 

@@ -72,7 +72,7 @@ namespace Engine
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//glUseProgram(_shader->GetShader()); por que esto esta aca??? Que hace???
+		//glUseProgram(_shader->GetShader()); //por que esto esta aca??? Que hace???
 		glBindVertexArray(vao);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3); // ------> USAR DRAW ELEMENTS
