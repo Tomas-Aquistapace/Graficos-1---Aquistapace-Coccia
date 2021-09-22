@@ -7,6 +7,10 @@
 
 namespace Engine
 {
+	enum TypeOfShape {
+		Triangle, 
+		Quad
+	};
 	class EXPORT_API Renderer
 	{
 	private:
@@ -17,9 +21,9 @@ namespace Engine
 		~Renderer();
 		
 		int InitGlew();
-		void CreateBuffer(int vertexCant, float* testvb, unsigned int& vbo, unsigned int& vao);
+		void CreateBuffer(TypeOfShape shape,int vertexCant, unsigned int &vao, unsigned int &vbo, unsigned int &ebo, float* testvb, unsigned int indexPos);
 		void CreateShader();
-		void DrawRenderer(unsigned int& vao);
+		void DrawRenderer(TypeOfShape shape, int vertexCant, unsigned int &vao, unsigned int &vbo, unsigned int &ebo, float* testvb, float tamVertexs, unsigned int indexPos);
 		void StopShader();
 	};
 }

@@ -7,11 +7,6 @@
 
 namespace Engine
 {
-	enum class TypeOfShape {
-		Triangle,
-		Quad
-	};
-
 	class EXPORT_API Shape : Entity
 	{
 	private:
@@ -19,6 +14,7 @@ namespace Engine
 		float* _vertex;
 		unsigned int _vao; // Vertex Array Obj
 		unsigned int _vbo; // Vertex Buffer Obj
+		unsigned int _ebo; // Buffer Obj
 
 		// --------> HAY QUE METER EL "EBO" BUFFER
 

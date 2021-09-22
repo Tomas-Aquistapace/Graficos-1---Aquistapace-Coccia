@@ -9,6 +9,7 @@ namespace Engine
 	{
 	private:
 		Shape* _triangle1;
+		Shape* _quad1;
 
 	public:
 		Game();
