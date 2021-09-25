@@ -14,14 +14,12 @@ namespace Engine
 		float* _vertex;
 		unsigned int _vao; // Vertex Array Obj
 		unsigned int _vbo; // Vertex Buffer Obj
-		unsigned int _ebo; // Buffer Obj
-
-		// --------> HAY QUE METER EL "EBO" BUFFER
+		unsigned int _ebo; // Index Buffer Obj
+		TypeOfShape _shape;
 
 	public:
 		Shape(Renderer* renderer);
 		~Shape();
-
 		void InitShape(TypeOfShape type);
 		void Draw();
 	};

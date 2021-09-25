@@ -21,9 +21,11 @@ namespace Engine
 		~Renderer();
 		
 		int InitGlew();
-		void CreateBuffer(TypeOfShape shape,int vertexCant, unsigned int &vao, unsigned int &vbo, unsigned int &ebo, float* testvb, unsigned int indexPos);
+		void SetVertexBuffer(int size, float* vertex, unsigned int &vao, unsigned int &vbo);
+		void SetIndexBuffer(int size, unsigned int* index, unsigned int &ebo);
+		void SetAtrtribs(int size, int strides, int offset);
 		void CreateShader();
-		void DrawRenderer(TypeOfShape shape, int vertexCant, unsigned int &vao, unsigned int &vbo, unsigned int &ebo, float* testvb, float tamVertexs, unsigned int indexPos);
+		void Draw(TypeOfShape shape, unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
 		void StopShader();
 	};
 }
