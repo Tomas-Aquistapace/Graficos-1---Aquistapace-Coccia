@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-	enum TypeOfShape {
+	enum class TypeOfShape {
 		Triangle, 
 		Quad
 	};

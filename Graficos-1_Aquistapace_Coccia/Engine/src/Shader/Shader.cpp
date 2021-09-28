@@ -12,18 +12,24 @@ namespace Engine
 			"layout (location = 0) in vec4 position;\n"
 
 			"uniform mat4 model;\n"
+			"in vec3 color;\n"
+			"out vec4 vColour;\n"
 
 			"void main()\n"
 			"{\n"
 			"   gl_Position = model * position;\n"
+			"	vColour = vec4(color, 1.0f);\n"
 			"}\0";
-
+		///layout(location = 0) 
 		_fragmentShader =
 			"#version 330 core\n"
-			"layout(location = 0) out vec4 color;\n"
+			"in vec4 vColour;\n"
+
+			"out vec4 colour;\n"
+
 			"void main()\n"
 			"{\n"
-			"   color = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
+			"   colour = vColour;\n"
 			"}\n\0";
 
 		_shader = 0;

@@ -14,8 +14,7 @@ namespace Engine
 
 	Entity::~Entity()
 	{
-		if(_renderer != NULL)
-			delete _renderer;
+
 	}
 
 	void Entity::SetPosition(float x, float y, float z)
@@ -79,30 +78,5 @@ namespace Engine
 			_generalMatrix.rotateY *
 			_generalMatrix.rotateZ * 
 			_generalMatrix.scale;
-	}
-
-	// --------------------------------
-
-	void Entity::SetColor(ENTITY_COLOR color)
-	{
-		switch (color)
-		{
-		case ENTITY_COLOR::WHITE:
-			break;
-		case ENTITY_COLOR::BLACK:
-			break;
-		case ENTITY_COLOR::BLUE:
-			break;
-		case ENTITY_COLOR::RED:
-			break;
-		case ENTITY_COLOR::GREEN:
-			break;
-		case ENTITY_COLOR::GRAY:
-			break;
-		case ENTITY_COLOR::YELLOW:
-			break;
-		case ENTITY_COLOR::ORANGE:
-			break;
-		}
 	}
 }

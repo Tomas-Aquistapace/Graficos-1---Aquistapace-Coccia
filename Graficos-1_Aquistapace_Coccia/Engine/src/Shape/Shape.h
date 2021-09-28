@@ -10,24 +10,24 @@ namespace Engine
 	class EXPORT_API Shape : public Entity
 	{
 	private:
-		float triangleVertex[18] = {
+		float _triangleVertex[18] = {
 			/*Pos*/ -0.1f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
 			/*Pos*/  0.0f,  0.2f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
 			/*Pos*/  0.1f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
 		};
 
-		float quadVertex[24] = {
+		float _quadVertex[24] = {
 			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
 			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
 			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
 			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
 		};
 
-		unsigned int indexTris[3] = {
+		unsigned int _indexTris[3] = {
 			0,1,2,
 		};
 
-		unsigned int indexPos[6] = {
+		unsigned int _indexPos[6] = {
 			0,1,2,
 			3,2,0
 		};
@@ -47,6 +47,9 @@ namespace Engine
 		~Shape();
 		void InitShape(TypeOfShape type);
 		void Draw();
+
+		void SetColor(ENTITY_COLOR color) override;
+		void SetColor(float r, float g, float b) override;
 	};
 }
 

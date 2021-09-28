@@ -13,8 +13,10 @@ namespace Engine
 
 	Renderer::~Renderer()
 	{
-		if (_shader != NULL)
+		if (_shader != NULL) {
 			delete _shader;
+			_shader = NULL;
+		}
 	}
 
 	int Renderer::InitGlew()
@@ -57,7 +59,7 @@ namespace Engine
 	
 	void Renderer::Draw(TypeOfShape shape, unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount)
 	{		
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(_shader->GetShader());
 		glBindVertexArray(vao);
@@ -65,9 +67,12 @@ namespace Engine
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glBufferData(GL_ARRAY_BUFFER, vertexSize, vertex, GL_STATIC_DRAW);
 
-		//if (shape == TypeOfShape::Triangle)
-		//	glDrawArrays(GL_TRIANGLES, 0, vertexCount);
-		//else
+
+		unsigned int colorLocation = glGetAttribLocation(GetShader(), "color");
+		glVertexAttribPointer(colorLocation, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(colorLocation);
+
+
 		glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(0);

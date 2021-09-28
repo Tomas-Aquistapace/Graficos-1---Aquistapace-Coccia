@@ -10,11 +10,10 @@
 
 namespace Engine
 {
-	enum ENTITY_COLOR
+	enum class ENTITY_COLOR
 	{
-		WHITE, BLACK, BLUE,
-		RED, GREEN, GRAY,
-		YELLOW, ORANGE
+		WHITE, BLACK, GRAY,
+		RED, GREEN, BLUE
 	};
 
 	struct Transform
@@ -56,7 +55,8 @@ namespace Engine
 
 		void UpdateMatrix();
 
-		void SetColor(ENTITY_COLOR color);		
+		virtual void SetColor(ENTITY_COLOR color) = 0;
+		virtual void SetColor(float r, float g, float b) = 0;
 	};
 }
 
