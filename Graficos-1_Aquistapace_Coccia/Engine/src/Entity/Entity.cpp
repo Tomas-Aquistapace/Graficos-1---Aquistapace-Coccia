@@ -6,6 +6,10 @@ namespace Engine
 	Entity::Entity(Renderer* renderer)
 	{
 		_renderer = renderer;
+
+		SetPosition(0,0,0);
+		SetRotation(0,0,0);
+		SetScale(1,1,1);
 	}
 
 	Entity::~Entity()
@@ -26,9 +30,11 @@ namespace Engine
 
 	void Entity::SetRotation(float x, float y, float z)
 	{
-		SetRotationX(x);
-		SetRotationY(y);
-		SetRotationZ(z);
+		_transform.rotation = { x, y, z };
+		_generalMatrix.rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(x), glm::vec3(1.0f, 0.0f, 0.0f));
+		_generalMatrix.rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(y), glm::vec3(0.0f, 1.0f, 0.0f));
+		_generalMatrix.rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(z), glm::vec3(0.0f, 0.0f, 1.0f));
+		UpdateMatrix();
 	}
 
 	void Entity::SetScale(float x, float y, float z) 

@@ -5,11 +5,13 @@
 
 namespace Engine
 {
-	class Game : GameBase
+	class Game : public GameBase
 	{
 	private:
 		Shape* _triangle1;
 		Shape* _quad1;
+
+		float _speed = 0.0001f;
 
 	public:
 		Game();

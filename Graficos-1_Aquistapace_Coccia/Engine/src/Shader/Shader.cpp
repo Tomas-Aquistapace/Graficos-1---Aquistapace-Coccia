@@ -10,9 +10,12 @@ namespace Engine
 		_vertexShader =
 			"#version 330 core\n"
 			"layout (location = 0) in vec4 position;\n"
+
+			"uniform mat4 model;\n"
+
 			"void main()\n"
 			"{\n"
-			"   gl_Position = position;\n"
+			"   gl_Position = model * position;\n"
 			"}\0";
 
 		_fragmentShader =

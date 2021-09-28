@@ -4,6 +4,7 @@
 #include <string>
 #include "..\Export\Export.h"
 #include "..\Shader\Shader.h"
+#include "glm\glm\mat4x4.hpp"
 
 namespace Engine
 {
@@ -27,7 +28,10 @@ namespace Engine
 		void SetAtrtribs(int size, int strides, int offset);
 		void CreateShader();
 		void Draw(TypeOfShape shape, unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
+		void UpdateModel(glm::mat4 model, unsigned int updateShape);
 		void StopShader();
+
+		unsigned int GetShader();
 	};
 }
 #endif

@@ -5,26 +5,6 @@
 
 namespace Engine
 {
-	float triangleVertex[18] = {
-		/*Pos*/ -0.1f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/  0.0f,  0.2f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/  0.1f,  0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
-	};
-
-	float quadVertex[24] = {
-		/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-		/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
-	};
-
-	unsigned int indexPos[] = {
-		0,1,2,
-		3,2,0
-	};
-	
-	// =======================================================
-	
 	Shape::Shape(Renderer* renderer) : Entity(renderer)
 	{
 		
@@ -48,6 +28,10 @@ namespace Engine
 			_vertexSize = sizeof(triangleVertex);
 
 			_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
+			_renderer->SetIndexBuffer(_vertexSize, indexTris, _ebo);
+			
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(0));
+			glEnableVertexAttribArray(0);
 			break;
 
 		case TypeOfShape::Quad:
@@ -56,28 +40,28 @@ namespace Engine
 
 			_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
 			_renderer->SetIndexBuffer(_vertexSize, indexPos, _ebo);
-			break;
-
-		}
-		if (_shape == TypeOfShape::Triangle)
-		{
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(0));
-			glEnableVertexAttribArray(0);
-		}
-		else
-		{
+			
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)0);
 			glEnableVertexAttribArray(0);
+			break;
 		}
+
+		_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
 	}
 
 	void Shape::Draw()
 	{
-		//triangleVertex[0] += 0.001f;
-        //triangleVertex[6] += 0.001f;
-        //triangleVertex[12] += 0.001f;
-        //_vertex = triangleVertex;
-		
-		_renderer->Draw(_shape, _vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(indexPos) / sizeof(float));
+		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+
+		switch (_shape)
+		{
+		case TypeOfShape::Triangle:
+			_renderer->Draw(_shape, _vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(indexTris) / sizeof(float));
+			break;
+
+		case TypeOfShape::Quad:
+			_renderer->Draw(_shape, _vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(indexPos) / sizeof(float));
+			break;
+		}
 	}
 }
