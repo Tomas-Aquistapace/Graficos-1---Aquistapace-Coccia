@@ -66,9 +66,9 @@ namespace Engine
 		glBufferData(GL_ARRAY_BUFFER, vertexSize, vertex, GL_STATIC_DRAW);
 
 		if (shape == TypeOfShape::Triangle)
-		 glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+			glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 		else
-		 glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);

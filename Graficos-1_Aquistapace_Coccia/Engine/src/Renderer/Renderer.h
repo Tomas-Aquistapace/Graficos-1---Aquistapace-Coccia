@@ -11,6 +11,7 @@ namespace Engine
 		Triangle, 
 		Quad
 	};
+
 	class EXPORT_API Renderer
 	{
 	private:
