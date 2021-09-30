@@ -34,12 +34,12 @@ namespace Engine
 		_renderer->CreateShader();
 	}
 
-	void GameBase::UpdateEngine()
+	void GameBase::UpdateEngine(float r, float g, float b, float a)
 	{
 		while (!_window->WindowShouldClose())
 		{
 			/* Render here */
-			_window->ClearWindow(0.1f, 0.0f, 0.0f, 1);
+			_window->ClearWindow(r, g, b, a);
 			
 			Update(); // --> Aca se utiliza un metodo virtual para poder dibujar los objetos del Game.cpp
 

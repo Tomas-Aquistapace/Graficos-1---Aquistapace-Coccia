@@ -27,19 +27,22 @@ namespace Engine
 
 		_quad1 = new Shape(GetRenderer());
 		_quad1->InitShape(TypeOfShape::Quad);
+		_quad1->SetPosition(-0.5f, 0.5f, 0);
+		_quad1->SetColor(0.25f, 0.25f, 0.25f);
 	}
 	
 	void Game::Play()
 	{
-		UpdateEngine();
+		UpdateEngine(0.5f, 0.5f, 0.5f, 1);
 	}
 
 	void Game::Update()
 	{
 		_triangle1->SetPosition(_triangle1->_transform.position.x + _speed, _triangle1->_transform.position.y, _triangle1->_transform.position.z);
-		_triangle1->SetRotationZ(_triangle1->_transform.rotation.z + 0.1f);
+		_triangle1->SetRotationZ(_triangle1->_transform.rotation.z + 0.05f);
 		
 		_quad1->SetRotationZ(_quad1->_transform.rotation.z - 0.1f);
+		_quad1->SetScale(_quad1->_transform.scale.x + 0.0001f, _quad1->_transform.scale.y + 0.0001f, _quad1->_transform.scale.z);
 
 		_triangle1->Draw();
 		_quad1->Draw();

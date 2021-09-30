@@ -17,10 +17,9 @@ namespace Engine
 		~GameBase();
 
 		int StartEngine(int width, int height, const char* windowName);
-		void UpdateEngine();
+		void UpdateEngine(float r, float g, float b, float a);
 		void EndEngine();
 
-		//virtual void Start() = 0;
 		virtual void Update() = 0;
 
 		Renderer* GetRenderer();

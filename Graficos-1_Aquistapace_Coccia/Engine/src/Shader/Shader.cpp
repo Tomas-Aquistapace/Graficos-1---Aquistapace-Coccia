@@ -20,7 +20,7 @@ namespace Engine
 			"   gl_Position = model * position;\n"
 			"	vColour = vec4(color, 1.0f);\n"
 			"}\0";
-		///layout(location = 0) 
+
 		_fragmentShader =
 			"#version 330 core\n"
 			"in vec4 vColour;\n"
