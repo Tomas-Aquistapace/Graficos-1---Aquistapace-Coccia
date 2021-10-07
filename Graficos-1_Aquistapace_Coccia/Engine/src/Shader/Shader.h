@@ -11,17 +11,14 @@ namespace Engine
 	private:
 		unsigned int _shader;
 
-		const char* _vertexShader;
-		const char* _fragmentShader;
-
-		unsigned int CompileShader(unsigned int type, const std::string& source);
-		unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+		unsigned int CompileShader(unsigned int type, const char* source);
+		unsigned int CreateShader(const char* vertexShader, const char* fragmentShader);
 	
 	public:
 		Shader();
 		~Shader();
 
-		void SetShader();
+		void SetShader(const char* vertexShader, const char* fragmentShader);
 		void ClearShader();
 
 		unsigned int GetShader();

@@ -1,5 +1,7 @@
 #include "Shader.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
@@ -7,31 +9,6 @@ namespace Engine
 {	
 	Shader::Shader()
 	{
-		_vertexShader =
-			"#version 330 core\n"
-			"layout (location = 0) in vec4 position;\n"
-
-			"uniform mat4 model;\n"
-			"in vec3 color;\n"
-			"out vec4 vColour;\n"
-
-			"void main()\n"
-			"{\n"
-			"   gl_Position = model * position;\n"
-			"	vColour = vec4(color, 1.0f);\n"
-			"}\0";
-
-		_fragmentShader =
-			"#version 330 core\n"
-			"in vec4 vColour;\n"
-
-			"out vec4 colour;\n"
-
-			"void main()\n"
-			"{\n"
-			"   colour = vColour;\n"
-			"}\n\0";
-
 		_shader = 0;
 	}
 
@@ -40,37 +17,39 @@ namespace Engine
 
 	}
 
-	unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
+	unsigned int Shader::CompileShader(unsigned int type, const char* source)
 	{
 		unsigned int id = glCreateShader(type);
-		const char* src = source.c_str();
-		glShaderSource(id, 1, &src, nullptr);
-		glCompileShader(id);
 
-		// Si ocurre algun error, se ejecutara esto:
-		int result;
-		glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+		std::string sourceShaderCode;
 
-		if (result == GL_FALSE)
-		{
-			int length;
-			glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-			char* message = (char*)_malloca(length * sizeof(char));
-			glGetShaderInfoLog(id, length, &length, message);
+		std::ifstream sourceShaderFile;
 
-			std::cout << "failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader!"
-				<< std::endl;
-			std::cout << message << std::endl;
+		sourceShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-			glDeleteShader(id);
+		try {
+			sourceShaderFile.open(source);
+			std::stringstream sourceShaderStream;
 
-			return 0;
+			sourceShaderStream << sourceShaderFile.rdbuf();
+
+			sourceShaderFile.close();
+
+			sourceShaderCode = sourceShaderStream.str();
 		}
+		catch (std::ifstream::failure& e) {
+			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ - " << e.what() << std::endl;
+		}
+
+		const char* srcCode = sourceShaderCode.c_str();
+
+		glShaderSource(id, 1, &srcCode, nullptr);
+		glCompileShader(id);
 
 		return id;
 	}
 
-	unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+	unsigned int Shader::CreateShader(const char* vertexShader, const char* fragmentShader)
 	{
 		unsigned int program = glCreateProgram();
 		unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
@@ -81,15 +60,18 @@ namespace Engine
 		glLinkProgram(program);
 		glValidateProgram(program);
 
+		glDetachShader(program, vs);
+		glDetachShader(program, fs);
+
 		glDeleteShader(vs);
 		glDeleteShader(fs);
 
 		return program;
 	}
 
-	void Shader::SetShader()
+	void Shader::SetShader(const char* vertexShader, const char* fragmentShader)
 	{
-		_shader = CreateShader(_vertexShader, _fragmentShader);
+		_shader = CreateShader(vertexShader, fragmentShader);
 	}
 
 	void Shader::ClearShader()
@@ -105,5 +87,4 @@ namespace Engine
 	{
 		return _shader;
 	}
-
 }

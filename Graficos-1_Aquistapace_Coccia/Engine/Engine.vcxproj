@@ -102,9 +102,12 @@
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
+      <Command>"$(ProjectDir)tools\postCompile.bat" "$(ProjectDir)bin\Debug" "$(SolutionDir)The_Game\bin\Debug"</Command>
+    </PostBuildEvent>
+    <CustomBuildStep>
       <Command>
       </Command>
-    </PostBuildEvent>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -173,6 +176,10 @@
     <ClInclude Include="src\Shape2D\Shape2D.h" />
     <ClInclude Include="src\Shape\Shape.h" />
     <ClInclude Include="src\Window\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\Fragment.shader" />
+    <None Include="Shaders\Vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

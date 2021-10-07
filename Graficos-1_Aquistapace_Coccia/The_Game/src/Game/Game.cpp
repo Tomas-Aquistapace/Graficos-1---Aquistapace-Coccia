@@ -42,7 +42,7 @@ namespace Engine
 		_triangle1->SetRotationZ(_triangle1->_transform.rotation.z + 0.05f);
 		
 		_quad1->SetRotationZ(_quad1->_transform.rotation.z - 0.1f);
-		_quad1->SetScale(_quad1->_transform.scale.x + 0.0001f, _quad1->_transform.scale.y + 0.0001f, _quad1->_transform.scale.z);
+		_quad1->SetScale(_quad1->_transform.scale.x, _quad1->_transform.scale.y + 0.0001f, _quad1->_transform.scale.z + 0.0001f);
 
 		_triangle1->Draw();
 		_quad1->Draw();

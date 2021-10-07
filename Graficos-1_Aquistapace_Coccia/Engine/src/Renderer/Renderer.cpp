@@ -53,14 +53,12 @@ namespace Engine
 
 	void Renderer::CreateShader()
 	{
-		_shader->SetShader();
+		_shader->SetShader("../Engine/shaders/Vertex.shader", "../Engine/shaders/Fragment.shader");
 		glUseProgram(_shader->GetShader());
 	}
 	
 	void Renderer::Draw(TypeOfShape shape, unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount)
-	{		
-		//glClear(GL_COLOR_BUFFER_BIT);
-
+	{
 		glUseProgram(_shader->GetShader());
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
