@@ -12,7 +12,6 @@ namespace Engine
 		Shape* _quad1;
 
 		float _speed = 0.0001f;
-
 	public:
 		Game();
 		~Game();

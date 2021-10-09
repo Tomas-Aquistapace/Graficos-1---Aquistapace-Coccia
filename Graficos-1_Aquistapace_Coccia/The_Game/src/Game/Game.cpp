@@ -38,14 +38,33 @@ namespace Engine
 
 	void Game::Update()
 	{
-		_triangle1->SetPosition(_triangle1->_transform.position.x + _speed, _triangle1->_transform.position.y, _triangle1->_transform.position.z);
-		_triangle1->SetRotationZ(_triangle1->_transform.rotation.z + 0.05f);
+		//_triangle1->SetPosition(_triangle1->_transform.position.x + _speed, _triangle1->_transform.position.y, _triangle1->_transform.position.z);
+		//_triangle1->SetRotationZ(_triangle1->_transform.rotation.z + 0.05f);
 		
-		_quad1->SetRotationZ(_quad1->_transform.rotation.z - 0.1f);
-		_quad1->SetScale(_quad1->_transform.scale.x, _quad1->_transform.scale.y + 0.0001f, _quad1->_transform.scale.z + 0.0001f);
+		//_quad1->SetRotationZ(_quad1->_transform.rotation.z - 0.1f);
+		//_quad1->SetScale(_quad1->_transform.scale.x, _quad1->_transform.scale.y + 0.0001f, _quad1->_transform.scale.z + 0.0001f);
 
+		if (Input::GetKey(Keycode::W))
+		{
+			_quad1->SetPosition(_quad1->_transform.position.x, _quad1->_transform.position.y + _speed, _quad1->_transform.position.z);
+		}
+		else if (Input::GetKey(Keycode::S))
+		{
+			_quad1->SetPosition(_quad1->_transform.position.x, _quad1->_transform.position.y - _speed, _quad1->_transform.position.z);
+		}
+
+		if (Input::GetKey(Keycode::A))
+		{
+			_quad1->SetPosition(_quad1->_transform.position.x - _speed, _quad1->_transform.position.y , _quad1->_transform.position.z);
+		}
+		else if (Input::GetKey(Keycode::D))
+		{
+			_quad1->SetPosition(_quad1->_transform.position.x + _speed, _quad1->_transform.position.y , _quad1->_transform.position.z);
+		}
 		_triangle1->Draw();
 		_quad1->Draw();
+
+
 	}
 
 	void Game::End()

@@ -28,6 +28,9 @@
     <Filter Include="Shape2D">
       <UniqueIdentifier>{54254b23-86a9-4aff-b6d6-34914214f45a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{1264eabb-878c-42f7-806f-cd2af06f9099}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="src\Shape2D\Shape2D.cpp">
       <Filter>Shape2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="src\Shape2D\Shape2D.h">
       <Filter>Shape2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

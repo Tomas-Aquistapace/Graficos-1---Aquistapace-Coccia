@@ -1,6 +1,7 @@
 #include "GameBase.h"
 #include <iostream>
 #include "GLFW/glfw3.h"
+#include "../Input/Input.h"
 
 namespace Engine
 {
@@ -29,6 +30,8 @@ namespace Engine
 
 		_window->CreateWindow(width, height, windowName, NULL);
 		_window->InitWindow();
+
+		Input::SetWindow(_window->ReturnWindow());
 
 		_renderer->InitGlew();
 		_renderer->CreateShader();

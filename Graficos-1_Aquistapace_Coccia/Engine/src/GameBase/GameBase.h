@@ -4,6 +4,7 @@
 #include "../Window/Window.h"
 #include "../Renderer/Renderer.h"
 #include "../Shape/Shape.h"
+#include "../Input/Input.h"
 
 namespace Engine
 {
