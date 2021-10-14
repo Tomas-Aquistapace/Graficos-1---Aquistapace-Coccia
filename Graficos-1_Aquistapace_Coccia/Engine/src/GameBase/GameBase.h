@@ -24,6 +24,7 @@ namespace Engine
 
 		virtual void Update(float deltatime) = 0;
 
+		void SetCamera(CameraType type, float near, float far);
 		Renderer* GetRenderer();
 	};
 }
