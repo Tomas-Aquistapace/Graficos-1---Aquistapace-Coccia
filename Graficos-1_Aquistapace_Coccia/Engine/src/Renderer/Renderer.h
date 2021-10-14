@@ -4,6 +4,7 @@
 #include <string>
 #include "..\Export\Export.h"
 #include "..\Shader\Shader.h"
+#include "..\Camera\Camera.h"
 #include "glm\glm\mat4x4.hpp"
 
 namespace Engine
@@ -17,6 +18,7 @@ namespace Engine
 	{
 	private:
 		Shader* _shader;
+		Camera* _camera;
 
 	public:
 		Renderer();

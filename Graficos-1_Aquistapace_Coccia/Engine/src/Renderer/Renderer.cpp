@@ -1,7 +1,5 @@
 #include "Renderer.h"
-
 #include <iostream>
-
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "glm\gtc\type_ptr.hpp"
@@ -11,13 +9,21 @@ namespace Engine
 	Renderer::Renderer()
 	{		
 		_shader = new Shader();
+		_camera = new Camera();
 	}
 
 	Renderer::~Renderer()
 	{
-		if (_shader != NULL) {
+		if (_shader != NULL)
+		{
 			delete _shader;
 			_shader = NULL;
+		}
+		
+		if (_camera != NULL)
+		{
+			delete _camera;
+			_camera = NULL;
 		}
 	}
 
@@ -85,6 +91,9 @@ namespace Engine
 	{
 		glUseProgram(_shader->GetShader());
 		glUniformMatrix4fv(modelUniform, 1, GL_FALSE, glm::value_ptr(model));
+
+		_camera->UpdateMVP(model, _shader->GetShader());
+
 		glUseProgram(0);
 	}
 	

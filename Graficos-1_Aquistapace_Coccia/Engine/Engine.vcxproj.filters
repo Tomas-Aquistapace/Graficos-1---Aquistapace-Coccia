@@ -31,6 +31,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{1264eabb-878c-42f7-806f-cd2af06f9099}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{83ecb3e7-ae3f-40a5-b829-f677c36dd140}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="src\Input\Input.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera\Camera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="src\Input\Input.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera\Camera.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
