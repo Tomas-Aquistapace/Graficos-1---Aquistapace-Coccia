@@ -5,6 +5,7 @@
 #include "../Renderer/Renderer.h"
 #include "../Shape/Shape.h"
 #include "../Input/Input.h"
+#include "../Time/Time.h"
 
 namespace Engine
 {
@@ -21,7 +22,7 @@ namespace Engine
 		void UpdateEngine(float r, float g, float b, float a);
 		void EndEngine();
 
-		virtual void Update() = 0;
+		virtual void Update(float deltatime) = 0;
 
 		Renderer* GetRenderer();
 	};

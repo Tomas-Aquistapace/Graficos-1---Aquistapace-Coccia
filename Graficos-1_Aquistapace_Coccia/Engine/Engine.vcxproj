@@ -166,6 +166,7 @@
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shape2D\Shape2D.cpp" />
     <ClCompile Include="src\Shape\Shape.cpp" />
+    <ClCompile Include="src\Time\Time.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shape2D\Shape2D.h" />
     <ClInclude Include="src\Shape\Shape.h" />
+    <ClInclude Include="src\Time\Time.h" />
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>

@@ -11,14 +11,14 @@ namespace Engine
 		Shape* _triangle1;
 		Shape* _quad1;
 
-		float _speed = 0.0001f;
+		float _speed = 5;
 	public:
 		Game();
 		~Game();
 
 		void Start();
 		void Play();
-		void Update() override;
+		void Update(float deltaTime) override;
 		void End();
 	};
 }

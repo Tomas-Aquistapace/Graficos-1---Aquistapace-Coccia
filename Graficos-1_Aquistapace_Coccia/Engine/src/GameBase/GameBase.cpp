@@ -1,12 +1,16 @@
 #include "GameBase.h"
 #include <iostream>
+#include <time.h>
 #include "GLFW/glfw3.h"
 #include "../Input/Input.h"
 
 namespace Engine
 {
+	float deltaTime;
+
 	GameBase::GameBase()
 	{
+		srand(time(0));
 		_window = new Windowuwu();
 		_renderer = new Renderer();
 	}
@@ -43,8 +47,8 @@ namespace Engine
 		{
 			/* Render here */
 			_window->ClearWindow(r, g, b, a);
-			
-			Update(); // --> Aca se utiliza un metodo virtual para poder dibujar los objetos del Game.cpp
+			Time::DeltaTime(deltaTime);
+			Update(deltaTime); // --> Aca se utiliza un metodo virtual para poder dibujar los objetos del Game.cpp
 
 			/* Swap front and back buffers */
 			_window->SwapBuffers();

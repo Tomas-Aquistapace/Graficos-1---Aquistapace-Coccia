@@ -129,6 +129,7 @@ namespace Engine
 		RIGHT_SUPER = 347,
 		MENU = 348
 	};
+
 	class EXPORT_API Input
 	{
 		public:
