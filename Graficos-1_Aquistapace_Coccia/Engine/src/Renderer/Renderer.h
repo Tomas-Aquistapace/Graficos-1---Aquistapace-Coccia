@@ -10,7 +10,7 @@
 namespace Engine
 {
 	enum class TypeOfShape {
-		Triangle, 
+		Triangle,
 		Quad
 	};
 
@@ -33,6 +33,7 @@ namespace Engine
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
 		void StopShader();
 
+		void SetCameraValues(CameraType type, float near, float far);
 		unsigned int GetShader();
 	};
 }

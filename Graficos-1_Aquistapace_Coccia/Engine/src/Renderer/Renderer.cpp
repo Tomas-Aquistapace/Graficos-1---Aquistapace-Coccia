@@ -63,6 +63,8 @@ namespace Engine
 	{
 		_shader->SetShader("../Engine/shaders/Vertex.shader", "../Engine/shaders/Fragment.shader");
 		glUseProgram(_shader->GetShader());
+
+		_camera->SetIndex(_shader->GetShader());
 	}
 	
 	void Renderer::Draw(TypeOfShape shape, unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount)
@@ -90,7 +92,7 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 		glUniformMatrix4fv(modelUniform, 1, GL_FALSE, glm::value_ptr(model));
 
-		_camera->UpdateMVP(model, _shader->GetShader());
+		_camera->UpdateMVP(model);
 
 		glUseProgram(0);
 	}
@@ -101,6 +103,11 @@ namespace Engine
 		{
 			_shader->ClearShader();
 		}
+	}
+
+	void Renderer::SetCameraValues(CameraType type, float near, float far)
+	{
+		_camera->SetCameraValues(type, near, far);
 	}
 
 	// ----------------------------

@@ -25,6 +25,8 @@ namespace Engine
 		StartEngine(850, 420, "Ventana");
 		srand(time(NULL));
 
+		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
+
 		_sprite = new Sprite(GetRenderer());
 		_sprite->BindTexture();
 		_sprite->SetTexParameter();
@@ -49,11 +51,6 @@ namespace Engine
 	void Game::Update(float deltaTime)
 	{
 		
-		//_triangle1->SetPosition(_triangle1->_transform.position.x + _speed, _triangle1->_transform.position.y, _triangle1->_transform.position.z);
-		//_triangle1->SetRotationZ(_triangle1->_transform.rotation.z + 0.05f);
-		
-		//_quad1->SetRotationZ(_quad1->_transform.rotation.z - 0.1f);
-		//_quad1->SetScale(_quad1->_transform.scale.x, _quad1->_transform.scale.y + 0.0001f, _quad1->_transform.scale.z + 0.0001f);
 		if (Input::GetKey(Keycode::W))
 		{
 			//_quad1->SetPosition(_quad1->_transform.position.x, _quad1->_transform.position.y + (_speed * deltaTime), _quad1->_transform.position.z);

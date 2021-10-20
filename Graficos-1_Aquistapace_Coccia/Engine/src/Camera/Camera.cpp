@@ -7,9 +7,12 @@ namespace Engine
 {
 	Camera::Camera()
 	{
-		//_projection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, 0.1f, 1000.0f);
 		_projection = glm::mat4(1.0f);
 		_view = glm::mat4(1.0f);
+
+		_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+		_cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+		_cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	}
 
 	Camera::~Camera()
@@ -17,25 +20,50 @@ namespace Engine
 
 	}
 
-	void Camera::UpdateMVP(glm::mat4 model, unsigned int shaderId) //, unsigned int uniformModel, unsigned int uniformView, unsigned int uniformProjection, 
+	//void Camera::UpdateCameraVectors()
+	//{
+	//	  glm::vec3 front;
+	//	  front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	//	  front.y = sin(glm::radians(pitch));
+	//	  front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	//	  cameraFront = glm::normalize(front);
+	//	  right = glm::normalize(glm::cross(cameraFront, cameraUp));
+	//	  up = glm::normalize(glm::cross(right, cameraFront));
+	//}
+
+	void Camera::UpdateView()
 	{
-		unsigned int modelInd = glGetUniformLocation(shaderId, "model");
-		unsigned int viewInd = glGetUniformLocation(shaderId, "view");
-		unsigned int projectionInd = glGetUniformLocation(shaderId, "projection");
-		
-		glUniformMatrix4fv(modelInd, 1, GL_FALSE, glm::value_ptr(model));
-		glUniformMatrix4fv(projectionInd, 1, GL_FALSE, glm::value_ptr(_projection));
-		glUniformMatrix4fv(viewInd, 1, GL_FALSE, glm::value_ptr(_view));
+		_view = glm::lookAt(_cameraPos, _cameraPos + _cameraFront, _cameraUp);
 	}
 
-	void Camera::UseCamera(Shader& shader, glm::mat4 trsCamera)
+	void Camera::UpdateMVP(glm::mat4 model)
 	{
-		//unsigned int transformLoc = glGetUniformLocation(shader.GetShader(), "model");
-		//unsigned int projectionLoc = glGetUniformLocation(shader.GetShader(), "projection");
-		//unsigned int viewLoc = glGetUniformLocation(shader.GetShader(), "view");
-		//glUseProgram(shader.GetShader());
-		//glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trsCamera));
-		//glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(_MVP.projection));
-		//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(_MVP.view));
+		UpdateView();
+		glUniformMatrix4fv(_modelInd, 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(_viewInd, 1, GL_FALSE, glm::value_ptr(_view));
+		glUniformMatrix4fv(_projectionInd, 1, GL_FALSE, glm::value_ptr(_projection));
 	}
+
+	void Camera::SetIndex(unsigned int shaderId)
+	{
+		_modelInd = glGetUniformLocation(shaderId, "model");
+		_viewInd = glGetUniformLocation(shaderId, "view");
+		_projectionInd = glGetUniformLocation(shaderId, "projection");
+	}
+
+	void Camera::SetCameraValues(CameraType type, float near, float far)
+	{
+		switch (type)
+		{
+		case CameraType::Perspective:
+			_projection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, near, far);
+			break;
+
+		case CameraType::Ortho:
+			_projection = glm::ortho(-1.5f, 1.5f, -1.0f, 1.0f, near, far);
+			break;
+		}
+		_view = glm::mat4(1.0f);
+	}
+
 }

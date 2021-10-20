@@ -8,8 +8,7 @@ namespace Engine
 	class EXPORT_API Time
 	{
 	public:
-		static void DeltaTime(float& time);
-	
+		static void DeltaTime(float& time);	
 	};
 }
 
