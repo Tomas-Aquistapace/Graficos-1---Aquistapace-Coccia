@@ -10,6 +10,7 @@ namespace Engine
 	private:
 		Shape* _triangle1;
 		Shape* _quad1;
+		Sprite* _sprite;
 
 		float _speed = 5;
 	public:

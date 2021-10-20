@@ -67,7 +67,7 @@ namespace Engine
 		}
 	}
 
-	// -------------------------------
+	// -------------------------------------------
 
 	void Shape::SetColor(ENTITY_COLOR color)
 	{

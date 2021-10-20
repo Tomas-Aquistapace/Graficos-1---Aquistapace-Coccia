@@ -37,6 +37,12 @@
     <Filter Include="Time">
       <UniqueIdentifier>{801000a6-97ed-4f17-8827-287d191d168d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{b8ab226a-dbd8-4697-bd51-496dca0f6779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureImporter">
+      <UniqueIdentifier>{e437726a-0580-41a4-a5d5-b195b98c94c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -71,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="src\Time\Time.cpp">
       <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite\Sprite.cpp">
+      <Filter>Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="src\Time\Time.h">
       <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite\Sprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureImporter\stb_image.h">
+      <Filter>TextureImporter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

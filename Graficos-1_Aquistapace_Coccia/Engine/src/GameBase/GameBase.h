@@ -6,6 +6,7 @@
 #include "../Shape/Shape.h"
 #include "../Input/Input.h"
 #include "../Time/Time.h"
+#include "../Sprite/Sprite.h"
 
 namespace Engine
 {
