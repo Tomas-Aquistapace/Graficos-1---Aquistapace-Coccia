@@ -13,12 +13,12 @@ namespace Engine
 	unsigned int _vbo;
 	unsigned int _ebo;
 
-	float triangleTextCoords[] 
-	{
-		0.0f, 0.0f, // lower-left corner 
-		1.0f, 0.0f, // lower-right corner 
-		0.5f, 1.0f  // top-center corner 
-	};
+	//float triangleTextCoords[] 
+	//{
+	//	0.0f, 0.0f, // lower-left corner 
+	//	1.0f, 0.0f, // lower-right corner 
+	//	0.5f, 1.0f  // top-center corner 
+	//};
 	
 	float vertex[]
 	{
@@ -59,10 +59,13 @@ namespace Engine
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		
 	}
 	void Sprite::SetTexParameter()
 	{
+		glGenTextures(1, &_texture);
+		glBindTexture(GL_TEXTURE_2D, _texture);
+
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
@@ -73,8 +76,8 @@ namespace Engine
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
 		
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glGenTextures(1, &_texture);
+		glBindTexture(GL_TEXTURE_2D, _texture);
 		
 		//ACA HAY UN ERROR
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -84,6 +87,7 @@ namespace Engine
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 	}
 	
 	void Sprite::ImportTexture(const char* name)
@@ -100,13 +104,20 @@ namespace Engine
 			cout << "failed to load texture" << endl;
 		}
 		stbi_image_free(data);
+		
+		glUseProgram(_renderer->GetShader());
+		glUniform1i(glGetUniformLocation(_renderer->GetShader(), "_texture"), 0);
 	}
 
 	void Sprite::Draw()
 	{
-		_renderer->GetShader();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _texture);
+
+		glUseProgram(_renderer->GetShader());
 		glBindVertexArray(_vao);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glUseProgram(0);
 	}
 	void Sprite::SetColor(ENTITY_COLOR color)
 	{

@@ -13,7 +13,7 @@ namespace Engine
 		int nrChannels;
 
 		unsigned char* data; 
-		unsigned int texture;
+		unsigned int _texture;
 
 	public:
 		Sprite(Renderer* renderer);
