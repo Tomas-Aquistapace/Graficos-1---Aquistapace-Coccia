@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <iostream>
 #include <time.h>
+
 namespace Engine
 {
 	Game::Game(): GameBase()
@@ -28,29 +29,26 @@ namespace Engine
 		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
 
 		_sprite = new Sprite(GetRenderer());
-		_sprite->BindTexture();
-		_sprite->SetTexParameter();
+		_sprite->InitTexture();
 		_sprite->ImportTexture("res/wall.jpg");
 		
-		_triangle1 = new Shape(GetRenderer());
-		_triangle1->InitShape(TypeOfShape::Triangle);
-		_triangle1->SetColor(ENTITY_COLOR::BLUE);
-		
-		_quad1 = new Shape(GetRenderer());
-		_quad1->InitShape(TypeOfShape::Quad);
-		_quad1->SetPosition(-0.5f, 0.5f, 0);
-		_quad1->SetColor(0.25f, 0.25f, 0.25f);
-
+		//_triangle1 = new Shape(GetRenderer());
+		//_triangle1->InitShape(TypeOfShape::Triangle);
+		//_triangle1->SetColor(ENTITY_COLOR::BLUE);
+		//
+		//_quad1 = new Shape(GetRenderer());
+		//_quad1->InitShape(TypeOfShape::Quad);
+		//_quad1->SetPosition(-0.5f, 0.5f, 0);
+		//_quad1->SetColor(0.25f, 0.25f, 0.25f);
 	}
 	
 	void Game::Play()
 	{
-		UpdateEngine(0.5f, 0.5f, 0.5f, 1);
+		UpdateEngine(0.0f, 0.0f, 0.0f, 1);
 	}
 
 	void Game::Update(float deltaTime)
-	{
-		
+	{		
 		if (Input::GetKey(Keycode::W))
 		{
 			//_quad1->SetPosition(_quad1->_transform.position.x, _quad1->_transform.position.y + (_speed * deltaTime), _quad1->_transform.position.z);
@@ -71,7 +69,6 @@ namespace Engine
 		//_triangle1->Draw();
 		//_quad1->Draw();
 		_sprite->Draw();
-
 	}
 
 	void Game::End()

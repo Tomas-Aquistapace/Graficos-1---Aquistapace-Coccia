@@ -9,11 +9,12 @@ layout(location = 3) in vec4 position;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+
 in vec3 color;
 out vec4 vColour;
 
 out vec3 ourColor;
-out vec2 Textcoord;
+out vec2 TexCoord;
 
 void main()
 {
@@ -22,5 +23,5 @@ void main()
 
 	gl_Position = vec4(aPos, 1.0);
 	ourColor = aColor;
-	TexCoord = aTexCoord;
+	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
 }

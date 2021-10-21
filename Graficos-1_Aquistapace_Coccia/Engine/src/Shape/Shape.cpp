@@ -14,6 +14,7 @@ namespace Engine
 	{
 		glDeleteVertexArrays(1, &_vao);
 		glDeleteBuffers(1, &_vbo);
+		glDeleteBuffers(1, &_ebo);
 	}
 
 	void Shape::InitShape(TypeOfShape type)
@@ -58,11 +59,11 @@ namespace Engine
 		switch (_shape)
 		{
 		case TypeOfShape::Triangle:
-			_renderer->Draw(_shape, _vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_indexTris) / sizeof(float));
+			_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_indexTris) / sizeof(float));
 			break;
 
 		case TypeOfShape::Quad:
-			_renderer->Draw(_shape, _vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_indexPos) / sizeof(float));
+			_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_indexPos) / sizeof(float));
 			break;
 		}
 	}

@@ -67,7 +67,7 @@ namespace Engine
 		_camera->SetIndex(_shader->GetShader());
 	}
 	
-	void Renderer::Draw(TypeOfShape shape, unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount)
+	void Renderer::Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount)
 	{
 		glUseProgram(_shader->GetShader());
 		glBindVertexArray(vao);
