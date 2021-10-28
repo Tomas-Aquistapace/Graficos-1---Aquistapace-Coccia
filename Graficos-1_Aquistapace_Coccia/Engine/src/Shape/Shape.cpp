@@ -30,9 +30,6 @@ namespace Engine
 
 			_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
 			_renderer->SetIndexBuffer(_vertexSize, _indexTris, _ebo);
-			
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(0));
-			glEnableVertexAttribArray(0);
 			break;
 
 		case TypeOfShape::Quad:
@@ -41,15 +38,12 @@ namespace Engine
 
 			_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
 			_renderer->SetIndexBuffer(_vertexSize, _indexPos, _ebo);
-			
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)0);
-			glEnableVertexAttribArray(0);
 			break;
 		}
 
-		SetColor(ENTITY_COLOR::WHITE);
+		_renderer->SetVertexAttribPointer(true, _modelUniform);
 
-		_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
+		SetColor(ENTITY_COLOR::WHITE);
 	}
 
 	void Shape::Draw()

@@ -28,15 +28,20 @@ namespace Engine
 		_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
 		_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
 
-		// position attribute
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		// color attribute
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		// texture coord attribute
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-		glEnableVertexAttribArray(2);
+		_renderer->SetVertexAttribPointer(false, _modelUniform);
+	}
+	
+	void Sprite::ImportTexture(const char* name)
+	{
+		stbi_set_flip_vertically_on_load(true);
+
+		data = stbi_load(name, &_width, &_height, &_nrChannels, 0);
+		
+		if (!data)
+		{
+			cout << "failed to load texture" << endl;
+			return;
+		}
 
 		glGenTextures(1, &_texture);
 		glBindTexture(GL_TEXTURE_2D, _texture);
@@ -47,27 +52,23 @@ namespace Engine
 		// set texture filtering parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
-	}
-	
-	void Sprite::ImportTexture(const char* name)
-	{
-		data = stbi_load(name, &_width, &_height, &_nrChannels, 0);
 		
-		if (data)
+		if (_nrChannels == 4)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		}
 		else
 		{
-			cout << "failed to load texture" << endl;
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		}
+
+		glGenerateMipmap(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 		stbi_image_free(data);
 		
 		glUseProgram(_renderer->GetShader());
-		glUniform1i(glGetUniformLocation(_renderer->GetShader(), "_texture"), 0);
+		glUniform1i(glGetUniformLocation(_renderer->GetShader(), "ourTexture"), 0);
 	}
 
 	void Sprite::Draw()
@@ -77,13 +78,8 @@ namespace Engine
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _texture);
 
-		//glUseProgram(_renderer->GetShader());
-		//glBindVertexArray(_vao);
-		//
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		//glUseProgram(0);
-
 		_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glDisable(GL_TEXTURE_2D);
 	}

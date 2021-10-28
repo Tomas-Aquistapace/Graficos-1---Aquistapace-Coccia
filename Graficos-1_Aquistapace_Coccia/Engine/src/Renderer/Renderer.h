@@ -27,7 +27,7 @@ namespace Engine
 		int InitGlew();
 		void SetVertexBuffer(int size, float* vertex, unsigned int &vao, unsigned int &vbo);
 		void SetIndexBuffer(int size, unsigned int* index, unsigned int &ebo);
-		void SetAtrtribs(int size, int strides, int offset);
+		void SetVertexAttribPointer(bool shape, unsigned int &model);
 		void CreateShader();
 		void Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);

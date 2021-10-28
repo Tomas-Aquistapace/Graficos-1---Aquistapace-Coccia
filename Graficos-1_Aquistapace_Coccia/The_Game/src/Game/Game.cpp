@@ -30,7 +30,7 @@ namespace Engine
 
 		_sprite = new Sprite(GetRenderer());
 		_sprite->InitTexture();
-		_sprite->ImportTexture("res/wall.jpg");
+		_sprite->ImportTexture("res/BOB-ESPONJA-1-22.png");
 		
 		//_triangle1 = new Shape(GetRenderer());
 		//_triangle1->InitShape(TypeOfShape::Triangle);
