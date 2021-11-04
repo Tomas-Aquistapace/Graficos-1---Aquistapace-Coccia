@@ -43,6 +43,9 @@
     <Filter Include="TextureImporter">
       <UniqueIdentifier>{e437726a-0580-41a4-a5d5-b195b98c94c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CollisionManager">
+      <UniqueIdentifier>{68f58e42-a0ca-4fed-a10e-9e40812aa608}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -80,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="src\Sprite\Sprite.cpp">
       <Filter>Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager\CollisionManager.cpp">
+      <Filter>CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="src\TextureImporter\stb_image.h">
       <Filter>TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionManager\CollisionManager.h">
+      <Filter>CollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

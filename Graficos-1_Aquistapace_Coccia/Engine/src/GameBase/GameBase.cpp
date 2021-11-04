@@ -13,6 +13,7 @@ namespace Engine
 		srand(time(0));
 		_window = new Windowuwu();
 		_renderer = new Renderer();
+		//_collisionManager = new CollisionManager();
 	}
 
 	GameBase::~GameBase() 
@@ -21,6 +22,8 @@ namespace Engine
 			delete _window;
 		if (_renderer != NULL)
 			delete _renderer;
+		//if (_collisionManager != NULL)
+		//	delete _collisionManager;
 	}
 
 	int GameBase::StartEngine(int width, int height, const char* windowName) 
@@ -74,5 +77,10 @@ namespace Engine
 	Renderer* GameBase::GetRenderer()
 	{
 		return _renderer;
+	}
+
+	CollisionManager* GameBase::GetCollisionManager()
+	{
+		return _collisionManager;
 	}
 }

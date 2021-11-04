@@ -4,9 +4,10 @@
 #include "../Window/Window.h"
 #include "../Renderer/Renderer.h"
 #include "../Shape/Shape.h"
+#include "../Sprite/Sprite.h"
 #include "../Input/Input.h"
 #include "../Time/Time.h"
-#include "../Sprite/Sprite.h"
+#include "../CollisionManager/CollisionManager.h"
 
 namespace Engine
 {
@@ -14,6 +15,7 @@ namespace Engine
 	{
 		Renderer* _renderer;
 		Windowuwu* _window;
+		CollisionManager* _collisionManager;
 
 	public:
 		GameBase();
@@ -26,7 +28,9 @@ namespace Engine
 		virtual void Update(float deltatime) = 0;
 
 		void SetCamera(CameraType type, float near, float far);
+		
 		Renderer* GetRenderer();
+		CollisionManager* GetCollisionManager();
 	};
 }
 
