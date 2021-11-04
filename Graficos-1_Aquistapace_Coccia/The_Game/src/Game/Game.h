@@ -8,9 +8,8 @@ namespace Engine
 	class Game : public GameBase
 	{
 	private:
-		Shape* _triangle1;
-		Shape* _quad1;
 		Sprite* _sprite;
+		Sprite* _sprite2;
 
 		float _speed = 5;
 	public:
