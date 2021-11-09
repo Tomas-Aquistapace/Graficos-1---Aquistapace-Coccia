@@ -1,23 +1,25 @@
 #ifndef COLLISIONMANAGER_H
 #define COLLISIONMANAGER_H
 
+#include <vector>
 #include "..\Export\Export.h"
-#include "..\Sprite\Sprite.h"
-#include "..\Shape\Shape.h"
-//#include "..\Entity\Entity.h"
+#include "..\Entity\Entity.h"
 
 namespace Engine
 {
 	class EXPORT_API CollisionManager
 	{
-		
+		std::vector<Entity*> _vec;
+
 	public:
-		//CollisionManager();
-		//~CollisionManager();
+		CollisionManager();
+		~CollisionManager();
 
-		bool CheckCollision(Sprite& one, Sprite& two);
-		bool CheckCollision(Shape& one, Shape& two);
+		void AddNewObject(Entity* obj);
+		void RemoveObject(Entity* obj);
 
+		bool CheckCollision(Entity* one, Entity* two);
+		void CheckAllCollisions();
 	};
 }
 #endif

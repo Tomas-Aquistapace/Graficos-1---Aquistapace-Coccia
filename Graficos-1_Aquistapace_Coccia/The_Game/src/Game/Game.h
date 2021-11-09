@@ -2,16 +2,21 @@
 #define GAME_H
 
 #include "GameBase/GameBase.h"
+#include "../Objects/Player.h"
+#include "../Objects/Box.h"
 
 namespace Engine
 {
 	class Game : public GameBase
 	{
 	private:
-		Sprite* _sprite;
-		Sprite* _sprite2;
+		//Sprite* _bob;
+		Player* _bob;
+		Sprite* _wall1;
+		Sprite* _wall2;
+		Sprite* _box;
 
-		float _speed = 5;
+		float _speed = 2;
 	public:
 		Game();
 		~Game();

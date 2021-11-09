@@ -7,10 +7,19 @@
     <Filter Include="Game">
       <UniqueIdentifier>{9b7c406b-d80c-439a-8ca9-12d58373e8bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{d46486b6-c0c6-4e5e-b1b0-82c34f346573}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game\Game.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Box.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Player.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +28,12 @@
     </ClCompile>
     <ClCompile Include="src\Main\Main.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Box.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Player.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

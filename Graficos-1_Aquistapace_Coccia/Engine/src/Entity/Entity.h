@@ -6,7 +6,6 @@
 #include "..\Renderer\Renderer.h"
 #include "glm\glm\vec3.hpp"
 #include "glm\glm\mat4x4.hpp"
-//#include <glm\gtc\quaternion.hpp>
 
 namespace Engine
 {
@@ -21,7 +20,13 @@ namespace Engine
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 scale;
+		
+		glm::vec3 preb_position;
+		glm::vec3 preb_rotation;
+		glm::vec3 preb_scale;
 	};
+
+	// Guardar la posicion anterior
 
 	struct GeneralMatrix
 	{
@@ -35,9 +40,19 @@ namespace Engine
 
 	class EXPORT_API Entity 
 	{
+		void SetPrebPosition(glm::vec3 position);
+		void SetPrebRotation(glm::vec3 rotation);
+		void SetPrebRotationX(float x);
+		void SetPrebRotationY(float y);
+		void SetPrebRotationZ(float z);
+		void SetPrebScale(glm::vec3 scale);
+
 	protected:
 		Renderer* _renderer;
 		GeneralMatrix _generalMatrix;
+
+		bool _isTrigger;
+		bool _isStatic;
 
 	public:
 		Entity(Renderer* renderer);
@@ -46,17 +61,29 @@ namespace Engine
 		Transform _transform;
 
 		void SetPosition(float x, float y, float z);
-		void SetRotation(float x, float y, float z);
-		void SetScale(float x, float y, float z);
+		void SetPosition(glm::vec3 position);
 
+		void SetRotation(float x, float y, float z);
+		void SetRotation(glm::vec3 rotation);
 		void SetRotationX(float x);
 		void SetRotationY(float y);
 		void SetRotationZ(float z);
 
+		void SetScale(float x, float y, float z);
+		void SetScale(glm::vec3 scale);
+
 		void UpdateMatrix();
+		void ReturnToPrevTransform();
+
+		void SetTriggerState(bool state);
+		void SetStaticState(bool state);
+		bool GetTriggerState();
+		bool GetStaticState();
 
 		virtual void SetColor(ENTITY_COLOR color) = 0;
 		virtual void SetColor(float r, float g, float b) = 0;
+
+		virtual void TriggerCollision(Entity* other) = 0;
 	};
 }
 

@@ -93,4 +93,9 @@ namespace Engine
 	{
 
 	}
+
+	void Sprite::TriggerCollision(Entity* other)
+	{
+
+	}
 }

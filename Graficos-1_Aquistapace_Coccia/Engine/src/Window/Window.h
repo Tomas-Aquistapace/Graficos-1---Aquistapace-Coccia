@@ -11,6 +11,7 @@ namespace Engine
 	class EXPORT_API Windowuwu
 	{
 		GLFWwindow* _window;
+
 	public:
 		Windowuwu();
 		~Windowuwu();

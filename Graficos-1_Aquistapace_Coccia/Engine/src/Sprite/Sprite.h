@@ -47,6 +47,7 @@ namespace Engine
 		void Draw();
 		void SetColor(ENTITY_COLOR color);
 		void SetColor(float r, float g, float b);
+		void TriggerCollision(Entity* other);
 	};
 }
 #endif

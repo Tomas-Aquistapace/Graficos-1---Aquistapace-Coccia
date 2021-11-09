@@ -6,16 +6,22 @@ namespace Engine
 {
 	Game::Game(): GameBase()
 	{
-		_sprite = NULL;
-		_sprite2 = NULL;
+		_bob = NULL;
+		_wall1 = NULL;
+		_wall2 = NULL;
+		_box = NULL;
 	}
 
 	Game::~Game()
 	{
-		if (_sprite != NULL)
-			delete _sprite;
-		if (_sprite2 != NULL)
-			delete _sprite2;
+		if (_bob != NULL)
+			delete _bob;
+		if (_wall1 != NULL)
+			delete _wall1;
+		if (_wall2 != NULL)
+			delete _wall2;
+		if (_box != NULL)
+			delete _box;
 	}
 
 	void Game::Start()
@@ -25,14 +31,31 @@ namespace Engine
 
 		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
 
-		_sprite = new Sprite(GetRenderer());
-		_sprite->InitTexture();
-		_sprite->ImportTexture("res/BOB-ESPONJA-1-22.png");
-		_sprite->SetPosition(-1.8, 0, 0);
+		_bob = new Player(GetRenderer());
+		_bob->InitTexture();
+		_bob->ImportTexture("res/BOB-ESPONJA-1-22.png");
+		_bob->SetPosition(-1.8, 0, 0);
+		GetCollisionManager()->AddNewObject(_bob);
 
-		_sprite2 = new Sprite(GetRenderer());
-		_sprite2->InitTexture();
-		_sprite2->ImportTexture("res/wall.png");
+		_wall1 = new Sprite(GetRenderer());
+		_wall1->InitTexture();
+		_wall1->ImportTexture("res/wall.png");
+		_wall1->SetPosition(0, 1.2, 0);
+		_wall1->SetStaticState(true);
+		GetCollisionManager()->AddNewObject(_wall1);
+		
+		_wall2 = new Sprite(GetRenderer());
+		_wall2->InitTexture();
+		_wall2->ImportTexture("res/wall.png");
+		_wall2->SetPosition(0, -1.2, 0);
+		_wall2->SetStaticState(true);
+		GetCollisionManager()->AddNewObject(_wall2);
+		
+		_box = new Sprite(GetRenderer());
+		_box->InitTexture();
+		_box->ImportTexture("res/crate1_diffuse.png");
+		_box->SetPosition(0, 0, 0);
+		GetCollisionManager()->AddNewObject(_box);
 	}
 	
 	void Game::Play()
@@ -41,37 +64,34 @@ namespace Engine
 	}
 
 	void Game::Update(float deltaTime)
-	{		
+	{
 		if (Input::GetKey(Keycode::W))
 		{
-			_sprite->SetPosition(_sprite->_transform.position.x, _sprite->_transform.position.y + (_speed * deltaTime), _sprite->_transform.position.z);
+			_bob->SetPosition(_bob->_transform.position.x, _bob->_transform.position.y + (_speed * deltaTime), _bob->_transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::S))
 		{
-			_sprite->SetPosition(_sprite->_transform.position.x, _sprite->_transform.position.y - (_speed * deltaTime), _sprite->_transform.position.z);
+			_bob->SetPosition(_bob->_transform.position.x, _bob->_transform.position.y - (_speed * deltaTime), _bob->_transform.position.z);
 		}
-
-		if (Input::GetKey(Keycode::A))
+		else if (Input::GetKey(Keycode::A))
 		{
-			_sprite->SetPosition(_sprite->_transform.position.x - (_speed * deltaTime), _sprite->_transform.position.y, _sprite->_transform.position.z);
+			_bob->SetPosition(_bob->_transform.position.x - (_speed * deltaTime), _bob->_transform.position.y, _bob->_transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::D))
 		{
-			_sprite->SetPosition(_sprite->_transform.position.x + (_speed * deltaTime), _sprite->_transform.position.y, _sprite->_transform.position.z);
+			_bob->SetPosition(_bob->_transform.position.x + (_speed * deltaTime), _bob->_transform.position.y, _bob->_transform.position.z);
 		}
 
-		if (GetCollisionManager()->CheckCollision(*_sprite, *_sprite2))
-		{
-			std::cout << "Colisiono!" << std::endl;
-		}
+		GetCollisionManager()->CheckAllCollisions();
 
-		_sprite2->Draw();
-		_sprite->Draw();
+		_wall1->Draw();
+		_wall2->Draw();
+		_box->Draw();
+		_bob->Draw();
 	}
 
 	void Game::End()
 	{
 		EndEngine();
 	}
-
 }
