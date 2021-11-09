@@ -3,14 +3,12 @@
 
 #include "GameBase/GameBase.h"
 #include "../Objects/Player.h"
-#include "../Objects/Box.h"
 
 namespace Engine
 {
 	class Game : public GameBase
 	{
 	private:
-		//Sprite* _bob;
 		Player* _bob;
 		Sprite* _wall1;
 		Sprite* _wall2;

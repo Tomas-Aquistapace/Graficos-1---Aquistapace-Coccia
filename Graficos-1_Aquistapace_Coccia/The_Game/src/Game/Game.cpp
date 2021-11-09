@@ -39,14 +39,14 @@ namespace Engine
 
 		_wall1 = new Sprite(GetRenderer());
 		_wall1->InitTexture();
-		_wall1->ImportTexture("res/wall.png");
+		_wall1->ImportTexture("res/wall.jpg");
 		_wall1->SetPosition(0, 1.2, 0);
 		_wall1->SetStaticState(true);
 		GetCollisionManager()->AddNewObject(_wall1);
 		
 		_wall2 = new Sprite(GetRenderer());
 		_wall2->InitTexture();
-		_wall2->ImportTexture("res/wall.png");
+		_wall2->ImportTexture("res/wall.jpg");
 		_wall2->SetPosition(0, -1.2, 0);
 		_wall2->SetStaticState(true);
 		GetCollisionManager()->AddNewObject(_wall2);

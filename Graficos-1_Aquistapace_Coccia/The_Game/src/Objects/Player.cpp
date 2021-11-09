@@ -22,7 +22,7 @@ namespace Engine
 
 			other->SetPosition(other->_transform.position + newPos);
 		}
-		else 
+		else
 		{
 			ReturnToPrevTransform();
 		}

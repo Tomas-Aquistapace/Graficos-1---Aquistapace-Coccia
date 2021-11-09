@@ -15,9 +15,6 @@
     <ClInclude Include="src\Game\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Objects\Box.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="src\Objects\Player.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -28,9 +25,6 @@
     </ClCompile>
     <ClCompile Include="src\Main\Main.cpp">
       <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Box.cpp">
-      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\Player.cpp">
       <Filter>Objects</Filter>
