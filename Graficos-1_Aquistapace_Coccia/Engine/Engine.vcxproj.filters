@@ -46,6 +46,9 @@
     <Filter Include="Camara">
       <UniqueIdentifier>{6d3a02e4-dabd-457d-b24b-f3b862df936c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{8fe896a6-d0c8-4813-935e-66b17d7bd264}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -86,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="src\Camera\Camera.cpp">
       <Filter>Camara</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Animation.cpp">
+      <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="src\Camera\Camera.h">
       <Filter>Camara</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\Animation.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

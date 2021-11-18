@@ -6,6 +6,11 @@
 
 namespace Engine
 {
+	struct EXPORT_API UVs
+	{
+		float u;
+		float v;
+	};
 	class EXPORT_API Sprite : public Entity
 	{
 		float _vertex[36]
@@ -15,6 +20,15 @@ namespace Engine
 			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // bottom right
 			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f, 0.0f,   0.0f, 0.0f,   // bottom left
 			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 0.0f,   0.0f, 1.0f    // top left
+		};
+
+		float _vertexes[32]
+		{
+			// positions          // colors					// texture coords
+			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
 		};
 
 		float _borderColor[4]
@@ -38,6 +52,8 @@ namespace Engine
 		unsigned int _texture;
 
 		unsigned int _modelUniform;
+		
+		UVs _uv[4];
 
 	public:
 		Sprite(Renderer* renderer);
@@ -45,6 +61,7 @@ namespace Engine
 		void InitTexture();
 		void ImportTexture(const char*name);
 		void Draw();
+		void DrawAnimation(glm::vec4 uvRect);
 		void SetColor(ENTITY_COLOR color);
 		void SetColor(float r, float g, float b);
 		void TriggerCollision(Entity* other);

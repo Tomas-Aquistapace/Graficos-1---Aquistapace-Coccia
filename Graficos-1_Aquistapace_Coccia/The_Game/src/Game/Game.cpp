@@ -10,6 +10,9 @@ namespace Engine
 		_wall1 = NULL;
 		_wall2 = NULL;
 		_box = NULL;
+		
+		_testSprite = NULL;
+		_testAnimation = NULL;
 	}
 
 	Game::~Game()
@@ -22,6 +25,8 @@ namespace Engine
 			delete _wall2;
 		if (_box != NULL)
 			delete _box;
+		if (_testAnimation != NULL)
+			delete _testAnimation;
 	}
 
 	void Game::Start()
@@ -56,13 +61,21 @@ namespace Engine
 		_box->ImportTexture("res/crate1_diffuse.png");
 		_box->SetPosition(0, 0, 0);
 		GetCollisionManager()->AddNewObject(_box);
+
+		_testSprite = new Sprite(GetRenderer());
+		_testSprite->InitTexture();
+		_testSprite->ImportTexture("res/character_robot_sheet.png");
+		_testSprite->SetPosition(0, 0, 0);
+		GetCollisionManager()->AddNewObject(_testSprite);
+
+		_testAnimation = new Animation();
+		_testAnimation->InitSpriteSheet(_testSprite,ivec2(9,5));
 	}
 	
 	void Game::Play()
 	{
 		UpdateEngine(0.0f, 0.0f, 0.0f, 1);
 	}
-
 	void Game::Update(float deltaTime)
 	{
 		if (Input::GetKey(Keycode::W))
@@ -87,6 +100,7 @@ namespace Engine
 		_wall1->Draw();
 		_wall2->Draw();
 		_box->Draw();
+		_testSprite->DrawAnimation(_testAnimation->GetUVs(0));
 		_bob->Draw();
 	}
 

@@ -14,6 +14,10 @@ namespace Engine
 		Sprite* _wall2;
 		Sprite* _box;
 
+
+		Sprite* _testSprite;
+		Animation* _testAnimation;
+
 		float _speed = 2;
 	public:
 		Game();
