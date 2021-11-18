@@ -15,8 +15,8 @@ namespace Engine
 		Sprite* _box;
 
 
-		Sprite* _testSprite;
-		Animation* _testAnimation;
+		Sprite* _roboBob;
+		Animation* _roboBobAnimation;
 
 		float _speed = 2;
 	public:

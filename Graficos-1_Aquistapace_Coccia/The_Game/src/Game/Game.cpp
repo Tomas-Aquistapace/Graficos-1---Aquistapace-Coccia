@@ -11,8 +11,8 @@ namespace Engine
 		_wall2 = NULL;
 		_box = NULL;
 		
-		_testSprite = NULL;
-		_testAnimation = NULL;
+		_roboBob = NULL;
+		_roboBobAnimation = NULL;
 	}
 
 	Game::~Game()
@@ -25,8 +25,8 @@ namespace Engine
 			delete _wall2;
 		if (_box != NULL)
 			delete _box;
-		if (_testAnimation != NULL)
-			delete _testAnimation;
+		if (_roboBobAnimation != NULL)
+			delete _roboBobAnimation;
 	}
 
 	void Game::Start()
@@ -62,15 +62,15 @@ namespace Engine
 		_box->SetPosition(0, 0, 0);
 		GetCollisionManager()->AddNewObject(_box);
 
-		_testSprite = new Sprite(GetRenderer());
-		_testSprite->InitTexture();
-		_testSprite->ImportTexture("res/character_robot_sheet.png");
-		_testSprite->SetPosition(0, 0, 0);
-		GetCollisionManager()->AddNewObject(_testSprite);
+		_roboBob = new Sprite(GetRenderer());
+		_roboBob->InitTexture();
+		_roboBob->ImportTexture("res/character_robot_sheet.png");
+		_roboBob->SetPosition(0, 0, 0);
+		GetCollisionManager()->AddNewObject(_roboBob);
 
-		_testAnimation = new Animation();
-		_testAnimation->InitSpriteSheet(_testSprite,ivec2(9,5));
-		_testAnimation->AddFrame(0, 0, 864 / 9, 640 / 5, 864, 640, 0.2f, 8);
+		_roboBobAnimation = new Animation();
+		_roboBobAnimation->InitSpriteSheet(_roboBob,ivec2(9,5));
+		_roboBobAnimation->AddFrame(0.1, 0, 7);
 	}
 	
 	void Game::Play()
@@ -81,28 +81,39 @@ namespace Engine
 	{
 		if (Input::GetKey(Keycode::W))
 		{
-			_bob->SetPosition(_bob->_transform.position.x, _bob->_transform.position.y + (_speed * deltaTime), _bob->_transform.position.z);
+			_roboBob->SetPosition(_roboBob->_transform.position.x, _roboBob->_transform.position.y + (_speed * deltaTime), _roboBob->_transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::S))
 		{
-			_bob->SetPosition(_bob->_transform.position.x, _bob->_transform.position.y - (_speed * deltaTime), _bob->_transform.position.z);
+			_roboBob->SetPosition(_roboBob->_transform.position.x, _roboBob->_transform.position.y - (_speed * deltaTime), _roboBob->_transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::A))
 		{
-			_bob->SetPosition(_bob->_transform.position.x - (_speed * deltaTime), _bob->_transform.position.y, _bob->_transform.position.z);
+			_roboBobAnimation->UpdateFrame(deltaTime);
+			_roboBob->DrawAnimation(_roboBobAnimation->GetUVs(_roboBobAnimation->GetCurrentFrame()));
+			_roboBob->SetRotationY(180);
+
+			_roboBob->SetPosition(_roboBob->_transform.position.x - (_speed * deltaTime), _roboBob->_transform.position.y, _roboBob->_transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::D))
 		{
-			_bob->SetPosition(_bob->_transform.position.x + (_speed * deltaTime), _bob->_transform.position.y, _bob->_transform.position.z);
-		}
+			_roboBobAnimation->UpdateFrame(deltaTime);
+			_roboBob->DrawAnimation(_roboBobAnimation->GetUVs(_roboBobAnimation->GetCurrentFrame()));
+			_roboBob->SetRotationY(0);
 
+			_roboBob->SetPosition(_roboBob->_transform.position.x + (_speed * deltaTime), _roboBob->_transform.position.y, _roboBob->_transform.position.z);
+		}
+		else
+		{
+			_roboBobAnimation->UpdateFrame(deltaTime);
+			_roboBob->DrawAnimation(_roboBobAnimation->GetUVs(36));
+		}
 		GetCollisionManager()->CheckAllCollisions();
 
 		_wall1->Draw();
 		_wall2->Draw();
-		_box->Draw();
-		_testAnimation->UpdateFrame(deltaTime);
-		_testSprite->DrawAnimation(_testAnimation->GetUVs(_testAnimation->GetCurrentFrame()));
+		//_box->Draw();
+		
 		_bob->Draw();
 	}
 
