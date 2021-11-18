@@ -70,6 +70,7 @@ namespace Engine
 
 		_testAnimation = new Animation();
 		_testAnimation->InitSpriteSheet(_testSprite,ivec2(9,5));
+		_testAnimation->AddFrame(0, 0, 864 / 9, 640 / 5, 864, 640, 0.2f, 8);
 	}
 	
 	void Game::Play()
@@ -100,7 +101,8 @@ namespace Engine
 		_wall1->Draw();
 		_wall2->Draw();
 		_box->Draw();
-		_testSprite->DrawAnimation(_testAnimation->GetUVs(0));
+		_testAnimation->UpdateFrame(deltaTime);
+		_testSprite->DrawAnimation(_testAnimation->GetUVs(_testAnimation->GetCurrentFrame()));
 		_bob->Draw();
 	}
 

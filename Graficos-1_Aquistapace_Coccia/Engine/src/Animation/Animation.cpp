@@ -10,6 +10,10 @@ namespace Engine
 		_sprite = NULL;
 		_dimensions.x = 0;
 		_dimensions.y = 0;
+		_currentFrame = 0;
+		_maxFrames = 0;
+		_currentAnims = 0;
+		_animsCount = 0;
 	}
 	Animation::~Animation()
 	{
@@ -22,7 +26,7 @@ namespace Engine
 	}
 	void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, float textureWidth, float textureHeight, float durationInSec)
 	{
-		_length = durationInSec * 1000;
+		_length = durationInSec ;
 		Frame frame;
 
 		frame.uv[0].u = (frameX / textureWidth);
@@ -38,13 +42,13 @@ namespace Engine
 		frame.uv[3].v = ((frameY + frameHeight) / textureHeight);
 		
 		frame._framesCount++;
-
+		_maxFrames++;
 		_frames.push_back(frame);
 	}
 	void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, float textureWidth, float textureHeight, float durationInSec , int frameCount)
 	{
-		_length = durationInSec * 1000;
-
+		_length = durationInSec;
+		_maxFrames = 0;
 		float frameXIndex = 0;
 
 		for (int i = 0; i < frameCount; i++)
@@ -63,8 +67,9 @@ namespace Engine
 			frame.uv[3].u = (((frameX + frameXIndex) + frameWidth) / textureWidth);
 			frame.uv[3].v = ((frameY + frameHeight) / textureHeight);
 
-			frame._framesCount++;
-			
+			_maxFrames = frameXIndex;
+			frame._framesCount = _maxFrames;
+
 			_frames.push_back(frame);
 			frameXIndex++;
 		}
@@ -80,22 +85,32 @@ namespace Engine
 			_time -= _length;
 
 			_currentFrame++;
+			if (_currentFrame > _maxFrames)
+				_currentFrame = 0;
 
-			if (_currentFrame >  _frames[_framesCount]._framesCount) _currentFrame = 0;
-			//poner funcion para cambiar de frame
+			ChangeFrame();
 			_time = t;
 		}
+	}
+	void Animation::ChangeFrame()
+	{
+		uvs = GetUVs(_currentFrame);
 	}
 	vec4 Animation::GetUVs(int index)
 	{
 		int xTile = index % _dimensions.x;
 		int yTile = index / _dimensions.x;
-		vec4 uvs = vec4(0,0,0,0);
+		
 		uvs.x = xTile / (float)_dimensions.x;
 		uvs.y = yTile / (float)_dimensions.y;
 		uvs.z = 1.0f / (float)_dimensions.x;
 		uvs.w = 1.0f / (float)_dimensions.y;
 
 		return uvs;
+	}
+	
+	int Animation::GetCurrentFrame()
+	{
+		return _currentFrame;
 	}
 }
