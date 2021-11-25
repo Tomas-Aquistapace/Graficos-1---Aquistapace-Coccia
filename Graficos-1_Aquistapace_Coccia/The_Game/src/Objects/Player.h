@@ -7,10 +7,13 @@ namespace Engine
 {
 	class Player : public Sprite
 	{
+		float _speed;
+
 	public:
-		Player(Renderer* renderer);
+		Player(Renderer* renderer, const glm::ivec2& tileDimensions, float speed);
 		~Player();
 
+		void Move(float deltaTime);
 		void TriggerCollision(Entity* other) override;
 	};
 }

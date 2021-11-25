@@ -13,7 +13,9 @@ namespace Engine
 		vec4 _uv;
 		int _framesCount;
 	};
+
 	class Sprite;
+	
 	class EXPORT_API Animation
 	{
 	private:
@@ -36,6 +38,7 @@ namespace Engine
 	public:
 		Animation();
 		~Animation();
+
 		void InitSpriteSheet(Sprite* spriteSheet, const glm::ivec2& tileDimensions);
 		void AddFrame(float durationInSec, int firstIndex, int lastIndex);
 		void UpdateFrame(float deltaTime);

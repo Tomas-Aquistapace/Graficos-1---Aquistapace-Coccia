@@ -137,6 +137,21 @@ namespace Engine
 		SetScale(_transform.preb_scale);
 	}
 
+	void Entity::ReturnToPrevPosition()
+	{
+		SetPosition(_transform.preb_position);
+	}
+
+	void Entity::ReturnToPrevRotation()
+	{
+		SetRotation(_transform.preb_rotation);
+	}
+	
+	void Entity::ReturnToPrevScale()
+	{
+		SetScale(_transform.preb_scale);
+	}
+
 	// --------------------------------
 	// Se utiliza para las colisiones
 

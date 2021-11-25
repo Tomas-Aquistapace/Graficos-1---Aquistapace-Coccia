@@ -14,11 +14,8 @@ namespace Engine
 		Sprite* _wall2;
 		Sprite* _box;
 
+		Player* _roboBob;
 
-		Sprite* _roboBob;
-		Animation* _roboBobAnimation;
-
-		float _speed = 2;
 	public:
 		Game();
 		~Game();

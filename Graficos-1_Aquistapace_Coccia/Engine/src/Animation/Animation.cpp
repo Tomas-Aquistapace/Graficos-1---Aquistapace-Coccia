@@ -1,5 +1,4 @@
 #include "Animation.h"
-#include <iostream>
 
 using namespace std;
 
@@ -11,22 +10,21 @@ namespace Engine
 		_dimensions.x = 0;
 		_dimensions.y = 0;
 		_currentFrame = 0;
-		//_currentAnims = 0;
-		//_animsCount = 0;
 
 		_firstIndex = 0;
 		_lastIndex  = 0;
 	}
+
 	Animation::~Animation()
 	{
 
 	}
+
 	void Animation::InitSpriteSheet(Sprite* spriteSheet, const  glm::ivec2& tileDimensions)
 	{
 		_sprite = spriteSheet;
 		_dimensions = tileDimensions;
-	}
-	
+	}	
 	
 	void Animation::AddFrame(float durationInSec, int firstIndex, int lastIndex)
 	{
@@ -50,6 +48,7 @@ namespace Engine
 			_frames.push_back(frame);
 		}
 	}
+
 	void Animation::UpdateFrame(float deltaTime)
 	{
 		float t = 0;
@@ -68,10 +67,12 @@ namespace Engine
 			_time = t;
 		}
 	}
+
 	void Animation::ChangeFrame()
 	{
 		uvs = GetUVs(_currentFrame);
 	}
+
 	vec4 Animation::GetUVs(int index)
 	{
 		int xTile = index % _dimensions.x;
@@ -86,8 +87,7 @@ namespace Engine
 	}
 	
 	int Animation::GetCurrentFrame()
-	{
-		
+	{		
 		return _currentFrame;
 	}
 }

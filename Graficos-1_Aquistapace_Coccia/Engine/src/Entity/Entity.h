@@ -26,8 +26,6 @@ namespace Engine
 		glm::vec3 preb_scale;
 	};
 
-	// Guardar la posicion anterior
-
 	struct GeneralMatrix
 	{
 		glm::mat4 model;
@@ -74,6 +72,9 @@ namespace Engine
 
 		void UpdateMatrix();
 		void ReturnToPrevTransform();
+		void ReturnToPrevPosition();
+		void ReturnToPrevRotation();
+		void ReturnToPrevScale();
 
 		void SetTriggerState(bool state);
 		void SetStaticState(bool state);

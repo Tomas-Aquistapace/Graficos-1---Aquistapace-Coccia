@@ -2,7 +2,6 @@
 
 #include "GL\glew.h"
 #include "glm\glm.hpp"
-#include "..\TextureImporter\stb_image.h"
 
 #include <iostream>
 
@@ -12,7 +11,17 @@ namespace Engine
 {	
 	Sprite::Sprite(Renderer* renderer) : Entity(renderer)
 	{
+		_textureImporter = new TextureImporter();
 
+		_animation = new Animation();
+	}
+
+	Sprite::Sprite(Renderer* renderer, const glm::ivec2& tileDimensions) : Entity(renderer)
+	{
+		_textureImporter = new TextureImporter();
+
+		_animation = new Animation();
+		_animation->InitSpriteSheet(this, tileDimensions);
 	}
 
 	Sprite::~Sprite()
@@ -20,6 +29,11 @@ namespace Engine
 		glDeleteVertexArrays(1, &_vao);
 		glDeleteBuffers(1, &_vbo);
 		glDeleteBuffers(1, &_ebo);
+
+		if (_animation != NULL)
+			delete _animation;
+		if (_textureImporter != NULL)
+			delete _textureImporter;
 	}
 
 	void Sprite::InitTexture()
@@ -32,45 +46,9 @@ namespace Engine
 		_renderer->SetVertexAttribPointer(false, _modelUniform);
 	}
 	
-	
 	void Sprite::ImportTexture(const char* name)
 	{
-		stbi_set_flip_vertically_on_load(true);
-
-		data = stbi_load(name, &_width, &_height, &_nrChannels, 0);
-		
-		if (!data)
-		{
-			cout << "failed to load texture" << endl;
-			return;
-		}
-
-		glGenTextures(1, &_texture);
-		glBindTexture(GL_TEXTURE_2D, _texture);
-
-		// set the texture wrapping parameters
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		// set texture filtering parameters
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		
-		if (_nrChannels == 4)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		}
-		else
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		}
-
-		glGenerateMipmap(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		stbi_image_free(data);
-		
-		glUseProgram(_renderer->GetShader());
-		glUniform1i(glGetUniformLocation(_renderer->GetShader(), "ourTexture"), 0);
+		_textureImporter->ImportTexture(_renderer, name, _texture);
 	}
 
 	void Sprite::Draw()
@@ -93,12 +71,6 @@ namespace Engine
 		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
 		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
 		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
-		
-		/*_vertexes[6] = _uv[0].u; _vertexes[7] = _uv[0].v;
-		_vertexes[14] = _uv[1].u; _vertexes[15] = _uv[1].v;
-		_vertexes[22] = _uv[2].u; _vertexes[23] = _uv[2].v;
-		_vertexes[30] = _uv[3].u; _vertexes[31] = _uv[3].v;*/
-
 
 		//Set UV
 		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
@@ -116,18 +88,22 @@ namespace Engine
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glDisable(GL_TEXTURE_2D);
 	}
-	void Sprite::SetColor(ENTITY_COLOR color)
-	{
 
+	// --------------------------------
+
+	void Sprite::SetColor(ENTITY_COLOR color) { }
+
+	void Sprite::SetColor(float r, float g, float b) { }
+
+	void Sprite::TriggerCollision(Entity* other) { }
+
+	void Sprite::SetAnimation()
+	{
+		_animation = new Animation(); // para el final te agregamos una lista de animaciones
 	}
 
-	void Sprite::SetColor(float r, float g, float b)
+	Animation* Sprite::GetAnimation()
 	{
-
-	}
-
-	void Sprite::TriggerCollision(Entity* other)
-	{
-
+		return _animation;
 	}
 }

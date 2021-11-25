@@ -3,6 +3,8 @@
 
 #include "..\Export\Export.h"
 #include "..\Entity\Entity.h"
+#include "..\Animation\Animation.h"
+#include "..\TextureImporter\TextureImporter.h"
 
 namespace Engine
 {
@@ -11,6 +13,7 @@ namespace Engine
 		float u;
 		float v;
 	};
+
 	class EXPORT_API Sprite : public Entity
 	{
 		float _vertex[36]
@@ -45,19 +48,24 @@ namespace Engine
 		unsigned int _vbo;
 		unsigned int _ebo;
 
-		int _width, _height, _nrChannels;
+		//int _width, _height, _nrChannels;
 
 		int _vertexSize;
-		unsigned char* data;
+		//unsigned char* _data;
 		unsigned int _texture;
 
 		unsigned int _modelUniform;
 		
 		UVs _uv[4];
 
+		Animation* _animation;
+		TextureImporter* _textureImporter;
+
 	public:
 		Sprite(Renderer* renderer);
+		Sprite(Renderer* renderer, const glm::ivec2& tileDimensions);
 		~Sprite();
+
 		void InitTexture();
 		void ImportTexture(const char*name);
 		void Draw();
@@ -65,6 +73,9 @@ namespace Engine
 		void SetColor(ENTITY_COLOR color);
 		void SetColor(float r, float g, float b);
 		void TriggerCollision(Entity* other);
+
+		void SetAnimation();
+		Animation* GetAnimation();
 	};
 }
 #endif

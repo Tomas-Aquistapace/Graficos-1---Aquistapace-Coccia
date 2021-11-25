@@ -93,6 +93,9 @@
     <ClCompile Include="src\Animation\Animation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
+    <ClCompile Include="src\TextureImporter\TextureImporter.cpp">
+      <Filter>TextureImporter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Window.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="src\Animation\Animation.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureImporter\TextureImporter.h">
+      <Filter>TextureImporter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
