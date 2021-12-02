@@ -88,9 +88,7 @@ namespace Engine
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glDisable(GL_TEXTURE_2D);
 	}
-
 	// --------------------------------
-
 	void Sprite::SetColor(ENTITY_COLOR color) { }
 
 	void Sprite::SetColor(float r, float g, float b) { }

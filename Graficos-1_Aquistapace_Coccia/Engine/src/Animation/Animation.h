@@ -43,6 +43,7 @@ namespace Engine
 		void AddFrame(float durationInSec, int firstIndex, int lastIndex);
 		void UpdateFrame(float deltaTime);
 		vec4 GetUVs(int index);
+		vec4 GetUVsFromVector(int index);
 		int GetCurrentFrame();
 	};
 }

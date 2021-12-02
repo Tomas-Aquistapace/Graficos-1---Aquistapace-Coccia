@@ -84,7 +84,13 @@ namespace Engine
 		uvs.w = 1.0f / (float)_dimensions.y;
 
 		return uvs;
+		
 	}
+	vec4 Animation::GetUVsFromVector(int index)
+	{
+		return _frames[index]._uv;
+	}
+
 	
 	int Animation::GetCurrentFrame()
 	{		

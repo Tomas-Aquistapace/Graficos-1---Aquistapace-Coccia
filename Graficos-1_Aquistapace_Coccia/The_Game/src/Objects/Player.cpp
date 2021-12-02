@@ -17,7 +17,7 @@ namespace Engine
 		if (Input::GetKey(Keycode::W))
 		{
 			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation(GetAnimation()->GetUVs(GetAnimation()->GetCurrentFrame()));
+			DrawAnimation(GetAnimation()->GetUVsFromVector(GetAnimation()->GetCurrentFrame()));
 			SetRotationY(180);
 
 			SetPosition(_transform.position.x, _transform.position.y + (_speed * deltaTime), _transform.position.z);
@@ -25,7 +25,7 @@ namespace Engine
 		else if (Input::GetKey(Keycode::S))
 		{
 			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation(GetAnimation()->GetUVs(GetAnimation()->GetCurrentFrame()));
+			DrawAnimation(GetAnimation()->GetUVsFromVector(GetAnimation()->GetCurrentFrame()));
 			SetRotationY(0);
 
 			SetPosition(_transform.position.x, _transform.position.y - (_speed * deltaTime), _transform.position.z);
@@ -33,7 +33,7 @@ namespace Engine
 		else if (Input::GetKey(Keycode::A))
 		{
 			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation(GetAnimation()->GetUVs(GetAnimation()->GetCurrentFrame()));
+			DrawAnimation(GetAnimation()->GetUVsFromVector(GetAnimation()->GetCurrentFrame()));
 			SetRotationY(180);
 		
 			SetPosition(_transform.position.x - (_speed * deltaTime), _transform.position.y, _transform.position.z);
@@ -41,7 +41,7 @@ namespace Engine
 		else if (Input::GetKey(Keycode::D))
 		{
 			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation(GetAnimation()->GetUVs(GetAnimation()->GetCurrentFrame()));
+			DrawAnimation(GetAnimation()->GetUVsFromVector(GetAnimation()->GetCurrentFrame()));
 			SetRotationY(0);
 		
 			SetPosition(_transform.position.x + (_speed * deltaTime), _transform.position.y, _transform.position.z);
