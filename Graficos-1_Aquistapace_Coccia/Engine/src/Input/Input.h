@@ -7,7 +7,8 @@ struct GLFWwindow;
 
 namespace Engine
 {
-	static enum Keycode {
+	static enum Keycode
+	{
 		SPACE = 32,
 		APOSTROPHE = 39,
 		COMMA = 44,
@@ -140,4 +141,3 @@ namespace Engine
 }
 
 #endif
-

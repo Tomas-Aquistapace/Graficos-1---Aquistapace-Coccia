@@ -11,7 +11,7 @@ namespace Engine
 	GameBase::GameBase()
 	{
 		srand(time(0));
-		_window = new Windowuwu();
+		_window = new Window();
 		_renderer = new Renderer();
 		_collisionManager = new CollisionManager();
 	}

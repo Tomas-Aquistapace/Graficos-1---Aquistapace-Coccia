@@ -44,21 +44,18 @@ namespace Engine
 			1, 2, 3  // second triangle
 		};
 
-		unsigned int _vao;
-		unsigned int _vbo;
-		unsigned int _ebo;
-
-		//int _width, _height, _nrChannels;
+		unsigned int _vao; // Vertex Array Obj
+		unsigned int _vbo; // Vertex Buffer Obj
+		unsigned int _ebo; // Index Buffer Obj
 
 		int _vertexSize;
-		//unsigned char* _data;
 		unsigned int _texture;
 
 		unsigned int _modelUniform;
 		
 		UVs _uv[4];
 
-		Animation* _animation;
+		Animation* _animation; // Acá se podria poner una lista para asi tener mas de 1 animacion
 		TextureImporter* _textureImporter;
 
 	public:

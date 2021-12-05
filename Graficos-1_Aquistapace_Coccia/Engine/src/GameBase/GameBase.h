@@ -16,7 +16,7 @@ namespace Engine
 	class EXPORT_API GameBase
 	{
 		Renderer* _renderer;
-		Windowuwu* _window;
+		Window* _window;
 		CollisionManager* _collisionManager;
 
 	public:

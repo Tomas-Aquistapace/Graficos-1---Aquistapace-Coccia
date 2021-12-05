@@ -1,7 +1,5 @@
 #include "Shape.h"
 #include <iostream>
-#include "GL/glew.h"
-#include "GLFW/glfw3.h"
 
 namespace Engine
 {
@@ -12,9 +10,7 @@ namespace Engine
 
 	Shape::~Shape()
 	{
-		glDeleteVertexArrays(1, &_vao);
-		glDeleteBuffers(1, &_vbo);
-		glDeleteBuffers(1, &_ebo);
+		_renderer->DeleteBuffers(_vao, _vbo, _ebo);
 	}
 
 	void Shape::InitShape(TypeOfShape type)

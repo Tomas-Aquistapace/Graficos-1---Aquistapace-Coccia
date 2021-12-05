@@ -29,9 +29,13 @@ namespace Engine
 		void SetIndexBuffer(int size, unsigned int* index, unsigned int &ebo);
 		void SetVertexAttribPointer(bool shape, unsigned int &model);
 		void CreateShader();
+		void BindTexture(unsigned int& texture);
+		void DisableTexture();
 		void Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
+
 		void StopShader();
+		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);
 
 		void SetCameraValues(CameraType type, float near, float far);
 		unsigned int GetShader();

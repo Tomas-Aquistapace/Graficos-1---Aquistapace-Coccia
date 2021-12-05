@@ -44,7 +44,7 @@ namespace Engine
 			frame._uv.z = 1.0f / (float)_dimensions.x;
 			frame._uv.w = 1.0f / (float)_dimensions.y;
 
-			frame._framesCount = i;
+			//frame._framesCount = i;
 			_frames.push_back(frame);
 		}
 	}
@@ -57,8 +57,6 @@ namespace Engine
 
 		if (_time >= _length)
 		{
-			_time -= _length;
-
 			_currentFrame++;
 			if (_currentFrame > _lastIndex)
 				_currentFrame = _firstIndex;

@@ -11,6 +11,7 @@ namespace Engine
 	{
 		_window = window;
 	}
+
 	bool Input::GetKey(Keycode key)
 	{
 		return (glfwGetKey(_window, key) == GLFW_PRESS);

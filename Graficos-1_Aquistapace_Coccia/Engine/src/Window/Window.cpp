@@ -4,17 +4,17 @@
 
 namespace Engine
 {
-	Windowuwu::Windowuwu()
+	Window::Window()
 	{
 
 	}
 
-	Windowuwu::~Windowuwu()
+	Window::~Window()
 	{
 
 	}
 
-	int Windowuwu::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor)
+	int Window::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor)
 	{
 		_window = glfwCreateWindow(width, height, title, monitor, NULL);
 
@@ -26,33 +26,33 @@ namespace Engine
 		return 1;
 	}
 
-	void Windowuwu::InitWindow()
+	void Window::InitWindow()
 	{
 		glfwMakeContextCurrent(_window);
 	}
 
-	void Windowuwu::DestroyWindow()
+	void Window::DestroyWindow()
 	{
 		glfwDestroyWindow(_window);
 	}
 
-	int Windowuwu::WindowShouldClose()
+	int Window::WindowShouldClose()
 	{
 		return glfwWindowShouldClose(_window);
 	}
 
-	void Windowuwu::SwapBuffers()
+	void Window::SwapBuffers()
 	{
 		glfwSwapBuffers(_window);
 	}
 
-	void Windowuwu::ClearWindow(float r, float g, float b, float a)
+	void Window::ClearWindow(float r, float g, float b, float a)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(r, g, b, a);
 	}
 
-	GLFWwindow* Windowuwu::ReturnWindow()
+	GLFWwindow* Window::ReturnWindow()
 	{
 		return _window;
 	}

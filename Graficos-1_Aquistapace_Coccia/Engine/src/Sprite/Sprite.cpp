@@ -1,12 +1,5 @@
 #include "Sprite.h"
 
-#include "GL\glew.h"
-#include "glm\glm.hpp"
-
-#include <iostream>
-
-using namespace std;
-
 namespace Engine
 {	
 	Sprite::Sprite(Renderer* renderer) : Entity(renderer)
@@ -26,9 +19,7 @@ namespace Engine
 
 	Sprite::~Sprite()
 	{
-		glDeleteVertexArrays(1, &_vao);
-		glDeleteBuffers(1, &_vbo);
-		glDeleteBuffers(1, &_ebo);
+		_renderer->DeleteBuffers(_vao, _vbo, _ebo);
 
 		if (_animation != NULL)
 			delete _animation;
@@ -55,13 +46,11 @@ namespace Engine
 	{
 		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _texture);
+		_renderer->BindTexture(_texture);
 
 		_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glDisable(GL_TEXTURE_2D);
+		_renderer->DisableTexture();
 	}
 
 	void Sprite::DrawAnimation(glm::vec4 uvRect)
@@ -80,13 +69,11 @@ namespace Engine
 
 		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _texture);
+		_renderer->BindTexture(_texture);
 
 		_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glDisable(GL_TEXTURE_2D);
+		_renderer->DisableTexture();
 	}
 	// --------------------------------
 	void Sprite::SetColor(ENTITY_COLOR color) { }

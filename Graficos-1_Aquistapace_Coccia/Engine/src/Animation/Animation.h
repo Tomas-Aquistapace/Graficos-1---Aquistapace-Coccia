@@ -11,7 +11,7 @@ namespace Engine
 	struct Frame
 	{
 		vec4 _uv;
-		int _framesCount;
+		//int _framesCount;
 	};
 
 	class Sprite;

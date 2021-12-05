@@ -8,13 +8,13 @@ struct GLFWwindow;
 
 namespace Engine
 {
-	class EXPORT_API Windowuwu
+	class EXPORT_API Window
 	{
 		GLFWwindow* _window;
 
 	public:
-		Windowuwu();
-		~Windowuwu();
+		Window();
+		~Window();
 	
 		int CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor);
 		void InitWindow();

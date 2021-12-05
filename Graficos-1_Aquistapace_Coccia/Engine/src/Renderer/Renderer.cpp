@@ -91,6 +91,18 @@ namespace Engine
 		_camera->SetIndex(_shader->GetShader());
 	}
 	
+	void Renderer::BindTexture(unsigned int& texture)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
+
+	void Renderer::DisableTexture()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glDisable(GL_TEXTURE_2D);
+	}
+
 	void Renderer::Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount)
 	{
 		glUseProgram(_shader->GetShader());
@@ -123,6 +135,13 @@ namespace Engine
 		{
 			_shader->ClearShader();
 		}
+	}
+
+	void Renderer::DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo)
+	{
+		glDeleteVertexArrays(1, &vao);
+		glDeleteBuffers(1, &vbo);
+		glDeleteBuffers(1, &ebo);
 	}
 
 	void Renderer::SetCameraValues(CameraType type, float near, float far)
