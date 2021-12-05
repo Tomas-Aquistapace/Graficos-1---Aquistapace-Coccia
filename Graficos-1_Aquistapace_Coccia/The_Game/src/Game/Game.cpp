@@ -31,6 +31,7 @@ namespace Engine
 		srand(time(NULL));
 
 		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
+		SetCameraPosition(0, 0, 5);
 
 		// --------------------------------
 		

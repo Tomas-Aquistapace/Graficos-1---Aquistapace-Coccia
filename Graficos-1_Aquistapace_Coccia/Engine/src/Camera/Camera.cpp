@@ -66,4 +66,9 @@ namespace Engine
 		_view = glm::mat4(1.0f);
 	}
 
+	void Camera::SetCameraPosition(float x, float y, float z)
+	{
+		_cameraPos = glm::vec3(x, y, z);
+	}
+
 }

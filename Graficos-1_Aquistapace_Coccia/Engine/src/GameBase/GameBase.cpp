@@ -74,6 +74,11 @@ namespace Engine
 		_renderer->SetCameraValues(type, near, far);
 	}
 
+	void GameBase::SetCameraPosition(float x, float y, float z)
+	{
+		_renderer->SetCameraPosition(x, y, z);
+	}
+
 	Renderer* GameBase::GetRenderer()
 	{
 		return _renderer;

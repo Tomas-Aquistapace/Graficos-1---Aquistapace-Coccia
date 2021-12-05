@@ -30,7 +30,8 @@ namespace Engine
 		virtual void Update(float deltatime) = 0;
 
 		void SetCamera(CameraType type, float near, float far);
-		
+		void SetCameraPosition(float x, float y, float z);
+
 		Renderer* GetRenderer();
 		CollisionManager* GetCollisionManager();
 	};

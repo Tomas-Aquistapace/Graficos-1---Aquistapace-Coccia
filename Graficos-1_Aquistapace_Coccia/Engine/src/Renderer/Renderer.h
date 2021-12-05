@@ -38,6 +38,7 @@ namespace Engine
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);
 
 		void SetCameraValues(CameraType type, float near, float far);
+		void SetCameraPosition(float x, float y, float z);
 		unsigned int GetShader();
 	};
 }

@@ -149,6 +149,11 @@ namespace Engine
 		_camera->SetCameraValues(type, near, far);
 	}
 
+	void Renderer::SetCameraPosition(float x, float y, float z)
+	{
+		_camera->SetCameraPosition(x, y, z);
+	}
+
 	// ----------------------------
 
 	unsigned int Renderer::GetShader() 
