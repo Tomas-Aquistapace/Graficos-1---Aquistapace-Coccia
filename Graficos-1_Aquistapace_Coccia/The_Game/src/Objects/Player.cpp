@@ -48,7 +48,7 @@ namespace Engine
 		}
 		else
 		{
-			GetAnimation()->UpdateFrame(deltaTime);
+			//GetAnimation()->UpdateFrame(deltaTime);
 			DrawAnimation(GetAnimation()->GetUVs(36));
 		}
 	}

@@ -62,7 +62,7 @@ namespace Engine
 		// --------------------------------
 
 		_roboBob = new Player(GetRenderer(), ivec2(9,5), 2);
-		_roboBob->GetAnimation()->AddFrame(0.1, 0, 7);
+		_roboBob->GetAnimation()->AddFrame(0.5, 0, 7);
 
 		_roboBob->InitTexture();
 		_roboBob->ImportTexture("res/character_robot_sheet.png");

@@ -83,7 +83,6 @@ namespace Engine
 	{
 		return _renderer;
 	}
-
 	CollisionManager* GameBase::GetCollisionManager()
 	{
 		return _collisionManager;
