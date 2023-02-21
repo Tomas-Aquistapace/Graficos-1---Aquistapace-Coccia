@@ -20,6 +20,8 @@ namespace Engine
 		Shader* _shader;
 		Camera* _camera;
 
+		const int _attribElementsAmount = 9;
+
 	public:
 		Renderer();
 		~Renderer();
@@ -39,7 +41,9 @@ namespace Engine
 
 		void SetCameraValues(CameraType type, float near, float far);
 		void SetCameraPosition(float x, float y, float z);
+
 		unsigned int GetShader();
+		int GetAttribElementsAmount();
 	};
 }
 #endif

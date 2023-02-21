@@ -1,20 +1,18 @@
 #include "Sprite.h"
+#include <iostream>
 
 namespace Engine
-{	
+{
 	Sprite::Sprite(Renderer* renderer) : Entity(renderer)
 	{
 		_textureImporter = new TextureImporter();
-
-		_animation = new Animation();
 	}
 
-	Sprite::Sprite(Renderer* renderer, const glm::ivec2& tileDimensions) : Entity(renderer)
+	Sprite::Sprite(Renderer* renderer, const ivec2& tileDimensions) : Entity(renderer)
 	{
 		_textureImporter = new TextureImporter();
 
-		_animation = new Animation();
-		_animation->InitSpriteSheet(this, tileDimensions);
+		_animation = new Animation(tileDimensions);
 	}
 
 	Sprite::~Sprite()
@@ -53,42 +51,64 @@ namespace Engine
 		_renderer->DisableTexture();
 	}
 
-	void Sprite::DrawAnimation(glm::vec4 uvRect)
+	void Sprite::DrawAnimation(vec4 uvRect)
 	{
-		//UpdateUVs
-		_vertex[7] =  _uv[0].u; _vertex[8]  = _uv[0].v;
-		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
-		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
-		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
+		if (_animation != NULL)
+		{
+			_animation->DrawAnimation(uvRect);
 
-		//Set UV
-		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
-		_uv[1].u = uvRect.x + uvRect.z; _uv[1].v = uvRect.y;
-		_uv[2].u = uvRect.x; _uv[2].v = uvRect.y;
-		_uv[3].u = uvRect.x; _uv[3].v = uvRect.y + uvRect.w;
+			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
-		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+			_renderer->BindTexture(_texture);
 
-		_renderer->BindTexture(_texture);
+			_renderer->Draw(_vao, _vbo, _ebo, _animation->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
 
-		_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
-
-		_renderer->DisableTexture();
+			_renderer->DisableTexture();
+		}
+		else
+		{
+			cout << "Add an animation in the constructor to use one" << endl;
+		}
 	}
+
 	// --------------------------------
+	
+	vec4 Sprite::GetUVs(int index)
+	{
+		int xTile = index % _dimensions.x; //Esto impide que xTile sea mayor a la dimension en x
+		int yTile = index / _dimensions.x;
+
+		uvs.x = xTile / (float)_dimensions.x; //posicion en x
+		uvs.y = yTile / (float)_dimensions.y; //posicion en y
+		uvs.z = 1.0f / (float)_dimensions.x;  //ancho
+		uvs.w = 1.0f / (float)_dimensions.y;  //alto
+
+		return uvs;
+	}
+
+	// --------------------------------
+	
 	void Sprite::SetColor(ENTITY_COLOR color) { }
 
 	void Sprite::SetColor(float r, float g, float b) { }
 
 	void Sprite::TriggerCollision(Entity* other) { }
 
-	void Sprite::SetAnimation()
-	{
-		_animation = new Animation(); // para el final te agregamos una lista de animaciones
-	}
+	//void Sprite::SetAnimation()
+	//{
+	//	_animation = new Animation(); // para el final te agregamos una lista de animaciones
+	//}
 
 	Animation* Sprite::GetAnimation()
 	{
-		return _animation;
+		if (_animation != NULL)
+		{
+			return _animation;
+		}
+		else
+		{
+			cout << "Add an animation in the constructor to use one" << endl;
+			return NULL;
+		}
 	}
 }

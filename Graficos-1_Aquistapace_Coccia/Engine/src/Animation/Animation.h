@@ -2,16 +2,24 @@
 #define ANIMATION_H
 
 #include "..\Export\Export.h"
+#include "..\Renderer\Renderer.h"
 #include "glm/glm/glm.hpp"
 #include <vector>
 
 using namespace glm;
+using namespace std;
+
 namespace Engine
 {
-	struct Frame
+	struct EXPORT_API Frame
 	{
 		vec4 _uv;
-		//int _framesCount;
+	};
+
+	struct EXPORT_API UVs
+	{
+		float u;
+		float v;
 	};
 
 	class Sprite;
@@ -19,11 +27,22 @@ namespace Engine
 	class EXPORT_API Animation
 	{
 	private:
+		float _vertex[36]
+		{
+			// positions          // colors					// texture coords
+			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f, 0.0f,   0.0f, 0.0f,   // bottom left
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 0.0f,   0.0f, 1.0f    // top left
+		};
+
+		Renderer* _renderer;
+
 		vec4 uvs = vec4(0, 0, 0, 0);
-		Sprite* _sprite;
+		UVs _uv[4];
 
 		ivec2 _dimensions;
-		std::vector<Frame> _frames;
+		vector<Frame> _frames;
 
 		int _currentFrame;
 		int _maxFrames;
@@ -35,16 +54,21 @@ namespace Engine
 		float _time;
 	
 		void ChangeFrame();
+
 	public:
-		Animation();
+		Animation(const ivec2& tileDimensions);
 		~Animation();
 
-		void InitSpriteSheet(Sprite* spriteSheet, const glm::ivec2& tileDimensions);
 		void AddFrame(float durationInSec, int firstIndex, int lastIndex);
 		void UpdateFrame(float deltaTime);
+
+		void DrawAnimation(glm::vec4 uvRect);
+
 		vec4 GetUVs(int index);
 		vec4 GetUVsFromVector(int index);
 		int GetCurrentFrame();
+		ivec2 GetDimensions();
+		float* GetVertex();
 	};
 }
 #endif

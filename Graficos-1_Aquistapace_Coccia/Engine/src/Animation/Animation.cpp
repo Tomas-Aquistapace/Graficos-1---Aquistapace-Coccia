@@ -1,32 +1,25 @@
 #include "Animation.h"
 #include <iostream>
 
-using namespace std;
-
 namespace Engine
 {
-	Animation::Animation()
+	Animation::Animation(const ivec2& tileDimensions)
 	{
-		_sprite = NULL;
 		_dimensions.x = 0;
 		_dimensions.y = 0;
 		_currentFrame = 0;
 
 		_firstIndex = 0;
 		_lastIndex  = 0;
+
+		_dimensions = tileDimensions;
+		//	//Dimensions son la cantidad de indices en X e Y que tiene nuesta textura
 	}
 
 	Animation::~Animation()
 	{
 
 	}
-
-	void Animation::InitSpriteSheet(Sprite* spriteSheet, const  glm::ivec2& tileDimensions)
-	{
-		_sprite = spriteSheet;
-		_dimensions = tileDimensions;
-		//Dimensions son la cantidad de indices en X e Y que tiene nuesta textura
-	}	
 	
 	void Animation::AddFrame(float durationInSec, int firstIndex, int lastIndex)
 	{
@@ -66,10 +59,22 @@ namespace Engine
 		}
 	}
 
-	void Animation::ChangeFrame()
+	void Animation::DrawAnimation(glm::vec4 uvRect)
 	{
-		uvs = GetUVsFromVector(_currentFrame);
+		//UpdateUVs
+		_vertex[7] = _uv[0].u; _vertex[8] = _uv[0].v;
+		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
+		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
+		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
+
+		//Set UV
+		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
+		_uv[1].u = uvRect.x + uvRect.z; _uv[1].v = uvRect.y;
+		_uv[2].u = uvRect.x; _uv[2].v = uvRect.y;
+		_uv[3].u = uvRect.x; _uv[3].v = uvRect.y + uvRect.w;
 	}
+
+	// ------------------------------
 
 	vec4 Animation::GetUVs(int index)
 	{
@@ -81,9 +86,9 @@ namespace Engine
 		uvs.z = 1.0f / (float)_dimensions.x;  //ancho
 		uvs.w = 1.0f / (float)_dimensions.y;  //alto
 
-		return uvs;
-		
+		return uvs;		
 	}
+
 	vec4 Animation::GetUVsFromVector(int index)
 	{
 		return _frames[index]._uv;
@@ -92,5 +97,22 @@ namespace Engine
 	int Animation::GetCurrentFrame()
 	{	
 		return _currentFrame;
+	}
+
+	ivec2 Animation::GetDimensions()
+	{	
+		return _dimensions;
+	}
+
+	float* Animation::GetVertex()
+	{
+		return _vertex;
+	}
+
+	// ------------------------------
+
+	void Animation::ChangeFrame()
+	{
+		uvs = GetUVsFromVector(_currentFrame);
 	}
 }

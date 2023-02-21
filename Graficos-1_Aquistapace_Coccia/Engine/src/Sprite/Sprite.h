@@ -8,14 +8,9 @@
 
 namespace Engine
 {
-	struct EXPORT_API UVs
-	{
-		float u;
-		float v;
-	};
-
 	class EXPORT_API Sprite : public Entity
 	{
+	private:
 		float _vertex[36]
 		{
 			// positions          // colors					// texture coords
@@ -25,21 +20,8 @@ namespace Engine
 			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 0.0f,   0.0f, 1.0f    // top left
 		};
 
-		float _vertexes[32]
+		unsigned int _index[6] = 
 		{
-			// positions          // colors					// texture coords
-			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
-		};
-
-		float _borderColor[4]
-		{
-			1.0f, 1.0f, 0.0f, 1.0f
-		};
-
-		unsigned int _index[6] = {
 			0, 1, 3, // first triangle
 			1, 2, 3  // second triangle
 		};
@@ -50,11 +32,14 @@ namespace Engine
 
 		int _vertexSize;
 		unsigned int _texture;
-
 		unsigned int _modelUniform;
-		
-		UVs _uv[4];
 
+		vec4 uvs = vec4(0, 0, 0, 0);
+		ivec2 _dimensions;
+
+		vec4 GetUVs(int index);
+
+	protected:
 		Animation* _animation; // Acá se podria poner una lista para asi tener mas de 1 animacion
 		TextureImporter* _textureImporter;
 
@@ -65,13 +50,14 @@ namespace Engine
 
 		void InitTexture();
 		void ImportTexture(const char*name);
+
 		void Draw();
 		void DrawAnimation(glm::vec4 uvRect);
+		
 		void SetColor(ENTITY_COLOR color);
 		void SetColor(float r, float g, float b);
 		void TriggerCollision(Entity* other);
-
-		void SetAnimation();
+		//void SetAnimation();
 		Animation* GetAnimation();
 	};
 }

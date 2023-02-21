@@ -49,6 +49,12 @@
     <Filter Include="Animation">
       <UniqueIdentifier>{8fe896a6-d0c8-4813-935e-66b17d7bd264}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{eabab6c2-fae3-4dee-b76e-0effa4e5ac45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tilemap">
+      <UniqueIdentifier>{06553a55-bdce-4402-ae99-f0678e9af2bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -95,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="src\TextureImporter\TextureImporter.cpp">
       <Filter>TextureImporter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile\Tile.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileMap\TileMap.cpp">
+      <Filter>Tilemap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="src\TextureImporter\TextureImporter.h">
       <Filter>TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\Tile.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileMap\TileMap.h">
+      <Filter>Tilemap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
