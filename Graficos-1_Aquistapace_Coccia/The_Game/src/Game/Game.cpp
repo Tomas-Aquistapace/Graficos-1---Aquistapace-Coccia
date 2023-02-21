@@ -10,7 +10,7 @@ namespace Engine
 		_wall1 = NULL;
 		_wall2 = NULL;
 		_box = NULL;
-		
+		_tile = NULL;
 	}
 
 	Game::~Game()
@@ -23,11 +23,13 @@ namespace Engine
 			delete _wall2;
 		if (_box != NULL)
 			delete _box;
+		if (_tile != NULL)
+			delete _tile;
 	}
 
 	void Game::Start()
 	{
-		StartEngine(1200, 600, "Graficos 1 - Parcial N2");
+		StartEngine(1200, 600, "Graficos 1 - Final Aquistapace");
 		srand(time(NULL));
 
 		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
@@ -68,6 +70,18 @@ namespace Engine
 		_roboBob->ImportTexture("res/character_robot_sheet.png");
 		_roboBob->SetPosition(-1.8, 0, 0);
 		GetCollisionManager()->AddNewObject(_roboBob);
+
+		// --------------------------------
+
+		_tile = new Tile(GetRenderer(), ivec2(16, 17), 204);
+		//_tile = new Tile(GetRenderer(), ivec2(9, 9));
+		_tile->InitTexture();
+		//_tile->ImportTexture("res/tilesetFuture.png");
+		_tile->ImportTexture("res/Mega_Man_X_Sigma_Stage_3_Tileset.png");
+		_tile->SetPosition(0, 0, 0);
+		_tile->SetScale(0.5f, 0.5f, 0.5f);
+
+		//_tile->GetAnimation()->AddFrame(0.5f, 7, 8);
 	}
 	
 	void Game::Play()
@@ -79,11 +93,16 @@ namespace Engine
 	{
 		_roboBob->Move(deltaTime);
 
-		GetCollisionManager()->CheckAllCollisions();
+		//GetCollisionManager()->CheckAllCollisions();
 
-		_wall1->Draw();
-		_wall2->Draw();
-		_box->Draw();
+		//_wall1->Draw();
+		//_wall2->Draw();
+		//_box->Draw();
+		
+		_tile->DrawTile();
+
+		//_tile->GetAnimation()->UpdateFrame(deltaTime);
+		//_tile->DrawAnimation();
 	}
 
 	void Game::End()

@@ -5,15 +5,18 @@ namespace Engine
 {
 	Animation::Animation(const ivec2& tileDimensions)
 	{
-		_dimensions.x = 0;
-		_dimensions.y = 0;
+		// Dimensions son la cantidad de indices en X e Y que tiene nuesta textura
+		_dimensions = tileDimensions;
+		_frames.empty();
+		
 		_currentFrame = 0;
+		_maxFrames = 0;
 
 		_firstIndex = 0;
 		_lastIndex  = 0;
-
-		_dimensions = tileDimensions;
-		//	//Dimensions son la cantidad de indices en X e Y que tiene nuesta textura
+		
+		_length = 0;
+		_time = 0;		
 	}
 
 	Animation::~Animation()
@@ -23,6 +26,12 @@ namespace Engine
 	
 	void Animation::AddFrame(float durationInSec, int firstIndex, int lastIndex)
 	{
+		if (_dimensions.x <= 0 && _dimensions.y <= 0)
+		{
+			cout << "The dimensions are ecual to 0, give it another ones" << endl;
+			return;
+		}
+
 		_firstIndex = firstIndex;
 		_lastIndex = lastIndex;
 		_currentFrame = 0;
@@ -44,6 +53,12 @@ namespace Engine
 
 	void Animation::UpdateFrame(float deltaTime)
 	{
+		if (_dimensions.x <= 0 && _dimensions.y <= 0)
+		{
+			cout << "The dimensions are ecual to 0, give it another ones" << endl;
+			return;
+		}
+
 		float t = 0;
 		t = deltaTime;
 		_time += t;
@@ -59,7 +74,7 @@ namespace Engine
 		}
 	}
 
-	void Animation::DrawAnimation(glm::vec4 uvRect)
+	void Animation::DrawAnimation(vec4 uvRect)
 	{
 		//UpdateUVs
 		_vertex[7] = _uv[0].u; _vertex[8] = _uv[0].v;

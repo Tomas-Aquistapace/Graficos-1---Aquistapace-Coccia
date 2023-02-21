@@ -51,10 +51,12 @@ namespace Engine
 		_renderer->DisableTexture();
 	}
 
-	void Sprite::DrawAnimation(vec4 uvRect)
+	void Sprite::DrawFrame(int index)
 	{
 		if (_animation != NULL)
 		{
+			vec4 uvRect = _animation->GetUVs(index);
+
 			_animation->DrawAnimation(uvRect);
 
 			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
@@ -67,23 +69,30 @@ namespace Engine
 		}
 		else
 		{
-			cout << "Add an animation in the constructor to use one" << endl;
+			cout << "Error - Sprite.cpp - DrawFrame: Add an animation in the constructor to use one" << endl;
 		}
 	}
 
-	// --------------------------------
-	
-	vec4 Sprite::GetUVs(int index)
+	void Sprite::DrawAnimation()
 	{
-		int xTile = index % _dimensions.x; //Esto impide que xTile sea mayor a la dimension en x
-		int yTile = index / _dimensions.x;
+		if (_animation != NULL)
+		{
+			vec4 uvRect = _animation->GetUVsFromVector(_animation->GetCurrentFrame());
 
-		uvs.x = xTile / (float)_dimensions.x; //posicion en x
-		uvs.y = yTile / (float)_dimensions.y; //posicion en y
-		uvs.z = 1.0f / (float)_dimensions.x;  //ancho
-		uvs.w = 1.0f / (float)_dimensions.y;  //alto
+			_animation->DrawAnimation(uvRect);
 
-		return uvs;
+			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+
+			_renderer->BindTexture(_texture);
+
+			_renderer->Draw(_vao, _vbo, _ebo, _animation->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
+
+			_renderer->DisableTexture();
+		}
+		else
+		{
+			cout << "Error - Sprite.cpp - DrawAnimation(): Add an animation in the constructor to use one" << endl;
+		}
 	}
 
 	// --------------------------------
@@ -107,7 +116,7 @@ namespace Engine
 		}
 		else
 		{
-			cout << "Add an animation in the constructor to use one" << endl;
+			cout << "Error - Sprite.cpp - GetAnimation(): Add an animation in the constructor to use one" << endl;
 			return NULL;
 		}
 	}

@@ -16,6 +16,8 @@ namespace Engine
 
 		Player* _roboBob;
 
+		Tile* _tile;
+
 	public:
 		Game();
 		~Game();

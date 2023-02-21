@@ -29,7 +29,7 @@ namespace Engine
 			for (int j = 0; j < columns; j++)
 			{
 				//Tile* newTile = new Tile(renderer, texture, true, id, (float)rows / imageWidth * tileScaleX, (float)columns / imageHeight * tileScaleY);
-				Tile* newTile = new Tile(renderer, id);
+				Tile* newTile = new Tile(renderer);
 				newTile->InitTexture();
 				newTile->ImportTexture(path);
 

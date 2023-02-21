@@ -5,6 +5,7 @@
 #include "../Renderer/Renderer.h"
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
+#include "../Tile/Tile.h"
 #include "../Animation/Animation.h"
 #include "../Input/Input.h"
 #include "../Time/Time.h"

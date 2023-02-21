@@ -2,7 +2,6 @@
 #define ANIMATION_H
 
 #include "..\Export\Export.h"
-#include "..\Renderer\Renderer.h"
 #include "glm/glm/glm.hpp"
 #include <vector>
 
@@ -21,8 +20,6 @@ namespace Engine
 		float u;
 		float v;
 	};
-
-	class Sprite;
 	
 	class EXPORT_API Animation
 	{
@@ -35,8 +32,6 @@ namespace Engine
 			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f, 0.0f,   0.0f, 0.0f,   // bottom left
 			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 0.0f,   0.0f, 1.0f    // top left
 		};
-
-		Renderer* _renderer;
 
 		vec4 uvs = vec4(0, 0, 0, 0);
 		UVs _uv[4];
