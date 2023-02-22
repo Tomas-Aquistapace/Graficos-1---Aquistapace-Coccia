@@ -1,15 +1,18 @@
 #ifndef COLLISIONMANAGER_H
 #define COLLISIONMANAGER_H
 
-#include <vector>
 #include "..\Export\Export.h"
-#include "..\Entity\Entity.h"
+#include "..\Entity\Entity.h"}
+
+#include <vector>
+
+using namespace std;
 
 namespace Engine
 {
 	class EXPORT_API CollisionManager
 	{
-		std::vector<Entity*> _vec;
+		vector<Entity*> _vec;
 
 	public:
 		CollisionManager();

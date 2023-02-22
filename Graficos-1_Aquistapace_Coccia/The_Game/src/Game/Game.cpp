@@ -11,6 +11,7 @@ namespace Engine
 		_wall2 = NULL;
 		_box = NULL;
 		_tile = NULL;
+		_tileMap = NULL;
 	}
 
 	Game::~Game()
@@ -25,15 +26,17 @@ namespace Engine
 			delete _box;
 		if (_tile != NULL)
 			delete _tile;
+		if (_tileMap != NULL)
+			delete _tileMap;
 	}
 
 	void Game::Start()
 	{
-		StartEngine(1200, 600, "Graficos 1 - Final Aquistapace");
+		StartEngine(1920, 1080, "Graficos 1 - Final Aquistapace");
 		srand(time(NULL));
 
 		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
-		SetCameraPosition(0, 0, 5);
+		SetCameraPosition(0, 0, 10);
 
 		// --------------------------------
 		
@@ -72,14 +75,24 @@ namespace Engine
 		GetCollisionManager()->AddNewObject(_roboBob);
 
 		// --------------------------------
+		const char* path = "res/Mega_Man_X_Sigma_Stage_3_Tileset.png";
+		vec3 startPosition = vec3(-3, -3, 0);
+		vec2 startScale = vec2(0.5f, 0.5f);
 
-		_tile = new Tile(GetRenderer(), ivec2(16, 17), 204);
-		//_tile = new Tile(GetRenderer(), ivec2(9, 9));
-		_tile->InitTexture();
-		//_tile->ImportTexture("res/tilesetFuture.png");
-		_tile->ImportTexture("res/Mega_Man_X_Sigma_Stage_3_Tileset.png");
-		_tile->SetPosition(0, 0, 0);
-		_tile->SetScale(0.5f, 0.5f, 0.5f);
+		_tileMap = new TileMap(GetRenderer());
+		_tileMap->InitTileMap(startPosition, path, ivec2(16, 17), _tileModuleMatrix, startScale);
+
+		//vec3 startPosition, const char* path, const ivec2& tileDimensions, TileModule** tileModule, vec2 tileScale
+
+		// --------------------------------
+
+		//_tile = new Tile(GetRenderer(), ivec2(16, 17), 204);
+		////_tile = new Tile(GetRenderer(), ivec2(9, 9));
+		//_tile->InitTexture();
+		////_tile->ImportTexture("res/tilesetFuture.png");
+		//_tile->ImportTexture("res/Mega_Man_X_Sigma_Stage_3_Tileset.png");
+		//_tile->SetPosition(0, 0, 0);
+		//_tile->SetScale(0.5f, 0.5f, 0.5f);
 
 		//_tile->GetAnimation()->AddFrame(0.5f, 7, 8);
 	}
@@ -91,6 +104,8 @@ namespace Engine
 
 	void Game::Update(float deltaTime)
 	{
+		_tileMap->DrawTileMap();
+
 		_roboBob->Move(deltaTime);
 
 		//GetCollisionManager()->CheckAllCollisions();
@@ -99,7 +114,8 @@ namespace Engine
 		//_wall2->Draw();
 		//_box->Draw();
 		
-		_tile->DrawTile();
+
+		//_tile->DrawTile();
 
 		//_tile->GetAnimation()->UpdateFrame(deltaTime);
 		//_tile->DrawAnimation();

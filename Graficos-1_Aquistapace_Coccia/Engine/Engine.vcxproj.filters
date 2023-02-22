@@ -108,6 +108,9 @@
     <ClCompile Include="src\TileMap\TileMap.cpp">
       <Filter>Tilemap</Filter>
     </ClCompile>
+    <ClCompile Include="src\Tile\TileModule.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Window.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="src\TileMap\TileMap.h">
       <Filter>Tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\TileModule.h">
+      <Filter>Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

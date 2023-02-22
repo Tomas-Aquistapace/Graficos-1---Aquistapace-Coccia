@@ -16,7 +16,7 @@ namespace Engine
 		_lastIndex  = 0;
 		
 		_length = 0;
-		_time = 0;		
+		_time = 0;
 	}
 
 	Animation::~Animation()
