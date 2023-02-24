@@ -13,10 +13,12 @@ using namespace std;
 
 namespace Engine
 {
-	class EXPORT_API TileMap : public Entity
+	class EXPORT_API TileMap
 	{
 	private:
 		vector<Tile*> _tilesVector;
+
+		Renderer* _renderer;
 
 	public:
 		TileMap(Renderer* renderer);
@@ -25,12 +27,6 @@ namespace Engine
 		void InitTileMap(vec3 startPosition, const char* path, const ivec2& tileDimensions, vector<vector<TileModule>> tileModule, vec2 tileScale);
 		
 		void DrawTileMap();
-
-		// ----------------------
-		
-		void SetColor(ENTITY_COLOR color);
-		void SetColor(float r, float g, float b);
-		void TriggerCollision(Entity* other);
 	};
 }
 #endif

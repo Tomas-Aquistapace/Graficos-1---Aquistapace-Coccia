@@ -2,77 +2,63 @@
 
 namespace Engine
 {
-	Tile::Tile(Renderer* renderer) : Sprite(renderer)
+	Tile::Tile(Renderer* renderer, const ivec2& tileDimensions, int index) : Entity(renderer)
 	{
-		_index = 0;
-		_dimensions = ivec2(0,0);
-	}
-
-	Tile::Tile(Renderer* renderer, const ivec2& tileDimensions) : Sprite(renderer, tileDimensions)
-	{
-		_index = 0;
+		_tileFrame = index;
 		_dimensions = tileDimensions;
-	}
 
-	Tile::Tile(Renderer* renderer, const ivec2& tileDimensions, int index) : Sprite(renderer)
-	{
-		_index = index;
-		_dimensions = tileDimensions;
+		_textureImporter = new TextureImporter();
 	}
 
 	Tile::~Tile()
 	{
-
-	}
-
-	Tile* Tile::clone()
-	{
-		//Tile* clonedTile = new Tile(_renderer, GetAnimation()->GetDimensions(), _id);
-		//
-		//unsigned int uStart = 3;
-		//unsigned int vStart = 4;
-		//unsigned int stride = _renderer->GetAttribElementsAmount();
-		//unsigned int vertexNum = 0;
-		//
-		//float texCoordinates[8];
-		//
-		//for (int i = 0; i < 8; i++)
-		//{
-		//	if (i % 2 == 0)
-		//		texCoordinates[i] = _vertexes[stride * vertexNum + uStart];
-		//	else
-		//	{
-		//		texCoordinates[i] = _vertexes[stride * vertexNum + vStart];
-		//		vertexNum++;
-		//	}
-		//}
-
-		//clonedTile->setTextureCoordinates(texCoordinates[0], texCoordinates[1], texCoordinates[2], texCoordinates[3], texCoordinates[4], texCoordinates[5], texCoordinates[6], texCoordinates[7]);
-
-		//return clonedTile;
-		return NULL;
+		if (_textureImporter != NULL)
+			delete _textureImporter;
 	}
 
 	// --------------------------------
 
+	void Tile::InitTexture()
+	{
+		_vertexSize = sizeof(_vertex);
+
+		_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
+		_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
+
+		_renderer->SetVertexAttribPointer(false, _modelUniform);
+	}
+
+	void Tile::ImportTexture(const char* name)
+	{
+		_textureImporter->ImportTexture(_renderer, name, _texture);
+	}
+
 	void Tile::DrawTile()
 	{
-		vec4 uvRect = GetUVs(_index);
+		vec4 uvRect = GetUVs(_tileFrame);
 
 		//UpdateUVs
-		_vertex[7] = _uv[0].u; _vertex[8] = _uv[0].v;
-		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
-		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
-		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
+		_vertex[7] = _uv[0].x; _vertex[8] = _uv[0].y;
+		_vertex[16] = _uv[1].x; _vertex[17] = _uv[1].y;
+		_vertex[25] = _uv[2].x; _vertex[26] = _uv[2].y;
+		_vertex[34] = _uv[3].x; _vertex[35] = _uv[3].y;
 
 		//Set UV
-		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
-		_uv[1].u = uvRect.x + uvRect.z; _uv[1].v = uvRect.y;
-		_uv[2].u = uvRect.x; _uv[2].v = uvRect.y;
-		_uv[3].u = uvRect.x; _uv[3].v = uvRect.y + uvRect.w;
+		_uv[0].x = uvRect.x + uvRect.z; _uv[0].y = uvRect.y + uvRect.w;
+		_uv[1].x = uvRect.x + uvRect.z; _uv[1].y = uvRect.y;
+		_uv[2].x = uvRect.x; _uv[2].y = uvRect.y;
+		_uv[3].x = uvRect.x; _uv[3].y = uvRect.y + uvRect.w;
 
-		Draw();
+		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+
+		_renderer->BindTexture(_texture);
+
+		_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
+
+		_renderer->DisableTexture();
 	}
+
+	// ----------------------------------
 
 	vec4 Tile::GetUVs(int index)
 	{
@@ -86,4 +72,10 @@ namespace Engine
 
 		return uvs;
 	}
+
+	// --------------------------------
+
+	void Tile::SetColor(ENTITY_COLOR color) { }
+	void Tile::SetColor(float r, float g, float b) { }
+	void Tile::TriggerCollision(Entity* other) { }
 }

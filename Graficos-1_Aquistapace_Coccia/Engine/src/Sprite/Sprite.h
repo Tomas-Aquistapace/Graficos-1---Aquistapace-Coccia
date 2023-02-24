@@ -11,6 +11,15 @@ namespace Engine
 	class EXPORT_API Sprite : public Entity
 	{
 	private:
+		float _vertex[36]
+		{
+			// positions          // colors					// texture coords
+			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f, 0.0f,   0.0f, 0.0f,   // bottom left
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 0.0f,   0.0f, 1.0f    // top left
+		};
+
 		unsigned int _index[6] = 
 		{
 			0, 1, 3, // first triangle
@@ -25,18 +34,8 @@ namespace Engine
 		unsigned int _texture;
 		unsigned int _modelUniform;
 
-	protected:
-		float _vertex[36]
-		{
-			// positions          // colors					// texture coords
-			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f, 0.0f,   0.0f, 0.0f,   // bottom left
-			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 0.0f,   0.0f, 1.0f    // top left
-		};
-
-		vec4 uvs = vec4(0, 0, 0, 0);
-		ivec2 _dimensions;
+		//vec4 uvs = vec4(0, 0, 0, 0);
+		//ivec2 _dimensions;
 
 		Animation* _animation; // Acá se podria poner una lista para asi tener mas de 1 animacion
 		TextureImporter* _textureImporter;

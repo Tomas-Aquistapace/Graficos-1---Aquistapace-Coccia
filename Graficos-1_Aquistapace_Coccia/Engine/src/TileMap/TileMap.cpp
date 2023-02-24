@@ -1,11 +1,12 @@
 #include "TileMap.h"
-#include <algorithm>
 #include <iostream>
 
 namespace Engine
 {
-	TileMap::TileMap(Renderer* renderer) : Entity(renderer)
+	TileMap::TileMap(Renderer* renderer)
 	{
+		_renderer = renderer;
+
 		_tilesVector.clear();
 	}
 
@@ -31,7 +32,7 @@ namespace Engine
 		{
 			for (size_t j = 0; j < columns; j++)
 			{
-				Tile* tile = new Tile(this->_renderer, tileDimensions, tileModule[i][j]._tileFrame);
+				Tile* tile = new Tile(_renderer, tileDimensions, tileModule[i][j]._tileFrame);
 
 				tile->InitTexture();
 				tile->ImportTexture(path);
@@ -55,12 +56,4 @@ namespace Engine
 			item->DrawTile();
 		}
 	}
-
-	// -------------------------------
-
-	void TileMap::SetColor(ENTITY_COLOR color) { }
-
-	void TileMap::SetColor(float r, float g, float b) { }
-
-	void TileMap::TriggerCollision(Entity* other) { }
 }
