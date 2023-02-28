@@ -8,21 +8,18 @@ namespace Engine
 		_textureImporter = new TextureImporter();
 	}
 
-	Sprite::Sprite(Renderer* renderer, const ivec2& tileDimensions) : Entity(renderer)
-	{
-		_textureImporter = new TextureImporter();
-
-		_animation = new Animation(tileDimensions);
-	}
-
 	Sprite::~Sprite()
 	{
 		_renderer->DeleteBuffers(_vao, _vbo, _ebo);
 
-		if (_animation != NULL)
-			delete _animation;
 		if (_textureImporter != NULL)
 			delete _textureImporter;
+
+		for (Animation* item : _animations)
+		{
+			if (item != NULL)
+				delete item;
+		}
 	}
 
 	void Sprite::InitTexture()
@@ -37,8 +34,20 @@ namespace Engine
 	
 	void Sprite::ImportTexture(const char* name)
 	{
+		InitTexture();
+
 		_textureImporter->ImportTexture(_renderer, name, _texture);
 	}
+
+	// -------------------------------
+	
+	void Sprite::AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex, bool loop)
+	{
+		_animations.push_back(new Animation(id, tileDimensions));
+		_animations.back()->SetFrame(durationInSec, firstIndex, lastIndex, loop);
+	}
+
+	// -------------------------------
 
 	void Sprite::Draw()
 	{
@@ -53,17 +62,17 @@ namespace Engine
 
 	void Sprite::DrawFrame(int index)
 	{
-		if (_animation != NULL)
+		if (_animations.front() != NULL)
 		{
-			vec4 uvRect = _animation->GetUVs(index);
+			vec4 uvRect = _animations.front()->GetUVs(index);
 
-			_animation->DrawAnimation(uvRect);
+			_animations.front()->DrawAnimation(uvRect);
 
 			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
 			_renderer->BindTexture(_texture);
 
-			_renderer->Draw(_vao, _vbo, _ebo, _animation->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
+			_renderer->Draw(_vao, _vbo, _ebo, _animations.front()->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
 
 			_renderer->DisableTexture();
 		}
@@ -73,51 +82,103 @@ namespace Engine
 		}
 	}
 
-	void Sprite::DrawAnimation()
+	void Sprite::DrawAnimation(string id)
 	{
-		if (_animation != NULL)
+		for (size_t i = 0; i < _animations.size(); i++)
 		{
-			vec4 uvRect = _animation->GetUVsFromVector(_animation->GetCurrentFrame());
+			if (_animations[i] != NULL)
+			{
+				if (_animations[i]->GetId() == id)
+				{
+					vec4 uvRect = _animations[i]->GetUVsFromVector(_animations[i]->GetCurrentFrame());
 
-			_animation->DrawAnimation(uvRect);
+					_animations[i]->DrawAnimation(uvRect);
 
-			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+					_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
-			_renderer->BindTexture(_texture);
+					_renderer->BindTexture(_texture);
 
-			_renderer->Draw(_vao, _vbo, _ebo, _animation->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
+					_renderer->Draw(_vao, _vbo, _ebo, _animations[i]->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
 
-			_renderer->DisableTexture();
+					_renderer->DisableTexture();
+
+					return;
+				}
+			}
 		}
-		else
+
+		cout << "Error - Sprite.cpp - DrawAnimation(): animation /" << id << "/ not found" << endl;
+	}
+	
+	void Sprite::DrawAnimation(int id)
+	{
+		for (size_t i = 0; i < _animations.size(); i++)
 		{
-			cout << "Error - Sprite.cpp - DrawAnimation(): Add an animation in the constructor to use one" << endl;
+			if (_animations[i] != NULL)
+			{
+				if (i == id)
+				{
+					vec4 uvRect = _animations[i]->GetUVsFromVector(_animations[i]->GetCurrentFrame());
+
+					_animations[i]->DrawAnimation(uvRect);
+
+					_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+
+					_renderer->BindTexture(_texture);
+
+					_renderer->Draw(_vao, _vbo, _ebo, _animations[i]->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
+
+					_renderer->DisableTexture();
+
+					return;
+				}
+			}
 		}
+
+		cout << "Error - Sprite.cpp - DrawAnimation(): animation /" << id << "/ not found" << endl;
 	}
 
 	// --------------------------------
 	
+	Animation* Sprite::GetAnimation(string id)
+	{
+		for (size_t i = 0; i < _animations.size(); i++)
+		{
+			if (_animations[i] != NULL)
+			{
+				if (_animations[i]->GetId() == id)
+				{
+					return _animations[i];
+				}
+			}
+		}
+		
+		cout << "Error - Sprite.cpp - DrawAnimation(): animation /" << id << "/ not found" << endl;
+		return NULL;
+	}
+
+	Animation* Sprite::GetAnimation(int id)
+	{
+		for (size_t i = 0; i < _animations.size(); i++)
+		{
+			if (_animations[i] != NULL)
+			{
+				if (i == id)
+				{
+					return _animations[i];
+				}
+			}
+		}
+
+		cout << "Error - Sprite.cpp - DrawAnimation(): animation /" << id << "/ not found" << endl;
+		return NULL;
+	}
+	
+	// ---------------------------------
+
 	void Sprite::SetColor(ENTITY_COLOR color) { }
 
 	void Sprite::SetColor(float r, float g, float b) { }
 
 	void Sprite::TriggerCollision(Entity* other) { }
-
-	//void Sprite::SetAnimation()
-	//{
-	//	_animation = new Animation(); // para el final te agregamos una lista de animaciones
-	//}
-
-	Animation* Sprite::GetAnimation()
-	{
-		if (_animation != NULL)
-		{
-			return _animation;
-		}
-		else
-		{
-			cout << "Error - Sprite.cpp - GetAnimation(): Add an animation in the constructor to use one" << endl;
-			return NULL;
-		}
-	}
 }

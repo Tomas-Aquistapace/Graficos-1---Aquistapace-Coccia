@@ -3,7 +3,7 @@
 
 namespace Engine
 {
-	Animation::Animation(const ivec2& tileDimensions)
+	Animation::Animation(string id, const ivec2& tileDimensions)
 	{
 		// Dimensions son la cantidad de indices en X e Y que tiene nuesta textura
 		_dimensions = tileDimensions;
@@ -17,6 +17,8 @@ namespace Engine
 		
 		_length = 0;
 		_time = 0;
+
+		_id = id;
 	}
 
 	Animation::~Animation()
@@ -24,8 +26,10 @@ namespace Engine
 
 	}
 	
-	void Animation::AddFrame(float durationInSec, int firstIndex, int lastIndex)
+	void Animation::SetFrame(float durationInSec, int firstIndex, int lastIndex, bool loop)
 	{
+		_loop = loop;
+
 		if (_dimensions.x <= 0 && _dimensions.y <= 0)
 		{
 			cout << "The dimensions are ecual to 0, give it another ones" << endl;
@@ -122,6 +126,11 @@ namespace Engine
 	float* Animation::GetVertex()
 	{
 		return _vertex;
+	}
+
+	string Animation::GetId()
+	{
+		return _id;
 	}
 
 	// ------------------------------

@@ -6,6 +6,8 @@
 #include "..\Animation\Animation.h"
 #include "..\TextureImporter\TextureImporter.h"
 
+#include <vector>
+
 namespace Engine
 {
 	class EXPORT_API Sprite : public Entity
@@ -34,29 +36,31 @@ namespace Engine
 		unsigned int _texture;
 		unsigned int _modelUniform;
 
-		//vec4 uvs = vec4(0, 0, 0, 0);
-		//ivec2 _dimensions;
-
-		Animation* _animation; // Acá se podria poner una lista para asi tener mas de 1 animacion
+		vector<Animation*> _animations;
 		TextureImporter* _textureImporter;
+
+		void InitTexture();
 
 	public:
 		Sprite(Renderer* renderer);
-		Sprite(Renderer* renderer, const ivec2& tileDimensions);
 		~Sprite();
 
-		void InitTexture();
 		void ImportTexture(const char*name);
 
+		void AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex, bool loop);
+		
 		void Draw();
 		void DrawFrame(int index);
-		void DrawAnimation();
-		
+
+		void DrawAnimation(string id);
+		void DrawAnimation(int id);
+
+		Animation* GetAnimation(string id);
+		Animation* GetAnimation(int id);
+
 		void SetColor(ENTITY_COLOR color);
 		void SetColor(float r, float g, float b);
 		void TriggerCollision(Entity* other);
-		//void SetAnimation();
-		Animation* GetAnimation();
 	};
 }
 #endif

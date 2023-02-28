@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-	Player::Player(Renderer* renderer, const glm::ivec2& tileDimensions, float speed) : Sprite(renderer, tileDimensions)
+	Player::Player(Renderer* renderer, float speed) : Sprite(renderer)
 	{
 		_speed = speed;
 	}
@@ -16,39 +16,41 @@ namespace Engine
 	{
 		if (Input::GetKey(Keycode::W))
 		{
-			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation();
+			GetAnimation("walk")->UpdateFrame(deltaTime);
+			DrawAnimation("walk");
 			SetRotationY(180);
 
 			SetPosition(_transform.position.x, _transform.position.y + (_speed * deltaTime), _transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::S))
 		{
-			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation();
+			GetAnimation("walk")->UpdateFrame(deltaTime);
+			DrawAnimation("walk");
 			SetRotationY(0);
 
 			SetPosition(_transform.position.x, _transform.position.y - (_speed * deltaTime), _transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::A))
 		{
-			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation();
+			GetAnimation("walk")->UpdateFrame(deltaTime);
+			DrawAnimation("walk");
 			SetRotationY(180);
 		
 			SetPosition(_transform.position.x - (_speed * deltaTime), _transform.position.y, _transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::D))
 		{
-			GetAnimation()->UpdateFrame(deltaTime);
-			DrawAnimation();
+			GetAnimation("walk")->UpdateFrame(deltaTime);
+			DrawAnimation("walk");
 			SetRotationY(0);
 		
 			SetPosition(_transform.position.x + (_speed * deltaTime), _transform.position.y, _transform.position.z);
 		}
 		else
 		{
-			DrawFrame(36);
+			//DrawFrame(36);
+			GetAnimation("idle")->UpdateFrame(deltaTime);
+			DrawAnimation("idle");
 		}
 	}
 

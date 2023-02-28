@@ -34,7 +34,6 @@ namespace Engine
 			{
 				Tile* tile = new Tile(_renderer, tileDimensions, tileModule[i][j]._tileFrame);
 
-				tile->InitTexture();
 				tile->ImportTexture(path);
 
 				tile->SetScale(tileScale.x, tileScale.y, 0);

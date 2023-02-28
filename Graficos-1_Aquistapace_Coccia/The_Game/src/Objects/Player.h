@@ -10,7 +10,7 @@ namespace Engine
 		float _speed;
 
 	public:
-		Player(Renderer* renderer, const glm::ivec2& tileDimensions, float speed);
+		Player(Renderer* renderer, float speed);
 		~Player();
 
 		void Move(float deltaTime);

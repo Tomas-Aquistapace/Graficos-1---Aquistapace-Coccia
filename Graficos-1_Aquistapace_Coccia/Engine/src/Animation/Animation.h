@@ -4,6 +4,7 @@
 #include "..\Export\Export.h"
 #include "glm/glm/glm.hpp"
 #include <vector>
+#include <string>
 
 using namespace glm;
 using namespace std;
@@ -48,13 +49,17 @@ namespace Engine
 		float _length;
 		float _time;
 	
+		string _id;
+
+		bool _loop;
+
 		void ChangeFrame();
 
 	public:
-		Animation(const ivec2& tileDimensions);
+		Animation(string id, const ivec2& tileDimensions);
 		~Animation();
 
-		void AddFrame(float durationInSec, int firstIndex, int lastIndex);
+		void SetFrame(float durationInSec, int firstIndex, int lastIndex, bool loop);
 		void UpdateFrame(float deltaTime);
 
 		void DrawAnimation(glm::vec4 uvRect);
@@ -64,6 +69,7 @@ namespace Engine
 		int GetCurrentFrame();
 		ivec2 GetDimensions();
 		float* GetVertex();
+		string GetId();
 	};
 }
 #endif

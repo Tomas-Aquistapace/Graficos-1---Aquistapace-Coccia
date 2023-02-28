@@ -30,6 +30,8 @@ namespace Engine
 
 	void Tile::ImportTexture(const char* name)
 	{
+		InitTexture();
+
 		_textureImporter->ImportTexture(_renderer, name, _texture);
 	}
 

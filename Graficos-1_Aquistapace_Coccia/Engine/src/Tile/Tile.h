@@ -46,13 +46,13 @@ namespace Engine
 
 		TextureImporter* _textureImporter;
 
+		void InitTexture();	
 		vec4 GetUVs(int index);
 
 	public:
 		Tile(Renderer* renderer, const ivec2& tileDimensions, int index);
 		~Tile();
 
-		void InitTexture();
 		void ImportTexture(const char* name);
 
 		void DrawTile();
