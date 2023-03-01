@@ -157,6 +157,16 @@ namespace Engine
 	// --------------------------------
 	// Se utiliza para las colisiones
 
+	void Entity::SetTag(string tag)
+	{
+		_tag = tag;
+	}
+
+	string Entity::GetTag()
+	{
+		return _tag;
+	}
+
 	void Entity::SetTriggerState(bool state)
 	{
 		_isTrigger = state;

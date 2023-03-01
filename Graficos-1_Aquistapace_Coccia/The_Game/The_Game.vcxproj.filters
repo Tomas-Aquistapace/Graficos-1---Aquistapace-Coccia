@@ -18,6 +18,9 @@
     <ClInclude Include="src\Objects\Player.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\Objects\Coin.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game\Game.cpp">
@@ -27,6 +30,9 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\Player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Coin.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>

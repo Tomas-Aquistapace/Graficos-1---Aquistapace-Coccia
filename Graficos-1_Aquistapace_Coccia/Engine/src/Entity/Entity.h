@@ -1,11 +1,15 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <string>
 #include "..\Export\Export.h"
 #include "..\Renderer\Renderer.h"
 #include "glm\glm\vec3.hpp"
 #include "glm\glm\mat4x4.hpp"
+
+#include <string>
+
+using namespace std;
+using namespace glm;
 
 namespace Engine
 {
@@ -17,34 +21,34 @@ namespace Engine
 
 	struct Transform
 	{
-		glm::vec3 position;
-		glm::vec3 rotation;
-		glm::vec3 scale;
+		vec3 position;
+		vec3 rotation;
+		vec3 scale;
 		
-		glm::vec3 preb_position;
-		glm::vec3 preb_rotation;
-		glm::vec3 preb_scale;
+		vec3 preb_position;
+		vec3 preb_rotation;
+		vec3 preb_scale;
 	};
 
 	struct GeneralMatrix
 	{
-		glm::mat4 model;
-		glm::mat4 translate;
-		glm::mat4 rotateX;
-		glm::mat4 rotateY;
-		glm::mat4 rotateZ;
-		glm::mat4 scale;
+		mat4 model;
+		mat4 translate;
+		mat4 rotateX;
+		mat4 rotateY;
+		mat4 rotateZ;
+		mat4 scale;
 	};
 
 	class EXPORT_API Entity 
 	{
 	private:
-		void SetPrebPosition(glm::vec3 position);
-		void SetPrebRotation(glm::vec3 rotation);
+		void SetPrebPosition(vec3 position);
+		void SetPrebRotation(vec3 rotation);
 		void SetPrebRotationX(float x);
 		void SetPrebRotationY(float y);
 		void SetPrebRotationZ(float z);
-		void SetPrebScale(glm::vec3 scale);
+		void SetPrebScale(vec3 scale);
 
 	protected:
 		Renderer* _renderer;
@@ -55,6 +59,8 @@ namespace Engine
 
 		bool _colliderState;
 
+		string _tag;
+
 	public:
 		Entity(Renderer* renderer);
 		~Entity();
@@ -62,22 +68,25 @@ namespace Engine
 		Transform _transform;
 
 		void SetPosition(float x, float y, float z);
-		void SetPosition(glm::vec3 position);
+		void SetPosition(vec3 position);
 
 		void SetRotation(float x, float y, float z);
-		void SetRotation(glm::vec3 rotation);
+		void SetRotation(vec3 rotation);
 		void SetRotationX(float x);
 		void SetRotationY(float y);
 		void SetRotationZ(float z);
 
 		void SetScale(float x, float y, float z);
-		void SetScale(glm::vec3 scale);
+		void SetScale(vec3 scale);
 
 		void UpdateMatrix();
 		void ReturnToPrevTransform();
 		void ReturnToPrevPosition();
 		void ReturnToPrevRotation();
 		void ReturnToPrevScale();
+
+		void SetTag(string tag);
+		string GetTag();
 
 		void SetTriggerState(bool state);
 		bool GetTriggerState();

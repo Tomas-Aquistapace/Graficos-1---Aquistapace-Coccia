@@ -70,11 +70,14 @@ namespace Engine
 		// --------------------------------
 		cout << "Lodaing _coin" << endl;
 
-		_coin = new Sprite(GetRenderer());
+		_coin = new Coin(GetRenderer());
 		_coin->ImportTexture("res/Coin_Master.png");
 		_coin->SetPosition(0, 0, 0);
-		//_coin->SetScale(0.5f, 0.5f, 0.5f);
+
+		_coin->SetTag("coin");
 		_coin->AddAnimation("rotation", ivec2(8, 1), 0.5f, 0, 7, true);
+
+		GetCollisionManager()->AddNewObject(_coin);
 
 		cout << "-> Loaded _coin" << endl;
 		// --------------------------------
@@ -83,12 +86,13 @@ namespace Engine
 		_roboBob = new Player(GetRenderer(), 2);
 		_roboBob->ImportTexture("res/character_robot_sheet.png");
 
+		_roboBob->SetTag("player");
+
 		_roboBob->AddAnimation("walk", ivec2(9, 5), 0.5f, 0, 7, true);
 		_roboBob->AddAnimation("idle", ivec2(9, 5), 1.5f, 21, 23, true);
 		_roboBob->AddAnimation("punch", ivec2(9, 5), 1.5f, 9, 11, false);
 
 		_roboBob->SetPosition(-1.8, 0, 0);
-		//_roboBob->SetScale(0.5f, 0.5f, 0);
 		GetCollisionManager()->AddNewObject(_roboBob);
 
 		cout << "-> Loaded _roboBob" << endl;
@@ -121,11 +125,7 @@ namespace Engine
 		//_wall1->Draw();
 		//_wall2->Draw();
 		//_box->Draw();
-		//_coin->GetAnimation("rotation")->UpdateFrame(deltaTime);
-		_coin->DrawAnimation("rotation", deltaTime);
-
-		//_tile->GetAnimation()->UpdateFrame(deltaTime);
-		//_tile->DrawAnimation();
+		_coin->DrawCoin(deltaTime);
 	}
 
 	void Game::End()

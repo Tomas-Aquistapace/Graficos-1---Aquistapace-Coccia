@@ -37,13 +37,6 @@ namespace Engine
 		bool collisionY = one->_transform.position.y + one->_transform.scale.y >= two->_transform.position.y &&
 						  two->_transform.position.y + two->_transform.scale.y >= one->_transform.position.y;
 
-		//bool collisionX = one->_transform.position.x + (one->_transform.scale.x / 2) >= two->_transform.position.x + (two->_transform.scale.x / 2) &&
-		//				  two->_transform.position.x + (two->_transform.scale.x / 2) >= one->_transform.position.x + (one->_transform.scale.x / 2);
-		//
-		//bool collisionY = one->_transform.position.y + (one->_transform.scale.y / 2) >= two->_transform.position.y + (two->_transform.scale.y / 2) &&
-		//				  two->_transform.position.y + (two->_transform.scale.y / 2) >= one->_transform.position.y + (one->_transform.scale.y / 2);
-
-
 		return collisionX && collisionY;
 	}
 

@@ -8,6 +8,7 @@ namespace Engine
 	class Player : public Sprite
 	{
 		float _speed;
+		int _points;
 
 	public:
 		Player(Renderer* renderer, float speed);

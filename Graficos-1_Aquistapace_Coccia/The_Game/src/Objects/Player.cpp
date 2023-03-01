@@ -1,10 +1,13 @@
 #include "Player.h"
+#include <iostream>
 
 namespace Engine
 {
 	Player::Player(Renderer* renderer, float speed) : Sprite(renderer)
 	{
 		_speed = speed;
+
+		_points = 0;
 	}
 	
 	Player::~Player()
@@ -16,7 +19,6 @@ namespace Engine
 	{
 		if (Input::GetKey(Keycode::W))
 		{
-			//GetAnimation("walk")->UpdateFrame(deltaTime);
 			DrawAnimation("walk", deltaTime);
 			SetRotationY(180);
 
@@ -24,7 +26,6 @@ namespace Engine
 		}
 		else if (Input::GetKey(Keycode::S))
 		{
-			//GetAnimation("walk")->UpdateFrame(deltaTime);
 			DrawAnimation("walk", deltaTime);
 			SetRotationY(0);
 
@@ -32,7 +33,6 @@ namespace Engine
 		}
 		else if (Input::GetKey(Keycode::A))
 		{
-			//GetAnimation("walk")->UpdateFrame(deltaTime);
 			DrawAnimation("walk", deltaTime);
 			SetRotationY(180);
 		
@@ -40,7 +40,6 @@ namespace Engine
 		}
 		else if (Input::GetKey(Keycode::D))
 		{
-			//GetAnimation("walk")->UpdateFrame(deltaTime);
 			DrawAnimation("walk", deltaTime);
 			SetRotationY(0);
 		
@@ -48,8 +47,6 @@ namespace Engine
 		}
 		else
 		{
-			//DrawFrame(36);
-			//GetAnimation("idle")->UpdateFrame(deltaTime);
 			DrawAnimation("idle", deltaTime);
 		}
 	}
@@ -68,6 +65,21 @@ namespace Engine
 		//{
 		//	ReturnToPrevPosition();
 		//}
-		ReturnToPrevPosition();
+
+		if (other != NULL)
+		{
+			if (other->GetTag() == "coin")
+			{
+				other->SetColliderState(false);
+
+				_points++;
+
+				cout << "Player points: " << _points << endl;
+			}
+			else
+			{
+				ReturnToPrevPosition();
+			}
+		}
 	}
 }

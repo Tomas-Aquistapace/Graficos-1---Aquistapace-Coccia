@@ -3,6 +3,7 @@
 
 #include "GameBase/GameBase.h"
 #include "../Objects/Player.h"
+#include "../Objects/Coin.h"
 
 namespace Engine
 {
@@ -12,18 +13,10 @@ namespace Engine
 		Sprite* _wall1;
 		Sprite* _wall2;
 		Sprite* _box;
-		Sprite* _coin;
+		Coin* _coin;
 
 		Player* _roboBob;
 		TileMap* _tileMap;
-
-		//vector<vector<TileModule>> _tileModuleMatrix
-		//{
-		//	{{70, true}, {67, false}, {68, false}, {216, false}},
-		//	{{64, false}, {108, false}, {108, false}, {64, false}},
-		//	{{66, false}, {108, false}, {108, false}, {66, false}},
-		//	{{65, false}, {108, false}, {108, false}, {65, false}},
-		//};
 
 		vector<vector<TileModule>> _tileModuleMatrix
 		{
