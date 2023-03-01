@@ -3,20 +3,24 @@
 
 namespace Engine
 {
-	TileMap::TileMap(Renderer* renderer)
+	TileMap::TileMap(Renderer* renderer, CollisionManager* collisionManager)
 	{
 		_renderer = renderer;
+		_collisionManager = collisionManager;
 
 		_tilesVector.clear();
 	}
 
 	TileMap::~TileMap()
 	{
-		for (Tile* item : _tilesVector)
+		for (int i = 0; i < _tilesVector.size(); i++)
 		{
-			if (item != NULL)
+			for (int j = 0; j < _tilesVector[0].size(); j++)
 			{
-				delete item;
+				if (_tilesVector[i][j] != NULL)
+				{
+					delete _tilesVector[i][j];
+				}
 			}
 		}
 	}
@@ -28,20 +32,24 @@ namespace Engine
 		int rows = tileModule.size();
 		int columns = tileModule[0].size();
 
-		for (size_t i = 0; i < rows; i++)
+		_tilesVector.resize(rows);
+		for (int i = 0; i < rows; i++)
 		{
-			for (size_t j = 0; j < columns; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				Tile* tile = new Tile(_renderer, tileDimensions, tileModule[i][j]._tileFrame);
 
 				tile->ImportTexture(path);
 
-				tile->SetScale(tileScale.x, tileScale.y, 0);
+				tile->SetScale(tileScale.x, tileScale.y, 1);
 				tile->SetPosition(pos.x, pos.y, pos.z);
+				tile->SetColliderState(tileModule[i][j]._collider);
 
-				_tilesVector.push_back(tile);
+				_tilesVector[i].push_back(tile);
 				
 				pos = vec3(pos.x + (tileScale.x), pos.y, pos.z);
+
+				_collisionManager->AddNewObject(tile);
 			}
 
 			pos = vec3(startPosition.x, pos.y + (tileScale.y), pos.z);
@@ -50,9 +58,22 @@ namespace Engine
 
 	void TileMap::DrawTileMap() 
 	{
-		for(Tile* item : _tilesVector)
+		for (int i = 0; i < _tilesVector.size(); i++)
 		{
-			item->DrawTile();
+			for (int j = 0; j < _tilesVector[0].size(); j++)
+			{
+				_tilesVector[i][j]->DrawTile();
+			}
 		}
+	}
+
+	vector<vector<Tile*>> TileMap::GetTilesVector()
+	{
+		return _tilesVector;
+	}
+
+	Tile* TileMap::GetTile(int row, int column)
+	{
+		return _tilesVector[row][column];
 	}
 }

@@ -12,20 +12,28 @@ namespace Engine
 		Sprite* _wall1;
 		Sprite* _wall2;
 		Sprite* _box;
+		Sprite* _coin;
 
 		Player* _roboBob;
 		TileMap* _tileMap;
 
+		//vector<vector<TileModule>> _tileModuleMatrix
+		//{
+		//	{{70, true}, {67, false}, {68, false}, {216, false}},
+		//	{{64, false}, {108, false}, {108, false}, {64, false}},
+		//	{{66, false}, {108, false}, {108, false}, {66, false}},
+		//	{{65, false}, {108, false}, {108, false}, {65, false}},
+		//};
 
 		vector<vector<TileModule>> _tileModuleMatrix
 		{
-			{{70, false}, {67, false}, {68, false}, {68, false}, {69, false}, {216, false}},
-			{{64, false}, {108, false}, {108, false}, {108, false}, {108, false}, {64, false}},
-			{{66, false}, {108, false}, {108, false}, {108, false}, {108, false}, {66, false}},
-			{{65, false}, {108, false}, {108, false}, {108, false}, {108, false}, {65, false}},
-			{{216, false}, {108, false}, {108, false}, {108, false}, {108, false}, {72, false}},
-			{{64, false}, {108, false}, {108, false}, {108, false}, {108, false}, {64, false}},
-			{{65, false}, {108, false}, {108, false}, {108, false}, {108, false}, {65, false}}
+			{{70, true}, {67, true}, {68, true}, {68, true}, {69, true}, {216, true}},
+			{{64, true}, {108, false}, {108, false}, {108, false}, {108, false}, {64, true}},
+			{{66, true}, {108, false}, {108, false}, {108, false}, {108, false}, {66, true}},
+			{{65, true}, {108, false}, {108, false}, {108, false}, {108, false}, {65, true}},
+			{{216, true}, {108, false}, {108, false}, {108, false}, {108, false}, {72, true}},
+			{{64, true}, {108, false}, {108, false}, {108, false}, {108, false}, {64, true}},
+			{{65, true}, {108, false}, {108, false}, {108, false}, {108, false}, {65, true}}
 		};
 
 	public:

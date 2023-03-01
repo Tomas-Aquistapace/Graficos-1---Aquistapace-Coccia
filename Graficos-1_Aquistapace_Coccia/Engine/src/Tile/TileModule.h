@@ -21,13 +21,6 @@ namespace Engine
 			_collider = coll;
 		}
 	};
-
-	//class EXPORT_API TileModule
-	//{
-	//
-	//
-	//
-	//};
 }
 
 #endif

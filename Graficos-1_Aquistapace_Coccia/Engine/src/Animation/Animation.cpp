@@ -55,6 +55,61 @@ namespace Engine
 		_length = durationInSec / _frames.size(); //El tiempo total se divide entre la cantidad de frames
 	}
 
+	void Animation::DrawAnimation(int index)
+	{
+		vec4 uvRect = GetUVs(index);
+
+		//UpdateUVs
+		_vertex[7] = _uv[0].u; _vertex[8] = _uv[0].v;
+		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
+		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
+		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
+
+		//Set UV
+		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
+		_uv[1].u = uvRect.x + uvRect.z; _uv[1].v = uvRect.y;
+		_uv[2].u = uvRect.x; _uv[2].v = uvRect.y;
+		_uv[3].u = uvRect.x; _uv[3].v = uvRect.y + uvRect.w;
+	}
+
+	void Animation::DrawAnimation(float deltaTime)
+	{
+		UpdateFrame(deltaTime);
+
+		vec4 uvRect = GetUVsFromVector();
+
+		//UpdateUVs
+		_vertex[7] = _uv[0].u; _vertex[8] = _uv[0].v;
+		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
+		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
+		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
+
+		//Set UV
+		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
+		_uv[1].u = uvRect.x + uvRect.z; _uv[1].v = uvRect.y;
+		_uv[2].u = uvRect.x; _uv[2].v = uvRect.y;
+		_uv[3].u = uvRect.x; _uv[3].v = uvRect.y + uvRect.w;
+	}
+
+	// ------------------------------
+
+	ivec2 Animation::GetDimensions()
+	{	
+		return _dimensions;
+	}
+
+	float* Animation::GetVertex()
+	{
+		return _vertex;
+	}
+
+	string Animation::GetId()
+	{
+		return _id;
+	}
+
+	// ------------------------------
+
 	void Animation::UpdateFrame(float deltaTime)
 	{
 		if (_dimensions.x <= 0 && _dimensions.y <= 0)
@@ -78,23 +133,6 @@ namespace Engine
 		}
 	}
 
-	void Animation::DrawAnimation(vec4 uvRect)
-	{
-		//UpdateUVs
-		_vertex[7] = _uv[0].u; _vertex[8] = _uv[0].v;
-		_vertex[16] = _uv[1].u; _vertex[17] = _uv[1].v;
-		_vertex[25] = _uv[2].u; _vertex[26] = _uv[2].v;
-		_vertex[34] = _uv[3].u; _vertex[35] = _uv[3].v;
-
-		//Set UV
-		_uv[0].u = uvRect.x + uvRect.z; _uv[0].v = uvRect.y + uvRect.w;
-		_uv[1].u = uvRect.x + uvRect.z; _uv[1].v = uvRect.y;
-		_uv[2].u = uvRect.x; _uv[2].v = uvRect.y;
-		_uv[3].u = uvRect.x; _uv[3].v = uvRect.y + uvRect.w;
-	}
-
-	// ------------------------------
-
 	vec4 Animation::GetUVs(int index)
 	{
 		int xTile = index % _dimensions.x; //Esto impide que xTile sea mayor a la dimension en x
@@ -105,12 +143,12 @@ namespace Engine
 		uvs.z = 1.0f / (float)_dimensions.x;  //ancho
 		uvs.w = 1.0f / (float)_dimensions.y;  //alto
 
-		return uvs;		
+		return uvs;
 	}
 
-	vec4 Animation::GetUVsFromVector(int index)
+	vec4 Animation::GetUVsFromVector()
 	{
-		return _frames[index]._uv;
+		return _frames[GetCurrentFrame()]._uv;
 	}
 
 	int Animation::GetCurrentFrame()
@@ -118,25 +156,8 @@ namespace Engine
 		return _currentFrame;
 	}
 
-	ivec2 Animation::GetDimensions()
-	{	
-		return _dimensions;
-	}
-
-	float* Animation::GetVertex()
-	{
-		return _vertex;
-	}
-
-	string Animation::GetId()
-	{
-		return _id;
-	}
-
-	// ------------------------------
-
 	void Animation::ChangeFrame()
 	{
-		uvs = GetUVsFromVector(_currentFrame);
+		uvs = GetUVsFromVector();
 	}
 }

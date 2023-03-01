@@ -38,6 +38,7 @@ namespace Engine
 
 	class EXPORT_API Entity 
 	{
+	private:
 		void SetPrebPosition(glm::vec3 position);
 		void SetPrebRotation(glm::vec3 rotation);
 		void SetPrebRotationX(float x);
@@ -51,6 +52,8 @@ namespace Engine
 
 		bool _isTrigger;
 		bool _isStatic;
+
+		bool _colliderState;
 
 	public:
 		Entity(Renderer* renderer);
@@ -77,9 +80,11 @@ namespace Engine
 		void ReturnToPrevScale();
 
 		void SetTriggerState(bool state);
-		void SetStaticState(bool state);
 		bool GetTriggerState();
+		void SetStaticState(bool state);
 		bool GetStaticState();
+		void SetColliderState(bool state);
+		bool GetColliderState();
 
 		virtual void SetColor(ENTITY_COLOR color) = 0;
 		virtual void SetColor(float r, float g, float b) = 0;

@@ -16,17 +16,21 @@ namespace Engine
 	class EXPORT_API TileMap
 	{
 	private:
-		vector<Tile*> _tilesVector;
+		vector<vector<Tile*>> _tilesVector;
 
 		Renderer* _renderer;
+		CollisionManager* _collisionManager;
 
 	public:
-		TileMap(Renderer* renderer);
+		TileMap(Renderer* renderer, CollisionManager* collisionManager);
 		~TileMap();
 
 		void InitTileMap(vec3 startPosition, const char* path, const ivec2& tileDimensions, vector<vector<TileModule>> tileModule, vec2 tileScale);
 		
 		void DrawTileMap();
+
+		vector<vector<Tile*>> GetTilesVector();
+		Tile* GetTile(int row, int column);
 	};
 }
 #endif

@@ -50,10 +50,10 @@ namespace Engine
 		void AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex, bool loop);
 		
 		void Draw();
-		void DrawFrame(int index);
+		void DrawFrame(string id, int index);
 
-		void DrawAnimation(string id);
-		void DrawAnimation(int id);
+		void DrawAnimation(string id, float deltaTime);
+		void DrawAnimation(int id, float deltaTime);
 
 		Animation* GetAnimation(string id);
 		Animation* GetAnimation(int id);

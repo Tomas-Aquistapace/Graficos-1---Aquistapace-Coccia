@@ -26,11 +26,23 @@ namespace Engine
 	
 	bool CollisionManager::CheckCollision(Entity* one, Entity* two)
 	{
+		if (!one->GetColliderState() || !two->GetColliderState())
+		{
+			return false;
+		}
+
 		bool collisionX = one->_transform.position.x + one->_transform.scale.x >= two->_transform.position.x &&
-			two->_transform.position.x + two->_transform.scale.x >= one->_transform.position.x;
-	
+						  two->_transform.position.x + two->_transform.scale.x >= one->_transform.position.x;
+		
 		bool collisionY = one->_transform.position.y + one->_transform.scale.y >= two->_transform.position.y &&
-			two->_transform.position.y + two->_transform.scale.y >= one->_transform.position.y;
+						  two->_transform.position.y + two->_transform.scale.y >= one->_transform.position.y;
+
+		//bool collisionX = one->_transform.position.x + (one->_transform.scale.x / 2) >= two->_transform.position.x + (two->_transform.scale.x / 2) &&
+		//				  two->_transform.position.x + (two->_transform.scale.x / 2) >= one->_transform.position.x + (one->_transform.scale.x / 2);
+		//
+		//bool collisionY = one->_transform.position.y + (one->_transform.scale.y / 2) >= two->_transform.position.y + (two->_transform.scale.y / 2) &&
+		//				  two->_transform.position.y + (two->_transform.scale.y / 2) >= one->_transform.position.y + (one->_transform.scale.y / 2);
+
 
 		return collisionX && collisionY;
 	}
@@ -43,7 +55,7 @@ namespace Engine
 			{
 				for (int j = 0; j < _vec.size(); j++)
 				{
-					if (CheckCollision(_vec[i], _vec[j]) && i != j)
+					if (i != j && CheckCollision(_vec[i], _vec[j]))
 					{
 						_vec[i]->TriggerCollision(_vec[j]);
 					}

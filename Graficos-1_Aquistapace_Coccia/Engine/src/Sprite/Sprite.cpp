@@ -60,39 +60,39 @@ namespace Engine
 		_renderer->DisableTexture();
 	}
 
-	void Sprite::DrawFrame(int index)
+	void Sprite::DrawFrame(string id, int index)
 	{
-		if (_animations.front() != NULL)
-		{
-			vec4 uvRect = _animations.front()->GetUVs(index);
-
-			_animations.front()->DrawAnimation(uvRect);
-
-			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
-
-			_renderer->BindTexture(_texture);
-
-			_renderer->Draw(_vao, _vbo, _ebo, _animations.front()->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
-
-			_renderer->DisableTexture();
-		}
-		else
-		{
-			cout << "Error - Sprite.cpp - DrawFrame: Add an animation in the constructor to use one" << endl;
-		}
-	}
-
-	void Sprite::DrawAnimation(string id)
-	{
-		for (size_t i = 0; i < _animations.size(); i++)
+		for (int i = 0; i < _animations.size(); i++)
 		{
 			if (_animations[i] != NULL)
 			{
 				if (_animations[i]->GetId() == id)
 				{
-					vec4 uvRect = _animations[i]->GetUVsFromVector(_animations[i]->GetCurrentFrame());
+					_animations[i]->DrawAnimation(index);
 
-					_animations[i]->DrawAnimation(uvRect);
+					_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+
+					_renderer->BindTexture(_texture);
+
+					_renderer->Draw(_vao, _vbo, _ebo, _animations.front()->GetVertex(), _vertexSize, sizeof(_index) / sizeof(float));
+
+					_renderer->DisableTexture();
+				}
+			}
+		}
+		
+		cout << "Error - Sprite.cpp - DrawFrame: Add an animation in the constructor to use one" << endl;
+	}
+
+	void Sprite::DrawAnimation(string id, float deltaTime)
+	{
+		for (int i = 0; i < _animations.size(); i++)
+		{
+			if (_animations[i] != NULL)
+			{
+				if (_animations[i]->GetId() == id)
+				{
+					_animations[i]->DrawAnimation(deltaTime);
 
 					_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
@@ -110,7 +110,7 @@ namespace Engine
 		cout << "Error - Sprite.cpp - DrawAnimation(): animation /" << id << "/ not found" << endl;
 	}
 	
-	void Sprite::DrawAnimation(int id)
+	void Sprite::DrawAnimation(int id, float deltaTime)
 	{
 		for (size_t i = 0; i < _animations.size(); i++)
 		{
@@ -118,9 +118,7 @@ namespace Engine
 			{
 				if (i == id)
 				{
-					vec4 uvRect = _animations[i]->GetUVsFromVector(_animations[i]->GetCurrentFrame());
-
-					_animations[i]->DrawAnimation(uvRect);
+					_animations[i]->DrawAnimation(deltaTime);
 
 					_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 

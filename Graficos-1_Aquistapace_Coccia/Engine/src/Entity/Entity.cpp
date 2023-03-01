@@ -17,6 +17,8 @@ namespace Engine
 
 		_isTrigger = false;
 		_isStatic = false;
+
+		_colliderState = true;
 	}
 
 	Entity::~Entity()
@@ -160,19 +162,29 @@ namespace Engine
 		_isTrigger = state;
 	}
 
+	bool Entity::GetTriggerState()
+	{
+		return _isTrigger;
+	}
+	
 	void Entity::SetStaticState(bool state)
 	{
 		_isStatic = state;
 	}
 
-	bool Entity::GetTriggerState()
-	{
-		return _isTrigger;
-	}
-
 	bool Entity::GetStaticState()
 	{
 		return _isStatic;
+	}
+
+	void Entity::SetColliderState(bool state)
+	{
+		_colliderState = state;
+	}
+
+	bool Entity::GetColliderState()
+	{
+		return _colliderState;
 	}
 
 	// --------------------------------

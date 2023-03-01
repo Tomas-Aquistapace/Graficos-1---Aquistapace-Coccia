@@ -172,7 +172,6 @@
     <ClCompile Include="src\TextureImporter\TextureImporter.cpp" />
     <ClCompile Include="src\TileMap\TileMap.cpp" />
     <ClCompile Include="src\Tile\Tile.cpp" />
-    <ClCompile Include="src\Tile\TileModule.cpp" />
     <ClCompile Include="src\Time\Time.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>

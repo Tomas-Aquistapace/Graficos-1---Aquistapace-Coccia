@@ -53,6 +53,10 @@ namespace Engine
 
 		bool _loop;
 
+		void UpdateFrame(float deltaTime);
+		vec4 GetUVs(int index);
+		vec4 GetUVsFromVector();
+		int GetCurrentFrame();
 		void ChangeFrame();
 
 	public:
@@ -60,13 +64,10 @@ namespace Engine
 		~Animation();
 
 		void SetFrame(float durationInSec, int firstIndex, int lastIndex, bool loop);
-		void UpdateFrame(float deltaTime);
 
-		void DrawAnimation(glm::vec4 uvRect);
+		void DrawAnimation(int index);
+		void DrawAnimation(float deltaTime);
 
-		vec4 GetUVs(int index);
-		vec4 GetUVsFromVector(int index);
-		int GetCurrentFrame();
 		ivec2 GetDimensions();
 		float* GetVertex();
 		string GetId();
