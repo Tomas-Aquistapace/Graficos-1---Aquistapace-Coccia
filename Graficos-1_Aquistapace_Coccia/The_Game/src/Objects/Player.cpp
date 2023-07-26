@@ -19,29 +19,29 @@ namespace Engine
 	{
 		if (Input::GetKey(Keycode::W))
 		{
-			DrawAnimation("walk", deltaTime);
-			SetRotationY(180);
+			DrawAnimation("walk_up", deltaTime);
+			//SetRotationY(180);
 
 			SetPosition(_transform.position.x, _transform.position.y + (_speed * deltaTime), _transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::S))
 		{
-			DrawAnimation("walk", deltaTime);
-			SetRotationY(0);
+			DrawAnimation("walk_down", deltaTime);
+			//SetRotationY(0);
 
 			SetPosition(_transform.position.x, _transform.position.y - (_speed * deltaTime), _transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::A))
 		{
-			DrawAnimation("walk", deltaTime);
-			SetRotationY(180);
+			DrawAnimation("walk_left", deltaTime);
+			//SetRotationY(180);
 		
 			SetPosition(_transform.position.x - (_speed * deltaTime), _transform.position.y, _transform.position.z);
 		}
 		else if (Input::GetKey(Keycode::D))
 		{
-			DrawAnimation("walk", deltaTime);
-			SetRotationY(0);
+			DrawAnimation("walk_right", deltaTime);
+			//SetRotationY(0);
 		
 			SetPosition(_transform.position.x + (_speed * deltaTime), _transform.position.y, _transform.position.z);
 		}

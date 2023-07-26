@@ -3,10 +3,14 @@
 
 namespace Engine
 {
-	TileMap::TileMap(Renderer* renderer, CollisionManager* collisionManager)
+	TileMap::TileMap(Renderer* renderer)
 	{
 		_renderer = renderer;
-		_collisionManager = collisionManager;
+
+		_tileDimensions = ivec2(0,0);
+
+		_startPosition = vec3(0,0,0);
+		_tileScale = vec2(0,0);
 
 		_tilesVector.clear();
 	}
@@ -27,6 +31,10 @@ namespace Engine
 
 	void TileMap::InitTileMap(vec3 startPosition, const char* path, const ivec2& tileDimensions, vector<vector<TileModule>> tileModule, vec2 tileScale)
 	{
+		_tileDimensions = tileDimensions;
+		_startPosition = startPosition;
+		_tileScale = tileScale;
+
 		vec3 pos = startPosition;
 
 		int rows = tileModule.size();
@@ -45,11 +53,11 @@ namespace Engine
 				tile->SetPosition(pos.x, pos.y, pos.z);
 				tile->SetColliderState(tileModule[i][j]._collider);
 
+				tile->SetTag(to_string(tileModule[i][j]._tileFrame)); // para borrar
+
 				_tilesVector[i].push_back(tile);
 				
 				pos = vec3(pos.x + (tileScale.x), pos.y, pos.z);
-
-				_collisionManager->AddNewObject(tile);
 			}
 
 			pos = vec3(startPosition.x, pos.y + (tileScale.y), pos.z);
@@ -67,6 +75,33 @@ namespace Engine
 		}
 	}
 
+	void TileMap::CheckTileCollisions(Entity* object)
+	{
+		float convertedPosX = (object->_transform.position.y - _startPosition.y) + (object->_transform.scale.y - _tileScale.y / 2);
+		float convertedPosY = (object->_transform.position.x - _startPosition.x) + (object->_transform.scale.x - _tileScale.x / 2);
+
+		ivec2 objectPos = vec2(convertedPosX, convertedPosY);
+
+		vector<ivec2> tiles =
+		{
+			vec2(convertedPosX + (object->_transform.scale.x / 2), convertedPosY + (object->_transform.scale.y / 2)),
+			vec2(convertedPosX - (object->_transform.scale.x / 2), convertedPosY + (object->_transform.scale.y / 2)),
+			vec2(convertedPosX + (object->_transform.scale.x / 2), convertedPosY - (object->_transform.scale.y / 2)),
+			vec2(convertedPosX - (object->_transform.scale.x / 2), convertedPosY - (object->_transform.scale.y / 2)),
+		};
+
+		bool collision = false;
+
+		for (int i = 0; i < tiles.size(); i++)
+		{
+			if (CollisionWithATile(object, tiles[i]))
+			{
+				object->TriggerCollision(_tilesVector[tiles[i].x][tiles[i].y]);
+				break;
+			}
+		}
+	}
+
 	vector<vector<Tile*>> TileMap::GetTilesVector()
 	{
 		return _tilesVector;
@@ -75,5 +110,24 @@ namespace Engine
 	Tile* TileMap::GetTile(int row, int column)
 	{
 		return _tilesVector[row][column];
+	}
+
+	// ---------------------
+
+	bool TileMap::CollisionWithATile(Entity* object, ivec2 tile)
+	{
+		if (tile.x >= 0 && tile.y >= 0)
+		{
+			if (tile.x < _tilesVector.size() && tile.y < _tilesVector[0].size())
+			{
+				if (_tilesVector[tile.x][tile.y]->GetColliderState())
+				{
+					cout << "Colisiono con el tile: " << tile.x << ":" << tile.y << endl;
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

@@ -19,15 +19,23 @@ namespace Engine
 		vector<vector<Tile*>> _tilesVector;
 
 		Renderer* _renderer;
-		CollisionManager* _collisionManager;
+
+		ivec2 _tileDimensions;
+
+		vec3 _startPosition;
+		vec2 _tileScale;
+
+		bool CollisionWithATile(Entity* object, ivec2 tile);
 
 	public:
-		TileMap(Renderer* renderer, CollisionManager* collisionManager);
+		TileMap(Renderer* renderer);
 		~TileMap();
 
 		void InitTileMap(vec3 startPosition, const char* path, const ivec2& tileDimensions, vector<vector<TileModule>> tileModule, vec2 tileScale);
 		
 		void DrawTileMap();
+
+		void CheckTileCollisions(Entity* object);
 
 		vector<vector<Tile*>> GetTilesVector();
 		Tile* GetTile(int row, int column);

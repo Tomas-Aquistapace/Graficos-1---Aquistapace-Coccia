@@ -47,7 +47,7 @@ namespace Engine
 
 		void ImportTexture(const char*name);
 
-		void AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex, bool loop);
+		void AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex);
 		
 		void Draw();
 		void DrawFrame(string id, int index);

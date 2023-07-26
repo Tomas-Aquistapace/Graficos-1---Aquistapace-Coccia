@@ -41,10 +41,10 @@ namespace Engine
 
 	// -------------------------------
 	
-	void Sprite::AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex, bool loop)
+	void Sprite::AddAnimation(string id, const ivec2& tileDimensions, float durationInSec, int firstIndex, int lastIndex)
 	{
 		_animations.push_back(new Animation(id, tileDimensions));
-		_animations.back()->SetFrame(durationInSec, firstIndex, lastIndex, loop);
+		_animations.back()->SetFrame(durationInSec, firstIndex, lastIndex);
 	}
 
 	// -------------------------------

@@ -63,7 +63,7 @@ namespace Engine
 		Animation(string id, const ivec2& tileDimensions);
 		~Animation();
 
-		void SetFrame(float durationInSec, int firstIndex, int lastIndex, bool loop);
+		void SetFrame(float durationInSec, int firstIndex, int lastIndex);
 
 		void DrawAnimation(int index);
 		void DrawAnimation(float deltaTime);

@@ -26,10 +26,8 @@ namespace Engine
 
 	}
 	
-	void Animation::SetFrame(float durationInSec, int firstIndex, int lastIndex, bool loop)
+	void Animation::SetFrame(float durationInSec, int firstIndex, int lastIndex)
 	{
-		_loop = loop;
-
 		if (_dimensions.x <= 0 && _dimensions.y <= 0)
 		{
 			cout << "The dimensions are ecual to 0, give it another ones" << endl;
