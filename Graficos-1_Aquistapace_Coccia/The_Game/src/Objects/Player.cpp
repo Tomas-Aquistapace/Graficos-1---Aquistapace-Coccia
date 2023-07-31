@@ -53,19 +53,6 @@ namespace Engine
 
 	void Player::TriggerCollision(Entity* other)
 	{
-		//if (!other->GetStaticState())
-		//{
-		//	glm::vec3 newPos = _transform.position;
-		//	ReturnToPrevPosition();
-		//	newPos -= _transform.position;
-		//
-		//	other->SetPosition(other->_transform.position + newPos);
-		//}
-		//else
-		//{
-		//	ReturnToPrevPosition();
-		//}
-
 		if (other != NULL)
 		{
 			if (other->GetTag() == "coin")

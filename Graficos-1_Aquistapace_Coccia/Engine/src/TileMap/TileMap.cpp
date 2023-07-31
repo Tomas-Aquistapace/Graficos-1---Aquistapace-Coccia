@@ -53,8 +53,6 @@ namespace Engine
 				tile->SetPosition(pos.x, pos.y, pos.z);
 				tile->SetColliderState(tileModule[i][j]._collider);
 
-				tile->SetTag(to_string(tileModule[i][j]._tileFrame)); // para borrar
-
 				_tilesVector[i].push_back(tile);
 				
 				pos = vec3(pos.x + (tileScale.x), pos.y, pos.z);
@@ -77,17 +75,20 @@ namespace Engine
 
 	void TileMap::CheckTileCollisions(Entity* object)
 	{
-		float convertedPosX = (object->_transform.position.y - _startPosition.y) + (object->_transform.scale.y - _tileScale.y / 2);
-		float convertedPosY = (object->_transform.position.x - _startPosition.x) + (object->_transform.scale.x - _tileScale.x / 2);
+		float convertedPosX = ((object->_transform.position.y - _startPosition.y) + (_tileScale.y / 2)) / _tileScale.y;
+		float convertedPosY = ((object->_transform.position.x - _startPosition.x) + (_tileScale.x / 2)) / _tileScale.x;
 
-		ivec2 objectPos = vec2(convertedPosX, convertedPosY);
+		vec2 objectScale = vec2((object->_transform.scale.x / _tileScale.x) / 2, 
+								(object->_transform.scale.y / _tileScale.y) / 2);
+
+		cout << "Esta en el tile: " << (int)convertedPosX << ":" << (int)convertedPosY << endl;
 
 		vector<ivec2> tiles =
 		{
-			vec2(convertedPosX + (object->_transform.scale.x / 2), convertedPosY + (object->_transform.scale.y / 2)),
-			vec2(convertedPosX - (object->_transform.scale.x / 2), convertedPosY + (object->_transform.scale.y / 2)),
-			vec2(convertedPosX + (object->_transform.scale.x / 2), convertedPosY - (object->_transform.scale.y / 2)),
-			vec2(convertedPosX - (object->_transform.scale.x / 2), convertedPosY - (object->_transform.scale.y / 2)),
+			vec2(convertedPosX + objectScale.x, convertedPosY + objectScale.y),
+			vec2(convertedPosX - objectScale.x, convertedPosY + objectScale.y),
+			vec2(convertedPosX + objectScale.x, convertedPosY - objectScale.y),
+			vec2(convertedPosX - objectScale.x, convertedPosY - objectScale.y),
 		};
 
 		bool collision = false;

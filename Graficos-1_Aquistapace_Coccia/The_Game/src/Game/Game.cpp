@@ -7,9 +7,6 @@ namespace Engine
 	Game::Game(): GameBase()
 	{
 		_link = NULL;
-		_wall1 = NULL;
-		_wall2 = NULL;
-		_box = NULL;
 		_coin = NULL;
 		_tileMap = NULL;
 	}
@@ -18,12 +15,6 @@ namespace Engine
 	{
 		if (_link != NULL)
 			delete _link;
-		if (_wall1 != NULL)
-			delete _wall1;
-		if (_wall2 != NULL)
-			delete _wall2;
-		if (_box != NULL)
-			delete _box;
 		if (_coin != NULL)
 			delete _coin;
 		if (_tileMap != NULL)
@@ -39,35 +30,6 @@ namespace Engine
 		SetCameraPosition(0, 0, 15);
 
 		// --------------------------------
-		cout << "Lodaing _wall1" << endl;
-
-		_wall1 = new Sprite(GetRenderer());
-		_wall1->ImportTexture("res/wall.jpg");
-		_wall1->SetPosition(0, 1.2, 0);
-		_wall1->SetStaticState(true);
-		//GetCollisionManager()->AddNewObject(_wall1);
-		
-		cout << "-> Loaded _wall1" << endl;
-		// --------------------------------
-		cout << "Lodaing _wall2" << endl;
-
-		_wall2 = new Sprite(GetRenderer());
-		_wall2->ImportTexture("res/wall.jpg");
-		_wall2->SetPosition(0, -1.2, 0);
-		_wall2->SetStaticState(true);
-		//GetCollisionManager()->AddNewObject(_wall2);
-
-		cout << "-> Loaded _wall2" << endl;
-		// --------------------------------
-		cout << "Lodaing _box" << endl;
-
-		_box = new Sprite(GetRenderer());
-		_box->ImportTexture("res/crate1_diffuse.png");
-		_box->SetPosition(0, 0, 0);
-		//GetCollisionManager()->AddNewObject(_box);
-
-		cout << "-> Loaded _box" << endl;
-		// --------------------------------
 		cout << "Lodaing _coin" << endl;
 
 		_coin = new Coin(GetRenderer());
@@ -81,38 +43,32 @@ namespace Engine
 
 		cout << "-> Loaded _coin" << endl;
 		// --------------------------------
-		cout << "Lodaing _roboBob" << endl;
+		cout << "Lodaing _link" << endl;
 
 		_link = new Player(GetRenderer(), 2);
-		//_roboBob->ImportTexture("res/character_robot_sheet.png");
 		_link->ImportTexture("res/Links Links Awakening sprite sheet.png");
 
 		_link->SetTag("player");
 
-		//_roboBob->AddAnimation("walk", ivec2(9, 5), 0.5f, 0, 7);
-		//_roboBob->AddAnimation("idle", ivec2(9, 5), 1.5f, 21, 23);
-		//_roboBob->AddAnimation("punch", ivec2(9, 5), 1.5f, 9, 11);
-		_link->AddAnimation("walk_up", ivec2(10, 16), 0.5f, 152, 153);
-		_link->AddAnimation("walk_down", ivec2(10, 16), 0.5f, 156, 157);
 		_link->AddAnimation("walk_right", ivec2(10, 16), 0.5f, 150, 151);
+		_link->AddAnimation("walk_up", ivec2(10, 16), 0.5f, 152, 153);
 		_link->AddAnimation("walk_left", ivec2(10, 16), 0.5f, 154, 155);
+		_link->AddAnimation("walk_down", ivec2(10, 16), 0.5f, 156, 157);
 		_link->AddAnimation("idle", ivec2(10, 16), 1, 158, 158);
 
 		_link->SetPosition(-1.8, 0, 0);
 		GetCollisionManager()->AddNewObject(_link);
 
-		cout << "-> Loaded _roboBob" << endl;
+		cout << "-> Loaded _link" << endl;
 		// --------------------------------
 		cout << "Lodaing _tileMap" << endl;
 
-		//const char* path = "res/Mega_Man_X_Sigma_Stage_3_Tileset.png";
 		const char* path = "res/Game Boy GBC - The Legend of Zelda Links Awakening DX - Overworld Tileset.png";
 		vec3 startPosition = vec3(-3, -3, 0);
-		vec2 startScale = vec2(1, 1);
+		vec2 tileScale = vec2(1.2, 1.2);
 
 		_tileMap = new TileMap(GetRenderer());
-		//_tileMap->InitTileMap(startPosition, path, ivec2(16, 17), _tileModuleMatrix, startScale);
-		_tileMap->InitTileMap(startPosition, path, ivec2(24, 25), _tileZeldaModuleMatrix, startScale);
+		_tileMap->InitTileMap(startPosition, path, ivec2(24, 25), _tileZeldaModuleMatrix, tileScale);
 
 		cout << "-> Loaded _tileMap" << endl;
 	}
@@ -127,15 +83,10 @@ namespace Engine
 		_tileMap->DrawTileMap();
 
 		_link->Move(deltaTime);
-
+		_coin->DrawCoin(deltaTime);
 
 		_tileMap->CheckTileCollisions(_link);
-		//GetCollisionManager()->CheckAllCollisions();
-
-		//_wall1->Draw();
-		//_wall2->Draw();
-		//_box->Draw();
-		_coin->DrawCoin(deltaTime);
+		GetCollisionManager()->CheckAllCollisions();
 	}
 
 	void Game::End()
